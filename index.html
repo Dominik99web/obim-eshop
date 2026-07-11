@@ -498,7 +498,7 @@ function App() {
       ? !!pickupSlot
       : (orderForm.deliveryType === "sklad" ? true : !!orderForm.deliverySlot));
 
-  const goShop = () => { setView("shop"); setOrderDone(false); };
+  const goShop = () => { setView("shop"); setOrderDone(false); window.scrollTo(0,0); };
 
   return (
     <div style={S.app}>
@@ -506,17 +506,13 @@ function App() {
       <header style={S.header}>
         <div style={S.headerInner}>
           <div style={S.logo}>
-            <span style={S.logoEmoji}>🥦</span>
-            <div>
-              <span style={S.logoText}>Obim s.r.o.</span>
-              <span style={S.logoSub}>Veľkoobchod ovocia a zeleniny</span>
-            </div>
+            <img src="https://obim.sk/wp-content/uploads/2025/11/Obim_LOGO.png" alt="Obim s.r.o." style={{height:44, width:"auto"}} />
           </div>
           <div style={S.nav}>
             <button style={{ ...S.navBtn, ...(view === "shop" ? S.navBtnActive : {}) }} onClick={goShop}>Tovar</button>
-            <button style={{ ...S.navBtn, ...(view === "admin" ? S.navBtnActive : {}) }} onClick={() => setView("admin")}>Admin</button>
+            <button style={{ ...S.navBtn, ...(view === "admin" ? S.navBtnActive : {}) }} onClick={() => { setView("admin"); window.scrollTo(0,0); }}>Admin</button>
             {view !== "cart" && (
-              <button style={S.cartBtn} onClick={() => { setView("cart"); setOrderDone(false); }}>
+              <button style={S.cartBtn} onClick={() => { setView("cart"); setOrderDone(false); window.scrollTo(0,0); }}>
                 🛒 Košík {cartCount > 0 && <span style={{...S.cartBadge, width:"auto", padding:"0 6px", borderRadius:10, fontSize:11}}>{cartTotal.toFixed(2)} €</span>}
               </button>
             )}
