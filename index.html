@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Obim - Ovocie a Zelenina</title>
+  <title>Obim s.r.o. - Veľkoobchod ovocia a zeleniny</title>
   <meta name="theme-color" content="#2d6a4f" />
 </head>
 <body style="margin:0;padding:0;">
@@ -33,37 +33,212 @@ const DELIVERY_CITIES = [
 ];
 
 const initialProducts = [
-  { id: 1, name: "Jablká (Golden)", unit: "kg", price: 0.89, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/300px-Red_Apple.jpg", available: true },
-  { id: 2, name: "Hrušky Williams", unit: "kg", price: 1.20, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/03/05/19/02/pears-1238929_640.jpg", available: true },
-  { id: 3, name: "Banány", unit: "kg", price: 1.10, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2017/06/27/22/21/banana-2449019_640.jpg", available: true },
-  { id: 4, name: "Pomaranče", unit: "kg", price: 1.30, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2017/01/20/15/06/oranges-1995044_640.jpg", available: true },
-  { id: 5, name: "Citrony", unit: "kg", price: 1.50, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/02/23/17/29/orange-1218160_640.jpg", available: true },
-  { id: 6, name: "Hrozno červené", unit: "kg", price: 2.40, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2014/08/12/21/10/grapes-416482_640.jpg", available: true },
-  { id: 7, name: "Jahody", unit: "kg", price: 3.50, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/06/11/16/36/strawberry-1450480_640.jpg", available: false },
-  { id: 8, name: "Melón vodový", unit: "ks", price: 4.90, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/05/30/14/29/watermelon-1424812_640.jpg", available: true },
-  { id: 9, name: "Mrkva", unit: "kg", price: 0.65, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
-  { id: 10, name: "Zemiaky", unit: "kg", price: 0.55, category: "Zemiaky", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
-  { id: 11, name: "Cibuľa žltá", unit: "kg", price: 0.70, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
-  { id: 12, name: "Cesnak", unit: "kg", price: 3.20, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/10/26/19/25/garlic-1773780_640.jpg", available: true },
-  { id: 13, name: "Paradajky cherry", unit: "kg", price: 2.80, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2019/04/07/20/19/tomatoes-4110892_640.jpg", available: true },
-  { id: 14, name: "Uhorky šalátové", unit: "ks", price: 0.85, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/24/11/09/cucumbers-1617698_640.jpg", available: true },
-  { id: 15, name: "Šalát ľadový", unit: "ks", price: 1.10, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
-  { id: 16, name: "Šalát rímsky", unit: "ks", price: 1.20, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
-  { id: 17, name: "Brokolica", unit: "ks", price: 1.90, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/03/05/19/02/broccoli-1238250_640.jpg", available: true },
-  { id: 18, name: "Paprika červená", unit: "kg", price: 2.20, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/05/09/25/paprika-1571739_640.jpg", available: true },
-  { id: 19, name: "Bazalka", unit: "zväzok", price: 0.80, category: "Bylinky", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
-  { id: 20, name: "Petržlen", unit: "zväzok", price: 0.70, category: "Bylinky", img: "https://cdn.pixabay.com/photo/2016/08/19/15/31/parsley-1606493_640.jpg", available: true },
-  { id: 21, name: "Mango", unit: "ks", price: 2.20, category: "Exotické ovocie", img: "https://cdn.pixabay.com/photo/2018/07/22/13/07/mango-3554992_640.jpg", available: true },
-  { id: 22, name: "Ananás", unit: "ks", price: 3.50, category: "Exotické ovocie", img: "https://cdn.pixabay.com/photo/2016/01/03/17/59/fruit-1119418_640.jpg", available: true },
-  { id: 23, name: "Avokádo", unit: "ks", price: 1.80, category: "Exotické ovocie", img: "https://cdn.pixabay.com/photo/2015/03/26/09/47/avocado-690979_640.jpg", available: true },
-  { id: 24, name: "Kokos", unit: "ks", price: 3.90, category: "Exotické ovocie", img: "https://cdn.pixabay.com/photo/2018/05/11/11/59/coconut-3390568_640.jpg", available: true },
+  // OVOCIE
+  { id: 1, name: "Ananás, cal 8, CR", unit: "ks", price: 2.49, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/01/03/17/59/fruit-1119418_640.jpg", available: true },
+  { id: 2, name: "Avokádo RTE, cal 20, I.tr.", unit: "ks", price: 1.39, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2015/03/26/09/47/avocado-690979_640.jpg", available: true },
+  { id: 3, name: "Banány Yellow EC/CO", unit: "kg", price: 1.19, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2017/06/27/22/21/banana-2449019_640.jpg", available: true },
+  { id: 4, name: "Broskyňa plato žltomasité cal.22", unit: "kg", price: 1.99, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/07/15/09/06/peach-1519739_640.jpg", available: true },
+  { id: 5, name: "Černice 125g, IT/PT", unit: "ks", price: 3.59, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2017/08/10/12/05/blackberries-2621674_640.jpg", available: true },
+  { id: 6, name: "Čučoriedky 125g, ES", unit: "ks", price: 1.49, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/07/12/10/15/blueberries-1510689_640.jpg", available: true },
+  { id: 7, name: "Granátové jablko, cal 10, TR", unit: "ks", price: 1.59, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2017/09/26/13/42/pomegranate-2789260_640.jpg", available: true },
+  { id: 8, name: "Grep červený Star Ruby, ZA", unit: "kg", price: 1.39, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2017/01/20/15/06/oranges-1995044_640.jpg", available: true },
+  { id: 9, name: "Hrozno biele Victoria, IT", unit: "kg", price: 2.99, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2014/08/12/21/10/grapes-416482_640.jpg", available: true },
+  { id: 10, name: "Hrozno tmavé Black Magic, IT", unit: "kg", price: 3.29, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2014/08/12/21/10/grapes-416482_640.jpg", available: true },
+  { id: 11, name: "Hrušky Conference, NL", unit: "kg", price: 1.99, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/03/05/19/02/pears-1238929_640.jpg", available: true },
+  { id: 12, name: "Jablká červené PRINCE, PL", unit: "kg", price: 0.99, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2018/09/26/21/18/apple-3705655_640.jpg", available: true },
+  { id: 13, name: "Jablká Golden Delicious, IT", unit: "kg", price: 1.39, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2018/09/26/21/18/apple-3705655_640.jpg", available: true },
+  { id: 14, name: "Jahody 250g, PL", unit: "ks", price: 2.99, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/06/11/16/36/strawberry-1450480_640.jpg", available: true },
+  { id: 15, name: "Jahody 500g, PL", unit: "ks", price: 5.99, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/06/11/16/36/strawberry-1450480_640.jpg", available: true },
+  { id: 16, name: "Jahody voľné, PL", unit: "kg", price: 8.99, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/06/11/16/36/strawberry-1450480_640.jpg", available: true },
+  { id: 17, name: "Kiwi voľné, cal 23, IT", unit: "kg", price: 3.29, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/03/26/16/44/kiwi-1280930_640.jpg", available: true },
+  { id: 18, name: "Maliny 125g, ES", unit: "ks", price: 2.49, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2017/07/14/19/48/raspberries-2504559_640.jpg", available: true },
+  { id: 19, name: "Mandarínky Nadorcott, PE", unit: "kg", price: 1.99, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2017/01/20/15/06/oranges-1995044_640.jpg", available: true },
+  { id: 20, name: "Mango RTE cal 7, BR", unit: "ks", price: 1.79, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2018/07/22/13/07/mango-3554992_640.jpg", available: true },
+  { id: 21, name: "Marhuľa, ES", unit: "kg", price: 2.39, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/07/22/16/41/apricots-1534119_640.jpg", available: true },
+  { id: 22, name: "Melón Cantaloupe, IT", unit: "kg", price: 1.99, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/05/30/14/29/watermelon-1424812_640.jpg", available: true },
+  { id: 23, name: "Melón červený, GR", unit: "kg", price: 0.65, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/05/30/14/29/watermelon-1424812_640.jpg", available: true },
+  { id: 24, name: "Melón žltý Honeydew, ESP", unit: "kg", price: 1.89, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/05/30/14/29/watermelon-1424812_640.jpg", available: true },
+  { id: 25, name: "Nektarinky žltomäsité, GR/IT", unit: "kg", price: 2.29, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/07/15/09/06/peach-1519739_640.jpg", available: true },
+  { id: 26, name: "Pomaranč Lane Late, ES", unit: "kg", price: 1.39, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2017/01/20/15/06/oranges-1995044_640.jpg", available: true },
+  { id: 27, name: "Ribezle 125g, IT", unit: "ks", price: 4.99, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2017/08/10/12/05/blackberries-2621674_640.jpg", available: true },
+  { id: 28, name: "Slivky Angeleno, cal AAA, ES", unit: "kg", price: 2.49, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/07/22/16/41/apricots-1534119_640.jpg", available: true },
+  { id: 29, name: "Physalis, CO", unit: "ks", price: 1.49, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/07/22/16/41/apricots-1534119_640.jpg", available: true },
+
+  // ZELENINA
+  { id: 30, name: "Baklažán, NL", unit: "kg", price: 2.49, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/05/09/25/paprika-1571739_640.jpg", available: true },
+  { id: 31, name: "Brokolica ESP", unit: "kg", price: 3.09, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/03/05/19/02/broccoli-1238250_640.jpg", available: true },
+  { id: 32, name: "Brokolica fólia 500g, PL", unit: "ks", price: 1.49, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/03/05/19/02/broccoli-1238250_640.jpg", available: true },
+  { id: 33, name: "Cesnak čistený vákuový, CN", unit: "kg", price: 4.49, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/10/26/19/25/garlic-1773780_640.jpg", available: true },
+  { id: 34, name: "Cesnak, CN", unit: "kg", price: 3.29, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/10/26/19/25/garlic-1773780_640.jpg", available: true },
+  { id: 35, name: "Cibuľa červená, NL", unit: "kg", price: 0.79, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 36, name: "Cibuľa žltá, cal 50-70, SK", unit: "kg", price: 0.59, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 37, name: "Cibuľa žltá, bal. 1kg, SK", unit: "ks", price: 1.29, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 38, name: "Cibuľka lahôdková, CZ", unit: "ks", price: 0.79, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 39, name: "Cibuľka šalotka FR", unit: "kg", price: 1.69, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 40, name: "Cuketa, PL", unit: "kg", price: 0.99, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/24/11/09/cucumbers-1617698_640.jpg", available: true },
+  { id: 41, name: "Cvikla varená 500g", unit: "ks", price: 1.19, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 42, name: "Cvikla, PL", unit: "kg", price: 0.49, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 43, name: "Čakanka biela, NL", unit: "kg", price: 2.89, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 44, name: "Čakanka červená, IT", unit: "kg", price: 3.89, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 45, name: "Fenikel, IT", unit: "kg", price: 2.99, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/24/11/09/cucumbers-1617698_640.jpg", available: true },
+  { id: 46, name: "Chilli, ES", unit: "kg", price: 9.99, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/05/09/25/paprika-1571739_640.jpg", available: true },
+  { id: 47, name: "Chren SK", unit: "kg", price: 7.89, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/05/09/25/paprika-1571739_640.jpg", available: true },
+  { id: 48, name: "Kalerábik lahôdkový, PL", unit: "ks", price: 0.69, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/03/05/19/02/broccoli-1238250_640.jpg", available: true },
+  { id: 49, name: "Kapusta biela, PL", unit: "kg", price: 0.59, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 50, name: "Kapusta červená, PL", unit: "kg", price: 0.69, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 51, name: "Kapusta čínska, PL", unit: "kg", price: 1.29, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 52, name: "Karfiol, cal 6, PL", unit: "ks", price: 1.59, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/03/05/19/02/broccoli-1238250_640.jpg", available: true },
+  { id: 53, name: "Kel, PL", unit: "kg", price: 1.19, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 54, name: "Kukurica lahôdková HU", unit: "ks", price: 0.79, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/24/11/09/cucumbers-1617698_640.jpg", available: true },
+  { id: 55, name: "Mrkva baby 200g, CZ", unit: "ks", price: 1.29, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 56, name: "Mrkva karotka žltá, NL", unit: "kg", price: 2.39, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 57, name: "Mrkva praná, PL/CZ", unit: "kg", price: 0.79, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 58, name: "Paprika červená GG, NL", unit: "kg", price: 2.99, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/05/09/25/paprika-1571739_640.jpg", available: true },
+  { id: 59, name: "Paprika oranžová GG, NL", unit: "kg", price: 2.79, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/05/09/25/paprika-1571739_640.jpg", available: true },
+  { id: 60, name: "Paprika PCR, GR", unit: "kg", price: 1.99, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/05/09/25/paprika-1571739_640.jpg", available: true },
+  { id: 61, name: "Paprika trikolóra GG, NL, 3ks bal.", unit: "kg", price: 4.99, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/05/09/25/paprika-1571739_640.jpg", available: true },
+  { id: 62, name: "Paprika zelená GG, NL", unit: "kg", price: 2.69, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/05/09/25/paprika-1571739_640.jpg", available: true },
+  { id: 63, name: "Paprika žltá GG, NL", unit: "kg", price: 2.99, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/05/09/25/paprika-1571739_640.jpg", available: true },
+  { id: 64, name: "Paradajky Cherry 200g, HU", unit: "ks", price: 1.29, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2019/04/07/20/19/tomatoes-4110892_640.jpg", available: true },
+  { id: 65, name: "Paradajky Cherry strapec, HU", unit: "kg", price: 3.99, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2019/04/07/20/19/tomatoes-4110892_640.jpg", available: true },
+  { id: 66, name: "Paradajky strapec, HU", unit: "kg", price: 1.39, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2019/04/07/20/19/tomatoes-4110892_640.jpg", available: true },
+  { id: 67, name: "Paštrnák, PL", unit: "kg", price: 1.49, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 68, name: "Polievková zmes SK/IT/NL/PL", unit: "kg", price: 2.19, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 69, name: "Pór, NL", unit: "kg", price: 1.59, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 70, name: "Reďkovka biela, IT", unit: "kg", price: 1.69, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/24/11/09/cucumbers-1617698_640.jpg", available: true },
+  { id: 71, name: "Reďkovka červená balená 250g, CZ", unit: "ks", price: 0.79, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/24/11/09/cucumbers-1617698_640.jpg", available: true },
+  { id: 72, name: "Reďkovka červená zv., CZ", unit: "ks", price: 0.79, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/24/11/09/cucumbers-1617698_640.jpg", available: true },
+  { id: 73, name: "Tekvica hokkaido, CZ", unit: "kg", price: 2.39, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/05/09/25/paprika-1571739_640.jpg", available: true },
+  { id: 74, name: "Tekvica maslová/orange, CZ", unit: "kg", price: 1.39, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/05/09/25/paprika-1571739_640.jpg", available: true },
+  { id: 75, name: "Uhorky Midios, HU/PL", unit: "kg", price: 1.49, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/24/11/09/cucumbers-1617698_640.jpg", available: true },
+  { id: 76, name: "Uhorky nakladačky PL", unit: "kg", price: 2.49, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/24/11/09/cucumbers-1617698_640.jpg", available: true },
+  { id: 77, name: "Zeler stopkatý, ES", unit: "ks", price: 1.19, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 78, name: "Zeler, CZ", unit: "kg", price: 0.89, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 79, name: "Pak Choi", unit: "ks", price: 1.99, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+
+  // ŠALÁTY
+  { id: 80, name: "Rukola 125g, IT", unit: "ks", price: 0.89, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 81, name: "Šalát dubový list červený, PL", unit: "ks", price: 1.29, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 82, name: "Šalát Frisee, ES", unit: "ks", price: 2.69, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 83, name: "Šalát hlávkový, HU", unit: "ks", price: 0.99, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 84, name: "Šalát ľadový, cal 10, PL", unit: "ks", price: 1.19, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 85, name: "Šalát ľadový, PL", unit: "kg", price: 2.99, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 86, name: "Šalát lolo biondo, PL", unit: "ks", price: 1.09, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 87, name: "Šalát lolo rosso, PL", unit: "ks", price: 1.09, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 88, name: "Šalát mix 125g, IT", unit: "ks", price: 0.99, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 89, name: "Šalát poľný 125g, IT", unit: "ks", price: 1.39, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 90, name: "Šalát Red Chard 125g, IT", unit: "ks", price: 0.99, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 91, name: "Šalát Rímsky, CZ", unit: "ks", price: 1.19, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 92, name: "Šalátové lístky MIX 500g, IT", unit: "ks", price: 2.39, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 93, name: "Špenát 125g, IT", unit: "ks", price: 0.99, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+
+  // BYLINKY A KORENINY
+  { id: 94, name: "Bazalka čínska Shiso NL", unit: "ks", price: 3.59, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 95, name: "Bazalka zelená rezaná, KE", unit: "kg", price: 19.99, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 96, name: "Citrónová tráva volná TH", unit: "kg", price: 19.99, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 97, name: "Koriander, l.tr.", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/19/15/31/parsley-1606493_640.jpg", available: true },
+  { id: 98, name: "Kôpor, IT", unit: "kg", price: 8.99, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/19/15/31/parsley-1606493_640.jpg", available: true },
+  { id: 99, name: "Ligurček lekársky", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 100, name: "Mäta rezaná, ES", unit: "kg", price: 17.90, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 101, name: "Oregano, I.tr.", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 102, name: "Pažitka NL", unit: "kg", price: 13.99, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/19/15/31/parsley-1606493_640.jpg", available: true },
+  { id: 103, name: "Petržlen, PL", unit: "kg", price: 1.39, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/19/15/31/parsley-1606493_640.jpg", available: true },
+  { id: 104, name: "Petržlenová vňať hladká, IT", unit: "kg", price: 3.89, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/19/15/31/parsley-1606493_640.jpg", available: true },
+  { id: 105, name: "Petržlenová vňať kučeravá, IT", unit: "kg", price: 4.89, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/19/15/31/parsley-1606493_640.jpg", available: true },
+  { id: 106, name: "Rozmarín, IL", unit: "kg", price: 18.90, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 107, name: "Šalvia, 1.tr.", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 108, name: "Tymián, IL", unit: "kg", price: 17.90, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 109, name: "Trebulka NL 100g", unit: "ks", price: 3.29, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 110, name: "Zázvor, BR", unit: "kg", price: 2.99, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 111, name: "Žerucha", unit: "ks", price: 2.39, category: "Bylinky a koreniny", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+
+  // HUBY
+  { id: 112, name: "Hliva balená, SK", unit: "kg", price: 4.29, category: "Huby", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 113, name: "Hliva čerstvá SK", unit: "kg", price: 3.49, category: "Huby", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 114, name: "Hríby sušené dubové 20g SK", unit: "ks", price: 2.09, category: "Huby", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 115, name: "Sušené dubáky 20g", unit: "ks", price: 2.09, category: "Huby", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 116, name: "Šampiňón hnedý SK", unit: "kg", price: 3.49, category: "Huby", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 117, name: "Šampiňóny bal. SK 250g", unit: "ks", price: 1.09, category: "Huby", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 118, name: "Šampiňóny hnedý 250g bal.", unit: "ks", price: 1.29, category: "Huby", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 119, name: "Šampiňóny Portobe SK", unit: "kg", price: 7.29, category: "Huby", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 120, name: "Šampiňóny voľné SK", unit: "kg", price: 2.89, category: "Huby", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+
+  // ZEMIAKY
+  { id: 121, name: "Zemiaky AGRIA, NL, vt.C", unit: "kg", price: 1.09, category: "Zemiaky", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 122, name: "Zemiaky baby 25/35mm, vt A CZ", unit: "kg", price: 0.69, category: "Zemiaky", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 123, name: "Zemiaky BATATY, EG/US", unit: "kg", price: 1.99, category: "Zemiaky", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 124, name: "Zemiaky Colomba 2KG balenie, CZ", unit: "ks", price: 1.39, category: "Zemiaky", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 125, name: "Zemiaky PRANÉ skoré, Colomba, CZ", unit: "kg", price: 0.79, category: "Zemiaky", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 126, name: "Zemiaky SKORÉ, Colomba, CZ", unit: "kg", price: 0.59, category: "Zemiaky", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+
+  // VAJCIA
+  { id: 127, name: "Vajcia čerstvé L kartón 30ks", unit: "ks", price: 7.49, category: "Vajcia", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+
+  // VAKUOVÉ PRODUKTY
+  { id: 128, name: "Vákuová cibuľa celá čistená 3KG", unit: "ks", price: 5.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 129, name: "Vákuová cibuľa celá čistená 5KG", unit: "ks", price: 8.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 130, name: "Vákuová cibuľa červená celá čistená 3KG", unit: "ks", price: 7.39, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 131, name: "Vákuová cibuľa červená celá čistená 5KG", unit: "ks", price: 13.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 132, name: "Vákuová cibuľa červená platky 3KG", unit: "ks", price: 7.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 133, name: "Vákuová cibuľa kocky/plátky 3KG", unit: "ks", price: 5.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 134, name: "Vákuová cibuľa kocky/plátky 5KG", unit: "ks", price: 8.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 135, name: "Vákuová kapusta biela strúhaná 3KG", unit: "ks", price: 4.59, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 136, name: "Vákuová kapusta biela strúhaná 5KG", unit: "ks", price: 7.39, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 137, name: "Vákuová kapusta červená strúhaná 3KG", unit: "ks", price: 5.59, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 138, name: "Vákuová kapusta červená strúhaná 5KG", unit: "ks", price: 8.69, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 139, name: "Vákuová mrkva celá čistená 3KG", unit: "ks", price: 7.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 140, name: "Vákuová mrkva celá čistená 5KG", unit: "ks", price: 12.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 141, name: "Vákuová mrkva kocky/rezance 3KG", unit: "ks", price: 8.19, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 142, name: "Vákuová mrkva kocky/rezance 5KG", unit: "ks", price: 13.59, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 143, name: "Vákuová repa celá/kocky/rezance varená 3KG", unit: "ks", price: 5.09, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 144, name: "Vákuová repa celá čistená 3KG", unit: "ks", price: 5.79, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 145, name: "Vákuová repa čistená strúhaná/kocky 3KG", unit: "ks", price: 4.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 146, name: "Vákuová sviečková zmes kocky/rezance 3KG", unit: "ks", price: 7.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 147, name: "Vákuová sviečková zmes kocky/rezance 5KG", unit: "ks", price: 13.39, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 148, name: "Vákuové zemiaky čistené surové krájané/celé 5KG", unit: "ks", price: 8.00, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 149, name: "Vákuové zemiaky surové americké 5KG", unit: "ks", price: 8.69, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 150, name: "Vákuové zemiaky surové kocky/plátky 3KG", unit: "ks", price: 4.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 151, name: "Vákuové zemiaky surové kocky/štvrťky/plátky", unit: "kg", price: 1.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 152, name: "Vákuové zemiaky surové plátky 5KG", unit: "ks", price: 9.39, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 153, name: "Vákuové zemiaky surové strúhané jemne/hrubo 1KG", unit: "ks", price: 1.69, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 154, name: "Vákuové zemiaky varené americké 3KG", unit: "ks", price: 5.59, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 155, name: "Vákuové zemiaky varené celé 3KG", unit: "ks", price: 5.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 156, name: "Vákuové zemiaky varené kocky", unit: "kg", price: 1.09, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 157, name: "Vákuové zemiaky varené plátky 3KG", unit: "ks", price: 6.29, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 158, name: "Vákuové zemiaky varené štvrťky", unit: "kg", price: 1.09, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 159, name: "Vákuový petržlen celý čistený 3KG", unit: "ks", price: 10.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/08/19/15/31/parsley-1606493_640.jpg", available: true },
+  { id: 160, name: "Vákuový petržlen kocky/rezance 3KG", unit: "ks", price: 10.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2016/08/19/15/31/parsley-1606493_640.jpg", available: true },
+  { id: 161, name: "Vákuový zeler celý čistený 3KG", unit: "ks", price: 5.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 162, name: "Vákuový zeler kocky 3KG", unit: "ks", price: 6.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 163, name: "Vákuový zeler rezance 3KG", unit: "ks", price: 6.99, category: "Vakuové produkty", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+
+  // VÝHONKY
+  { id: 164, name: "Výhonky cesnak 50g", unit: "ks", price: 2.19, category: "Sezónne produkty", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 165, name: "Výhonky hrášok zelený 100g", unit: "ks", price: 2.49, category: "Sezónne produkty", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 166, name: "Výhonky china rose 100g", unit: "ks", price: 1.99, category: "Sezónne produkty", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 167, name: "Výhonky poru 50g", unit: "ks", price: 2.09, category: "Sezónne produkty", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 168, name: "Výhonky reďkovky červené 50g", unit: "ks", price: 2.69, category: "Sezónne produkty", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 169, name: "Výhonky repa červená 50g", unit: "ks", price: 2.19, category: "Sezónne produkty", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+
+  // OSTATNÉ
+  { id: 170, name: "Jablková šťava 0,25l", unit: "ks", price: 0.33, category: "Sezónne produkty", img: "https://cdn.pixabay.com/photo/2018/09/26/21/18/apple-3705655_640.jpg", available: true },
+  { id: 171, name: "Kapusta kvas. 1kg HORTI SK", unit: "kg", price: 1.09, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 172, name: "Kapusta kyslá 10kg HORTI Slovensko", unit: "kg", price: 0.99, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 173, name: "Kapusta kyslá 5kg HORTI Slovensko", unit: "kg", price: 1.29, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 174, name: "Kapustnica biela 1l Slovensko", unit: "ks", price: 0.79, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 175, name: "Kapustový šalát 1kg SK", unit: "ks", price: 1.79, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 176, name: "Kapustový šalát 5kg SK", unit: "ks", price: 8.89, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 177, name: "Kapustový šalát pikant 1kg SK", unit: "ks", price: 1.79, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 178, name: "Mak modrý SK", unit: "kg", price: 5.49, category: "Sezónne produkty", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 179, name: "MUNGO klíčky 500g", unit: "ks", price: 2.89, category: "Sezónne produkty", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 180, name: "Orechy vlašské lúpané SK", unit: "kg", price: 11.90, category: "Sezónne produkty", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
 ];
 
 const CATEGORIES = ["Všetko", "Ovocie", "Zelenina", "Bylinky", "Exotické ovocie", "Zemiaky", "Šaláty"];
 
 const C = {
-  green: "#2d6a4f", greenLight: "#40916c", greenPale: "#d8f3dc",
-  orange: "#e76f00", cream: "#fefae0", dark: "#1b1b1b",
+  green: "#2a7a3b", greenLight: "#3a9e4f", greenPale: "#e8f5ea",
+  orange: "#e67e22", cream: "#f9f9f7", dark: "#1b1b1b",
   gray: "#6b7280", grayLight: "#f3f4f6",
   red: "#dc2626", redLight: "#fee2e2",
 };
@@ -223,7 +398,7 @@ function App() {
           <div style={S.logo}>
             <span style={S.logoEmoji}>🥦</span>
             <div>
-              <span style={S.logoText}>FreshMarket</span>
+              <span style={S.logoText}>Obim s.r.o.</span>
               <span style={S.logoSub}>Veľkoobchod ovocia a zeleniny</span>
             </div>
           </div>
@@ -244,8 +419,8 @@ function App() {
         <>
           <div style={S.hero}>
             <div style={S.heroTitle}>Čerstvé ovocie a zelenina 🍎🥕</div>
-            <div style={S.heroSub}>Veľkoobchodné ceny priamo pre vás</div>
-            <span style={S.heroNote}>📦 Dodávka na adresu · 🏭 Vyzdvihnutie v sklade</span>
+            <div style={S.heroSub}>Čerstvo, kvalitne a rýchlo.</div>
+            <span style={S.heroNote}>📦 Dodávka na adresu · 🏭 Vyzdvihnutie v sklade · 🌿 Trenčiansky kraj a okolie</span>
           </div>
           <div style={S.searchWrap}>
             <div style={S.searchBox}>
