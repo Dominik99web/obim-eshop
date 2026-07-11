@@ -516,14 +516,14 @@ function App() {
 
             {/* DIVIDER */}
             <div style={{textAlign:"center",marginBottom:24}}>
-              <div style={{fontSize:16,fontWeight:700,color:C.dark,marginBottom:4}}>Ako chcete nakupovať?</div>
-              <div style={{fontSize:14,color:C.gray}}>Vyberte typ zákazníka — zobrazíme vám správne ceny</div>
+              <div style={{fontSize:16,fontWeight:700,color:C.dark,marginBottom:4}}>Kto ste?</div>
+              <div style={{fontSize:14,color:C.gray}}>Vyberte typ zákazníka pre pokračovanie</div>
             </div>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
               <div onClick={() => { setCustomerType("domacnost"); setFirmReady(true); }} style={{background:"#fff",borderRadius:16,padding:28,cursor:"pointer",border:"2px solid #e8e8e8",textAlign:"center",boxShadow:"0 2px 12px rgba(0,0,0,0.06)"}}>
                 <div style={{fontSize:44,marginBottom:12}}>🏠</div>
                 <div style={{fontWeight:800,fontSize:18,marginBottom:8,color:"#1a1a1a"}}>Som domácnosť</div>
-                <div style={{fontSize:13,color:"#6b7280",lineHeight:1.5}}>Ceny sú uvedené <strong>s DPH</strong></div>
+                <div style={{fontSize:13,color:"#6b7280",lineHeight:1.5}}>Fyzická osoba / súkromná spotreba</div>
                 <div style={{marginTop:10,background:"#fff7ed",border:"1px solid #fed7aa",borderRadius:8,padding:"8px 10px",fontSize:12,color:"#9a3412",lineHeight:1.5}}>
                   ⚠️ Pre domácnosti je momentálne dostupné len <strong>vyzdvihnutie na sklade</strong>.<br/>
                   📍 Nová Dubnica – Malý Kolačín 342<br/>
@@ -540,7 +540,7 @@ function App() {
                   🏫 Školstvo a zariadenia<br/>
                   🏭 Iný platca DPH
                 </div>
-                <div style={{background:"#e8f5ea",borderRadius:8,padding:"6px 10px",fontSize:12,color:"#2a7a3b",fontWeight:600}}>Ceny bez DPH · Fakturácia</div>
+                <div style={{background:"#e8f5ea",borderRadius:8,padding:"6px 10px",fontSize:12,color:"#2a7a3b",fontWeight:600}}>Fakturácia · Veľkoobchodné ceny</div>
                 <div style={{marginTop:12,background:"#2a7a3b",color:"#fff",borderRadius:8,padding:"10px 0",fontWeight:700,fontSize:14}}>Vybrať</div>
               </div>
             </div>
