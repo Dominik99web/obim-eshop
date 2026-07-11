@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Obim - Ovocie a Zelenina</title>
   <meta name="theme-color" content="#2d6a4f" />
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body style="margin:0;padding:0;">
   <div id="root"></div>
-  <script type="text/babel">
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+  <script type="text/babel" data-presets="react">
+const { useState } = React;
 
 
 const ADMIN_PASSWORD = "admin123";
@@ -542,7 +543,7 @@ function App() {
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<React.StrictMode><App /></React.StrictMode>);
+root.render(React.createElement(React.StrictMode, null, React.createElement(App)));
   </script>
 </body>
 </html>
