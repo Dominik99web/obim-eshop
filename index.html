@@ -506,7 +506,7 @@ function App() {
       {/* HEADER */}
       <header style={S.header}>
         <div style={S.headerInner}>
-          <div style={{...S.logo, cursor:"pointer"}} onClick={() => { setCustomerType(null); setFirmType(null); setFirmReady(false); setView("shop"); window.scrollTo(0,0); }}>
+          <div style={{...S.logo, cursor:"pointer"}} onClick={() => { setView("shop"); window.scrollTo(0,0); }}>
             <img src="https://obim.sk/wp-content/uploads/2025/11/Obim_LOGO.png" alt="Obim s.r.o." style={{height:44, width:"auto"}} />
           </div>
           <div style={S.nav}>
@@ -524,8 +524,8 @@ function App() {
       {/* SHOP */}
       {/* CUSTOMER TYPE SELECTOR */}
       {!customerType && view === "shop" && (
-        <div style={{minHeight:"100vh",background:"#f5f5f5",display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
-          <div style={{maxWidth:560,width:"100%"}}>
+        <div style={{minHeight:"100vh",background:"#f8fafc",display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+          <div style={{maxWidth:580,width:"100%"}}>
             {/* HERO BANNER */}
             <div style={{background:`linear-gradient(135deg, ${C.greenDark} 0%, ${C.green} 100%)`,borderRadius:20,padding:"36px 32px",marginBottom:32,color:"#fff",textAlign:"center",position:"relative",overflow:"hidden"}}>
               <div style={{position:"absolute",top:-20,right:-20,fontSize:120,opacity:0.08}}>🥦</div>
@@ -547,32 +547,31 @@ function App() {
             </div>
 
             {/* DIVIDER */}
-            <div style={{marginBottom:16}}>
-              <div style={{fontSize:18,fontWeight:700,color:C.dark,marginBottom:4}}>Ako chcete nakupovať?</div>
-              <div style={{fontSize:14,color:"#64748b"}}>Vyberte typ zákazníka</div>
+            <div style={{marginBottom:14}}>
+              <div style={{fontSize:16,fontWeight:700,color:C.dark,marginBottom:3}}>Vyberte typ zákazníka</div>
             </div>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
-              <div onClick={() => { setCustomerType("domacnost"); setFirmReady(true); window.scrollTo(0,0); }} style={{background:"#fff",borderRadius:12,padding:24,cursor:"pointer",border:"1.5px solid #e2e8f0",transition:"all 0.15s"}}>
-                <div style={{width:44,height:44,background:"#f0fdf4",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,marginBottom:14}}>🏠</div>
-                <div style={{fontWeight:700,fontSize:16,marginBottom:6,color:C.dark}}>Som domácnosť</div>
-                <div style={{fontSize:13,color:"#64748b",lineHeight:1.5,marginBottom:14}}>Fyzická osoba · súkromná spotreba</div>
-                <div style={{background:"#fffbeb",border:"1px solid #fde68a",borderRadius:8,padding:"10px 12px",fontSize:12,color:"#92400e",lineHeight:1.6,marginBottom:14}}>
-                  ⚠️ Dostupné len <strong>vyzdvihnutie v sklade</strong><br/>
+              <div onClick={() => { setCustomerType("domacnost"); setFirmReady(true); window.scrollTo(0,0); }} style={{background:"#fff",borderRadius:12,padding:20,cursor:"pointer",border:"1.5px solid #e2e8f0",transition:"all 0.15s"}}>
+                <div style={{width:40,height:40,background:"#f0fdf4",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,marginBottom:12}}>🏠</div>
+                <div style={{fontWeight:700,fontSize:15,marginBottom:4,color:C.dark}}>Som domácnosť</div>
+                <div style={{fontSize:12,color:"#64748b",lineHeight:1.5,marginBottom:12}}>Fyzická osoba · súkromná spotreba</div>
+                <div style={{background:"#fffbeb",border:"1px solid #fde68a",borderRadius:8,padding:"8px 10px",fontSize:11,color:"#92400e",lineHeight:1.6,marginBottom:12}}>
+                  ⚠️ Len <strong>osobný odber v sklade</strong><br/>
                   📍 Malý Kolačín 342 · 🕘 9:00–13:00
                 </div>
-                <div style={{background:C.green,color:"#fff",borderRadius:8,padding:"10px 0",fontWeight:600,fontSize:14,textAlign:"center"}}>Pokračovať</div>
+                <div style={{background:C.green,color:"#fff",borderRadius:8,padding:"9px 0",fontWeight:600,fontSize:13,textAlign:"center"}}>Pokračovať →</div>
               </div>
-              <div onClick={() => setCustomerType("firma")} style={{background:"#fff",borderRadius:12,padding:24,cursor:"pointer",border:"1.5px solid #e2e8f0",transition:"all 0.15s"}}>
-                <div style={{width:44,height:44,background:"#f0fdf4",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,marginBottom:14}}>🏢</div>
-                <div style={{fontWeight:700,fontSize:16,marginBottom:6,color:C.dark}}>B2B / Firemný odber</div>
-                <div style={{fontSize:13,color:"#64748b",lineHeight:1.7,marginBottom:14}}>
+              <div onClick={() => setCustomerType("firma")} style={{background:"#fff",borderRadius:12,padding:20,cursor:"pointer",border:"1.5px solid #e2e8f0",transition:"all 0.15s"}}>
+                <div style={{width:40,height:40,background:"#f0fdf4",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,marginBottom:12}}>🏢</div>
+                <div style={{fontWeight:700,fontSize:15,marginBottom:4,color:C.dark}}>B2B / Firemný odber</div>
+                <div style={{fontSize:12,color:"#64748b",lineHeight:1.6,marginBottom:12}}>
                   Reštaurácie · Hotely · HORECA<br/>
                   Maloobchod · Školy · Iný platca DPH
                 </div>
-                <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:8,padding:"8px 12px",fontSize:12,color:C.green,fontWeight:600,marginBottom:14}}>
+                <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:8,padding:"7px 10px",fontSize:11,color:C.green,fontWeight:600,marginBottom:12}}>
                   Fakturácia · Veľkoobchodné ceny
                 </div>
-                <div style={{background:C.green,color:"#fff",borderRadius:8,padding:"10px 0",fontWeight:600,fontSize:14,textAlign:"center"}}>Pokračovať</div>
+                <div style={{background:C.green,color:"#fff",borderRadius:8,padding:"9px 0",fontWeight:600,fontSize:13,textAlign:"center"}}>Pokračovať →</div>
               </div>
             </div>
           </div>
@@ -1043,26 +1042,48 @@ function App() {
                 {orders.length === 0 ? (
                   <div style={{ color: C.gray, padding: "20px 0", textAlign: "center" }}>Žiadne objednávky zatiaľ.</div>
                 ) : (
-                  <table style={S.adminTable}>
-                    <thead><tr>{["Dátum", "Zákazník", "Telefón", "Prevzatie", "Platba", "Suma", "Status", "Akcia"].map(h => <th key={h} style={S.th}>{h}</th>)}</tr></thead>
-                    <tbody>
-                      {orders.map(o => (
-                        <tr key={o.id}>
-                          <td style={S.td}>{o.date}</td>
-                          <td style={S.td}><strong>{o.name}</strong></td>
-                          <td style={S.td}>{o.phone}</td>
-                          <td style={S.td}>{o.deliveryType === "sklad" ? `🏭 Sklad ${o.pickupSlot ? "— " + o.pickupSlot : ""}` : `🚚 Dovoz — ${o.deliverySlot}`}</td>
-                          <td style={S.td}>{o.payment === "dobierka" ? "💵 Dobierka" : "💳 Karta"}</td>
-                          <td style={S.td}><strong>{o.total.toFixed(2)} €</strong></td>
-                          <td style={S.td}><span style={{ ...S.badge, ...(o.status === "Nová" ? S.badgeOrange : o.status === "Vybavená" ? S.badgeGreen : S.badgeGray) }}>{o.status}</span></td>
-                          <td style={S.td}>
-                            <button style={{ ...S.actionBtn, background: C.greenPale, color: C.green }} onClick={() => setOrders(os => os.map(x => x.id === o.id ? { ...x, status: "Vybavená" } : x))}>✓</button>
-                            <button style={{ ...S.actionBtn, background: C.grayLight, color: C.gray }} onClick={() => setOrders(os => os.map(x => x.id === o.id ? { ...x, status: "Zrušená" } : x))}>✕</button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                  <div style={{display:"flex",flexDirection:"column",gap:16}}>
+                    {orders.map(o => (
+                      <div key={o.id} style={{border:"1px solid #e2e8f0",borderRadius:12,overflow:"hidden"}}>
+                        {/* Order header */}
+                        <div style={{background:"#f8fafc",padding:"12px 16px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:8}}>
+                          <div style={{display:"flex",gap:16,alignItems:"center",flexWrap:"wrap"}}>
+                            <div style={{fontSize:13,color:"#64748b"}}>{o.date}</div>
+                            <div style={{fontWeight:700,fontSize:15}}>{o.name}</div>
+                            <div style={{fontSize:13,color:"#64748b"}}>{o.phone}</div>
+                            {o.email && <div style={{fontSize:13,color:"#64748b"}}>{o.email}</div>}
+                            <div style={{fontSize:13}}>{o.deliveryType === "sklad" ? `🏭 Sklad ${o.pickupSlot ? "— " + o.pickupSlot : ""}` : `🚚 Dovoz — ${o.deliverySlot}`}</div>
+                            <div style={{fontSize:13}}>{o.payment}</div>
+                            {o.note && <div style={{fontSize:13,color:"#92400e",background:"#fffbeb",padding:"2px 8px",borderRadius:6}}>📝 {o.note}</div>}
+                          </div>
+                          <div style={{display:"flex",gap:8,alignItems:"center"}}>
+                            <div style={{fontWeight:700,fontSize:16,color:C.dark}}>{o.total.toFixed(2)} €</div>
+                            <span style={{ ...S.badge, ...(o.status === "Nová" ? S.badgeOrange : o.status === "Vybavená" ? S.badgeGreen : S.badgeGray) }}>{o.status}</span>
+                            <button style={{ ...S.actionBtn, background:"#f0fdf4", color: C.green }} onClick={() => setOrders(os => os.map(x => x.id === o.id ? { ...x, status: "Vybavená" } : x))}>✓ Vybaviť</button>
+                            <button style={{ ...S.actionBtn, background:"#f1f5f9", color: "#64748b" }} onClick={() => setOrders(os => os.map(x => x.id === o.id ? { ...x, status: "Zrušená" } : x))}>✕ Zrušiť</button>
+                          </div>
+                        </div>
+                        {/* Order items */}
+                        <div style={{padding:"12px 16px"}}>
+                          <div style={{fontSize:12,fontWeight:600,color:"#64748b",marginBottom:8,textTransform:"uppercase",letterSpacing:"0.5px"}}>Objednané položky:</div>
+                          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(220px,1fr))",gap:6}}>
+                            {o.items.map((item,i) => (
+                              <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"6px 10px",background:"#f8fafc",borderRadius:8,fontSize:13}}>
+                                <div>
+                                  <span style={{fontWeight:600}}>{item.name}</span>
+                                  {item.pieceNote && <span style={{color:"#f97316",fontSize:11,marginLeft:4}}>({item.pieceNote})</span>}
+                                </div>
+                                <div style={{display:"flex",gap:8,alignItems:"center"}}>
+                                  <span style={{color:"#64748b"}}>{item.qty} {item.unit}</span>
+                                  <span style={{fontWeight:700}}>{(item.qty * item.price).toFixed(2)} €</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 )}
               </div>
             )}
