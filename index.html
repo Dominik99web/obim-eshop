@@ -506,7 +506,7 @@ function App() {
       {/* HEADER */}
       <header style={S.header}>
         <div style={S.headerInner}>
-          <div style={S.logo}>
+          <div style={{...S.logo, cursor:"pointer"}} onClick={() => { setCustomerType(null); setFirmType(null); setFirmReady(false); setView("shop"); window.scrollTo(0,0); }}>
             <img src="https://obim.sk/wp-content/uploads/2025/11/Obim_LOGO.png" alt="Obim s.r.o." style={{height:44, width:"auto"}} />
           </div>
           <div style={S.nav}>
@@ -626,7 +626,7 @@ function App() {
                 <button
                   style={{width:"100%",background: firmData.nazov && firmData.mesto ? "#2a7a3b" : "#ccc",color:"#fff",border:"none",borderRadius:10,padding:"13px 0",fontSize:16,fontWeight:700,cursor: firmData.nazov && firmData.mesto ? "pointer" : "default"}}
                   disabled={!firmData.nazov || !firmData.mesto}
-                  onClick={() => setFirmReady(true)}>
+                  onClick={() => { setFirmReady(true); window.scrollTo(0,0); }}>
                   Pokračovať do e-shopu →
                 </button>
                 <button onClick={() => setFirmType(null)} style={{width:"100%",background:"none",border:"none",color:"#6b7280",fontSize:13,cursor:"pointer",marginTop:10,padding:"6px 0"}}>← Späť</button>
@@ -702,7 +702,7 @@ function App() {
                 <button
                   style={{width:"100%",background: (firmData.nazov && firmData.ico && firmData.adresa && firmData.mesto && firmData.kontakt && firmData.email && firmData.telefon) ? "#2a7a3b" : "#ccc",color:"#fff",border:"none",borderRadius:10,padding:"13px 0",fontSize:16,fontWeight:700,cursor:"pointer",marginTop:16}}
                   disabled={!(firmData.nazov && firmData.ico && firmData.adresa && firmData.mesto && firmData.kontakt && firmData.email && firmData.telefon)}
-                  onClick={() => setFirmReady(true)}>
+                  onClick={() => { setFirmReady(true); window.scrollTo(0,0); }}>
                   Pokračovať do e-shopu →
                 </button>
                 <div style={{fontSize:12,color:"#6b7280",textAlign:"center",marginTop:8}}>Vaše údaje použijeme len pre fakturáciu</div>
@@ -737,7 +737,7 @@ function App() {
           <div style={S.catBar}>
             <div style={S.catBarInner}>
               {CATEGORIES.map(c => (
-                <button key={c} style={{ ...S.catBtn, ...(effectiveCat === c ? S.catBtnActive : {}) }} onClick={() => setFilterCat(c)}>
+                <button key={c} style={{ ...S.catBtn, ...(effectiveCat === c ? S.catBtnActive : {}) }} onClick={() => { setFilterCat(c); setSearch(""); }}>
                   <span>{CAT_ICONS[c]}</span> {c}
                 </button>
               ))}
