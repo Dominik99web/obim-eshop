@@ -403,6 +403,7 @@ function App() {
   const [pickupSlot, setPickupSlot] = useState("");
   const [pieceNotes, setPieceNotes] = useState({});
   const [toast, setToast] = useState(null);
+  const [formErrors, setFormErrors] = useState({});
   const [orderForm, setOrderForm] = useState({
     name: "", phone: "", email: "", address: "", city: "", zip: "",
     payment: "dobierka", note: "",
@@ -438,7 +439,25 @@ function App() {
 
   const setField = (field, val) => setOrderForm(f => ({ ...f, [field]: val }));
 
+  const validateEmail = (email) => {
+    if (!email) return true; // email je nepovinný
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validatePhone = (phone) => {
+    const clean = phone.replace(/\s/g, '');
+    return /^(\+421|\+420|0)[0-9]{9}$/.test(clean);
+  };
+
   const submitOrder = () => {
+    const errors = {};
+    if (!validatePhone(orderForm.phone)) errors.phone = "Zadajte platné telefónne číslo (napr. +421 900 000 000)";
+    if (orderForm.email && !validateEmail(orderForm.email)) errors.email = "Zadajte platný e-mail (napr. jan@email.sk)";
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+    setFormErrors({});
     const paymentLabel = customerType === "domacnost" ? "Hotovosť na sklade" :
       firmType === "existujuci" ? "Hotovosť / Osobitné podmienky" : "Hotovosť pri dodávke";
     const order = { id: Date.now(), date: new Date().toLocaleString("sk-SK"), items: [...cart], total: cartTotal, ...orderForm, payment: paymentLabel, customerType, firmType, firmName: firmData.nazov, firmMesto: firmData.mesto, firmICO: firmData.ico, pickupSlot, status: "Nová" };
@@ -469,10 +488,15 @@ function App() {
 
   const selectedCitySlots = DELIVERY_CITIES.find(d => d.city === orderForm.deliveryCity)?.slots || [];
 
-  const canSubmit = orderForm.name && orderForm.phone && orderForm.deliveryType &&
-    (orderForm.deliveryType === "sklad"
-      ? (customerType === "domacnost" ? !!pickupSlot : true)
-      : (customerType === "firma" ? !!orderForm.deliverySlot : false));
+  // Auto-set sklad for domacnost
+  if (customerType === "domacnost" && !orderForm.deliveryType) {
+    setField("deliveryType", "sklad");
+  }
+
+  const canSubmit = orderForm.name && orderForm.phone &&
+    (customerType === "domacnost"
+      ? !!pickupSlot
+      : (orderForm.deliveryType === "sklad" ? true : !!orderForm.deliverySlot));
 
   const goShop = () => { setView("shop"); setOrderDone(false); };
 
@@ -859,16 +883,23 @@ function App() {
 
                 {/* DELIVERY TYPE */}
                 <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 12 }}>Spôsob prevzatia *</div>
-                <div style={S.deliveryOptions}>
-                  <div style={{ ...S.deliveryCard, ...(orderForm.deliveryType === "sklad" ? S.deliveryCardActive : {}) }} onClick={() => setField("deliveryType", "sklad")}>
+                {customerType === "domacnost" ? (
+                  <div style={{ ...S.deliveryCard, ...S.deliveryCardActive }} onClick={() => setField("deliveryType", "sklad")}>
                     <div style={S.deliveryCardTitle}>🏭 Vyzdvihnutie v sklade</div>
-                    <div style={S.deliveryCardSub}>Príďte si osobne prevziať tovar</div>
+                    <div style={S.deliveryCardSub}>Malý Kolačín 342 · Po–Pi 9:00–13:00</div>
                   </div>
-                  <div style={{ ...S.deliveryCard, ...(orderForm.deliveryType === "dovoz" ? S.deliveryCardActive : {}) }} onClick={() => { setField("deliveryType", "dovoz"); setField("deliveryCity", ""); setField("deliverySlot", ""); }}>
-                    <div style={S.deliveryCardTitle}>🚚 Dovoz tovaru</div>
-                    <div style={S.deliveryCardSub}>Doručíme priamo k vám</div>
+                ) : (
+                  <div style={S.deliveryOptions}>
+                    <div style={{ ...S.deliveryCard, ...(orderForm.deliveryType === "sklad" ? S.deliveryCardActive : {}) }} onClick={() => setField("deliveryType", "sklad")}>
+                      <div style={S.deliveryCardTitle}>🏭 Vyzdvihnutie v sklade</div>
+                      <div style={S.deliveryCardSub}>Príďte si osobne prevziať tovar</div>
+                    </div>
+                    <div style={{ ...S.deliveryCard, ...(orderForm.deliveryType === "dovoz" ? S.deliveryCardActive : {}) }} onClick={() => { setField("deliveryType", "dovoz"); setField("deliveryCity", ""); setField("deliverySlot", ""); }}>
+                      <div style={S.deliveryCardTitle}>🚚 Dovoz tovaru</div>
+                      <div style={S.deliveryCardSub}>Doručíme priamo k vám</div>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* DOVOZ — len casove okno pre firmy, bez vyber mesta */}
                 {orderForm.deliveryType === "dovoz" && customerType === "firma" && (
@@ -925,14 +956,22 @@ function App() {
                 <div style={S.form}>
                   <div style={S.formRow}>
                     <div><label style={S.label}>Meno a priezvisko *</label><input style={S.input} value={orderForm.name} onChange={e => setField("name", e.target.value)} placeholder="Ján Novák" /></div>
-                    <div><label style={S.label}>Telefón *</label><input style={S.input} value={orderForm.phone} onChange={e => setField("phone", e.target.value)} placeholder="+421 900 000 000" /></div>
+                    <div>
+                      <label style={S.label}>Telefón *</label>
+                      <input style={{...S.input, borderColor: formErrors.phone ? "#dc2626" : "#e5e7eb"}} value={orderForm.phone} onChange={e => { setField("phone", e.target.value); setFormErrors(f => ({...f, phone: null})); }} placeholder="+421 900 000 000" />
+                      {formErrors.phone && <div style={{color:"#dc2626",fontSize:12,marginTop:4}}>{formErrors.phone}</div>}
+                    </div>
                   </div>
-                  <div><label style={S.label}>E-mail</label><input style={S.input} value={orderForm.email} onChange={e => setField("email", e.target.value)} placeholder="jan@email.sk" /></div>
-                  {orderForm.deliveryType === "dovoz" && (
+                  <div>
+                    <label style={S.label}>E-mail</label>
+                    <input style={{...S.input, borderColor: formErrors.email ? "#dc2626" : "#e5e7eb"}} value={orderForm.email} onChange={e => { setField("email", e.target.value); setFormErrors(f => ({...f, email: null})); }} placeholder="jan@email.sk" />
+                    {formErrors.email && <div style={{color:"#dc2626",fontSize:12,marginTop:4}}>{formErrors.email}</div>}
+                  </div>
+                  {orderForm.deliveryType === "dovoz" && customerType === "firma" && firmType === "novy" && (
                     <>
                       <div><label style={S.label}>Adresa doručenia *</label><input style={S.input} value={orderForm.address} onChange={e => setField("address", e.target.value)} placeholder="Ulica a číslo" /></div>
                       <div style={S.formRow}>
-                        <div><label style={S.label}>Mesto</label><input style={S.input} value={orderForm.deliveryCity} readOnly placeholder="Vybrané vyššie" /></div>
+                        <div><label style={S.label}>Mesto</label><input style={S.input} value={orderForm.city} onChange={e => setField("city", e.target.value)} placeholder="Trenčín" /></div>
                         <div><label style={S.label}>PSČ</label><input style={S.input} value={orderForm.zip} onChange={e => setField("zip", e.target.value)} placeholder="911 01" /></div>
                       </div>
                     </>
