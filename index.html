@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Obim s.r.o. - Veľkoobchod ovocia a zeleniny</title>
-  <meta name="theme-color" content="#2d6a4f" />
+  <meta name="theme-color" content="#16a34a" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body style="margin:0;padding:0;">
   <div id="root"></div>
@@ -251,13 +252,13 @@ const getPriceWithDPH = (price, category) => {
 const CATEGORIES = ["Všetko", "Ovocie", "Zelenina", "Šaláty", "Bylinky a koreniny", "Huby", "Zemiaky", "Vakuové produkty", "Vajcia", "Sezónne produkty"];
 
 const C = {
-  green: "#1a6b2f", greenLight: "#2d8a47", greenPale: "#e6f4ea",
-  greenDark: "#134d22",
+  green: "#16a34a", greenLight: "#22c55e", greenPale: "#f0fdf4",
+  greenDark: "#15803d", greenMid: "#dcfce7",
   orange: "#f97316", orangeLight: "#fff7ed",
-  cream: "#ffffff", dark: "#111827",
-  gray: "#6b7280", grayLight: "#f9fafb", grayMid: "#e5e7eb",
-  red: "#dc2626", redLight: "#fee2e2",
-  yellow: "#fbbf24",
+  cream: "#ffffff", dark: "#0f172a",
+  gray: "#64748b", grayLight: "#f8fafc", grayMid: "#e2e8f0",
+  red: "#ef4444", redLight: "#fef2f2",
+  yellow: "#eab308", accent: "#0ea5e9",
 };
 
 // Category icons
@@ -275,109 +276,109 @@ const CAT_ICONS = {
 };
 
 const S = {
-  app: { fontFamily: "'Segoe UI', -apple-system, sans-serif", minHeight: "100vh", background: "#f8f9fa", color: C.dark },
+  app: { fontFamily: "'Inter', 'Segoe UI', -apple-system, sans-serif", minHeight: "100vh", background: "#f8fafc", color: C.dark },
 
-  // HEADER
-  header: { background: "#fff", borderBottom: "1px solid #e5e7eb", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 1px 8px rgba(0,0,0,0.08)" },
-  headerInner: { maxWidth: 1200, margin: "0 auto", padding: "12px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 },
-  logo: { display: "flex", alignItems: "center", gap: 10, color: C.green, textDecoration: "none" },
+  // HEADER - čistý, profesionálny
+  header: { background: "#fff", borderBottom: "1px solid #e2e8f0", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 1px 3px rgba(0,0,0,0.06)" },
+  headerInner: { maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 },
+  logo: { display: "flex", alignItems: "center" },
   logoEmoji: { fontSize: 26 },
   logoText: { fontSize: 19, fontWeight: 800, color: C.green, letterSpacing: "-0.3px" },
   logoSub: { fontSize: 10, color: C.gray, display: "block", marginTop: -1 },
-  nav: { display: "flex", gap: 6, alignItems: "center" },
-  navBtn: { background: "transparent", border: "1px solid #e5e7eb", color: C.dark, padding: "7px 14px", borderRadius: 8, cursor: "pointer", fontSize: 13, fontWeight: 500 },
-  navBtnActive: { background: C.greenPale, color: C.green, borderColor: C.green },
-  cartBtn: { background: C.green, border: "none", color: "#fff", padding: "9px 18px", borderRadius: 10, cursor: "pointer", fontSize: 14, fontWeight: 700, display: "flex", alignItems: "center", gap: 8, boxShadow: "0 2px 8px rgba(26,107,47,0.3)" },
-  cartBadge: { background: C.orange, color: "#fff", borderRadius: 10, padding: "1px 7px", fontSize: 12, fontWeight: 700 },
+  nav: { display: "flex", gap: 4, alignItems: "center" },
+  navBtn: { background: "transparent", border: "none", color: "#64748b", padding: "8px 14px", borderRadius: 8, cursor: "pointer", fontSize: 14, fontWeight: 500, transition: "all 0.15s" },
+  navBtnActive: { background: "#f0fdf4", color: C.green, fontWeight: 600 },
+  cartBtn: { background: C.green, border: "none", color: "#fff", padding: "10px 20px", borderRadius: 10, cursor: "pointer", fontSize: 14, fontWeight: 600, display: "flex", alignItems: "center", gap: 8, transition: "all 0.15s" },
+  cartBadge: { background: "rgba(255,255,255,0.25)", color: "#fff", borderRadius: 8, padding: "2px 8px", fontSize: 13, fontWeight: 700 },
 
-  // HERO
-  hero: { background: `linear-gradient(135deg, ${C.greenDark} 0%, ${C.green} 60%, ${C.greenLight} 100%)`, color: "#fff", padding: "36px 20px 40px", position: "relative", overflow: "hidden" },
-  heroTitle: { fontSize: 30, fontWeight: 900, marginBottom: 6, letterSpacing: "-0.5px" },
-  heroSub: { fontSize: 15, opacity: 0.85, marginBottom: 18, fontWeight: 400 },
-  heroNote: { display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,0.12)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.25)", borderRadius: 24, padding: "6px 14px", fontSize: 12, fontWeight: 500 },
+  // HERO - minimalistický tmavý
+  hero: { background: "#0f172a", color: "#fff", padding: "48px 24px 52px", position: "relative", overflow: "hidden" },
+  heroTitle: { fontSize: 34, fontWeight: 800, marginBottom: 8, letterSpacing: "-0.8px", lineHeight: 1.2 },
+  heroSub: { fontSize: 16, color: "#94a3b8", marginBottom: 24, fontWeight: 400, maxWidth: 480 },
+  heroNote: { display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "7px 14px", fontSize: 13, fontWeight: 500, color: "#cbd5e1" },
 
-  // SEARCH
-  searchWrap: { background: "#fff", borderBottom: "1px solid #e5e7eb", padding: "12px 20px", position: "sticky", top: 57, zIndex: 90, boxShadow: "0 2px 8px rgba(0,0,0,0.05)" },
-  searchInner: { maxWidth: 1200, margin: "0 auto" },
-  searchBox: { position: "relative" },
-  searchInput: { width: "100%", padding: "11px 44px 11px 16px", borderRadius: 10, border: "1.5px solid #e5e7eb", fontSize: 15, outline: "none", boxSizing: "border-box", background: "#f9fafb", transition: "border-color 0.15s" },
-  searchIcon: { position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)", fontSize: 18, pointerEvents: "none", color: C.gray },
+  // SEARCH - čistý
+  searchWrap: { background: "#fff", borderBottom: "1px solid #e2e8f0", padding: "12px 24px", position: "sticky", top: 64, zIndex: 90 },
+  searchInner: { maxWidth: 1280, margin: "0 auto" },
+  searchBox: { position: "relative", maxWidth: 600 },
+  searchInput: { width: "100%", padding: "11px 44px 11px 40px", borderRadius: 10, border: "1.5px solid #e2e8f0", fontSize: 14, outline: "none", boxSizing: "border-box", background: "#f8fafc", color: C.dark, transition: "all 0.15s" },
+  searchIcon: { position: "absolute", left: 13, top: "50%", transform: "translateY(-50%)", fontSize: 16, pointerEvents: "none", color: "#94a3b8" },
   searchResults: { marginTop: 6, fontSize: 12, color: C.gray },
 
-  // CATEGORY BAR
-  catBar: { background: "#fff", borderBottom: "1px solid #e5e7eb", padding: "0 20px", overflowX: "auto", whiteSpace: "nowrap", scrollbarWidth: "none", position: "sticky", top: 105, zIndex: 89 },
-  catBarInner: { maxWidth: 1200, margin: "0 auto", display: "flex", gap: 0 },
-  catBtn: { display: "inline-flex", alignItems: "center", gap: 6, padding: "12px 16px", border: "none", background: "transparent", cursor: "pointer", fontSize: 13, fontWeight: 500, color: C.gray, borderBottom: "2px solid transparent", whiteSpace: "nowrap", transition: "all 0.15s" },
-  catBtnActive: { color: C.green, borderBottom: `2px solid ${C.green}`, fontWeight: 700 },
+  // CATEGORY BAR - tabs štýl
+  catBar: { background: "#fff", borderBottom: "1px solid #e2e8f0", padding: "0 24px", overflowX: "auto", whiteSpace: "nowrap", scrollbarWidth: "none", position: "sticky", top: 113, zIndex: 89 },
+  catBarInner: { maxWidth: 1280, margin: "0 auto", display: "flex", gap: 0 },
+  catBtn: { display: "inline-flex", alignItems: "center", gap: 6, padding: "13px 16px", border: "none", background: "transparent", cursor: "pointer", fontSize: 13, fontWeight: 500, color: "#64748b", borderBottom: "2px solid transparent", whiteSpace: "nowrap", transition: "all 0.15s" },
+  catBtnActive: { color: C.dark, borderBottom: `2px solid ${C.green}`, fontWeight: 600 },
 
   // MAIN
-  main: { maxWidth: 1200, margin: "0 auto", padding: "20px 20px 40px" },
+  main: { maxWidth: 1280, margin: "0 auto", padding: "24px 24px 48px" },
   filterRow: { display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" },
-  filterBtn: { padding: "6px 14px", borderRadius: 20, border: "1.5px solid #e5e7eb", background: "#fff", color: C.gray, cursor: "pointer", fontSize: 13, fontWeight: 500 },
+  filterBtn: { padding: "6px 14px", borderRadius: 20, border: "1.5px solid #e2e8f0", background: "#fff", color: C.gray, cursor: "pointer", fontSize: 13, fontWeight: 500 },
   filterBtnActive: { background: C.green, color: "#fff", borderColor: C.green },
 
-  // PRODUCT GRID
-  grid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 16 },
-  card: { background: "#fff", borderRadius: 14, overflow: "hidden", display: "flex", flexDirection: "column", boxShadow: "0 1px 4px rgba(0,0,0,0.06)", border: "1px solid #efefef", cursor: "pointer" },
-  cardUnavailable: { opacity: 0.45 },
-  cardImgWrap: { position: "relative", width: "100%", height: 150, background: "#f3f4f6", overflow: "hidden" },
-  cardImg: { width: "100%", height: 150, objectFit: "cover" },
-  cardImgPlaceholder: { width: "100%", height: 150, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 52, background: "linear-gradient(135deg, #f0fdf4, #dcfce7)" },
-  cardBody: { padding: "10px 12px 12px", display: "flex", flexDirection: "column", gap: 5, flex: 1 },
-  cardCat: { fontSize: 10, color: C.gray, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px" },
-  cardName: { fontWeight: 700, fontSize: 14, color: C.dark, lineHeight: 1.3, marginBottom: 2 },
-  cardPrice: { fontSize: 20, fontWeight: 900, color: C.green },
-  cardUnit: { fontSize: 11, color: C.gray, fontWeight: 400 },
-  cardDph: { fontSize: 10, color: C.gray, marginTop: -3 },
-  unavailableBadge: { background: "#f3f4f6", color: C.gray, borderRadius: 6, padding: "5px 8px", fontSize: 12, textAlign: "center" },
-  addBtn: { background: C.green, color: "#fff", border: "none", borderRadius: 8, padding: "9px 0", cursor: "pointer", fontSize: 13, fontWeight: 700, width: "100%", marginTop: "auto" },
+  // PRODUCT GRID - moderné karty
+  grid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(210px, 1fr))", gap: 16 },
+  card: { background: "#fff", borderRadius: 12, overflow: "hidden", display: "flex", flexDirection: "column", border: "1px solid #e2e8f0", transition: "all 0.2s", cursor: "pointer" },
+  cardUnavailable: { opacity: 0.4 },
+  cardImgWrap: { position: "relative", width: "100%", height: 160, background: "#f1f5f9", overflow: "hidden" },
+  cardImg: { width: "100%", height: 160, objectFit: "cover", transition: "transform 0.3s" },
+  cardImgPlaceholder: { width: "100%", height: 160, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 52, background: "#f8fafc" },
+  cardBody: { padding: "12px 14px 14px", display: "flex", flexDirection: "column", gap: 4, flex: 1 },
+  cardCat: { fontSize: 11, color: "#94a3b8", fontWeight: 500, letterSpacing: "0.3px", textTransform: "uppercase" },
+  cardName: { fontWeight: 600, fontSize: 14, color: C.dark, lineHeight: 1.35, marginBottom: 4 },
+  cardPrice: { fontSize: 22, fontWeight: 700, color: C.dark, letterSpacing: "-0.5px" },
+  cardUnit: { fontSize: 12, color: "#94a3b8", fontWeight: 400 },
+  cardDph: { fontSize: 11, color: "#94a3b8", marginTop: -2 },
+  unavailableBadge: { background: "#f1f5f9", color: "#94a3b8", borderRadius: 6, padding: "5px 8px", fontSize: 12, textAlign: "center" },
+  addBtn: { background: C.green, color: "#fff", border: "none", borderRadius: 8, padding: "10px 0", cursor: "pointer", fontSize: 13, fontWeight: 600, width: "100%", marginTop: "auto", transition: "background 0.15s" },
   qtyRow: { display: "flex", alignItems: "center", gap: 8 },
-  qtyBtn: { width: 30, height: 30, borderRadius: 7, border: `2px solid ${C.green}`, background: "#fff", color: C.green, cursor: "pointer", fontSize: 18, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center" },
+  qtyBtn: { width: 30, height: 30, borderRadius: 7, border: "1.5px solid #e2e8f0", background: "#fff", color: C.dark, cursor: "pointer", fontSize: 18, fontWeight: 600, display: "flex", alignItems: "center", justifyContent: "center" },
   qtyNum: { minWidth: 28, textAlign: "center", fontWeight: 700, fontSize: 15 },
-  noResults: { textAlign: "center", padding: "60px 20px", color: C.gray },
+  noResults: { textAlign: "center", padding: "80px 20px", color: C.gray },
 
   // CART & FORMS
-  panel: { maxWidth: 860, margin: "0 auto", padding: "28px 20px" },
-  sectionTitle: { fontSize: 20, fontWeight: 800, marginBottom: 18, color: C.dark },
-  cartItem: { background: "#fff", borderRadius: 12, padding: "12px 14px", display: "flex", alignItems: "center", gap: 12, marginBottom: 8, boxShadow: "0 1px 3px rgba(0,0,0,0.05)", border: "1px solid #f0f0f0" },
-  cartItemImg: { width: 50, height: 50, borderRadius: 8, objectFit: "cover", background: "#f3f4f6", flexShrink: 0 },
+  panel: { maxWidth: 900, margin: "0 auto", padding: "32px 24px" },
+  sectionTitle: { fontSize: 22, fontWeight: 700, marginBottom: 20, color: C.dark, letterSpacing: "-0.3px" },
+  cartItem: { background: "#fff", borderRadius: 10, padding: "14px 16px", display: "flex", alignItems: "center", gap: 14, marginBottom: 8, border: "1px solid #e2e8f0" },
+  cartItemImg: { width: 52, height: 52, borderRadius: 8, objectFit: "cover", background: "#f1f5f9", flexShrink: 0 },
   cartItemInfo: { flex: 1, minWidth: 0 },
   cartItemName: { fontWeight: 600, fontSize: 14, color: C.dark },
-  cartItemPrice: { color: C.gray, fontSize: 12, marginTop: 1 },
-  cartItemTotal: { fontWeight: 800, fontSize: 15, color: C.green, minWidth: 60, textAlign: "right" },
-  removeBtn: { background: C.redLight, color: C.red, border: "none", borderRadius: 6, padding: "5px 9px", cursor: "pointer", fontSize: 12, fontWeight: 600 },
-  orderSummary: { background: "#fff", borderRadius: 14, padding: 22, marginTop: 18, boxShadow: "0 1px 6px rgba(0,0,0,0.06)", border: "1px solid #efefef" },
-  totalRow: { display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 19, fontWeight: 800, marginBottom: 18, paddingBottom: 14, borderBottom: "2px solid #f0f0f0" },
-  form: { display: "flex", flexDirection: "column", gap: 13 },
-  formRow: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 },
-  label: { fontSize: 12, fontWeight: 700, color: C.gray, marginBottom: 4, display: "block", textTransform: "uppercase", letterSpacing: "0.4px" },
-  input: { width: "100%", padding: "10px 12px", borderRadius: 8, border: "1.5px solid #e5e7eb", fontSize: 15, outline: "none", boxSizing: "border-box", background: "#fafafa" },
-  textarea: { width: "100%", padding: "10px 12px", borderRadius: 8, border: "1.5px solid #e5e7eb", fontSize: 15, minHeight: 70, outline: "none", resize: "vertical", boxSizing: "border-box", background: "#fafafa" },
-  select: { width: "100%", padding: "10px 12px", borderRadius: 8, border: "1.5px solid #e5e7eb", fontSize: 15, outline: "none", background: "#fafafa", boxSizing: "border-box" },
-  submitBtn: { background: C.green, color: "#fff", border: "none", borderRadius: 10, padding: "14px 0", fontSize: 16, fontWeight: 700, cursor: "pointer", marginTop: 8, width: "100%", boxShadow: "0 2px 8px rgba(26,107,47,0.25)" },
-  successBox: { background: C.greenPale, border: `2px solid ${C.green}`, borderRadius: 14, padding: 32, textAlign: "center" },
-  successTitle: { fontSize: 22, fontWeight: 800, color: C.green, marginBottom: 8 },
-  successText: { color: C.gray, fontSize: 14 },
+  cartItemPrice: { color: "#64748b", fontSize: 12, marginTop: 2 },
+  cartItemTotal: { fontWeight: 700, fontSize: 16, color: C.dark, minWidth: 70, textAlign: "right" },
+  removeBtn: { background: "#fef2f2", color: "#ef4444", border: "none", borderRadius: 6, padding: "5px 10px", cursor: "pointer", fontSize: 12, fontWeight: 600 },
+  orderSummary: { background: "#fff", borderRadius: 12, padding: 24, marginTop: 20, border: "1px solid #e2e8f0" },
+  totalRow: { display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 20, fontWeight: 700, marginBottom: 20, paddingBottom: 16, borderBottom: "1px solid #e2e8f0" },
+  form: { display: "flex", flexDirection: "column", gap: 16 },
+  formRow: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 },
+  label: { fontSize: 12, fontWeight: 600, color: "#64748b", marginBottom: 6, display: "block", letterSpacing: "0.3px" },
+  input: { width: "100%", padding: "11px 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, outline: "none", boxSizing: "border-box", background: "#fff", color: C.dark, transition: "border-color 0.15s" },
+  textarea: { width: "100%", padding: "11px 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, minHeight: 80, outline: "none", resize: "vertical", boxSizing: "border-box", background: "#fff" },
+  select: { width: "100%", padding: "11px 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, outline: "none", background: "#fff", boxSizing: "border-box" },
+  submitBtn: { background: C.green, color: "#fff", border: "none", borderRadius: 10, padding: "14px 0", fontSize: 15, fontWeight: 600, cursor: "pointer", marginTop: 8, width: "100%", letterSpacing: "0.2px" },
+  successBox: { background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 12, padding: 36, textAlign: "center" },
+  successTitle: { fontSize: 22, fontWeight: 700, color: C.green, marginBottom: 8 },
+  successText: { color: "#64748b", fontSize: 15 },
   deliveryOptions: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 4 },
-  deliveryCard: { border: "1.5px solid #e5e7eb", borderRadius: 10, padding: "14px 16px", cursor: "pointer", background: "#fff" },
-  deliveryCardActive: { border: `2px solid ${C.green}`, background: C.greenPale },
-  deliveryCardTitle: { fontWeight: 700, fontSize: 14, marginBottom: 3 },
-  deliveryCardSub: { fontSize: 12, color: C.gray },
-  slotGrid: { display: "flex", gap: 8, flexWrap: "wrap", marginTop: 4 },
-  slotBtn: { padding: "7px 12px", borderRadius: 8, border: "1.5px solid #e5e7eb", background: "#fff", cursor: "pointer", fontSize: 12, fontWeight: 600, color: C.dark },
-  slotBtnActive: { border: `2px solid ${C.green}`, background: C.greenPale, color: C.green },
-  infoBox: { background: "#fff7ed", border: "1px solid #fed7aa", borderRadius: 8, padding: "10px 14px", fontSize: 13, color: "#9a3412", marginTop: 4 },
-  adminSection: { background: "#fff", borderRadius: 12, padding: 22, marginBottom: 20, boxShadow: "0 1px 4px rgba(0,0,0,0.06)", border: "1px solid #efefef" },
-  adminLogin: { maxWidth: 380, margin: "80px auto", background: "#fff", borderRadius: 16, padding: 32, boxShadow: "0 4px 24px rgba(0,0,0,0.1)", textAlign: "center" },
+  deliveryCard: { border: "1.5px solid #e2e8f0", borderRadius: 10, padding: "16px", cursor: "pointer", background: "#fff", transition: "all 0.15s" },
+  deliveryCardActive: { border: `2px solid ${C.green}`, background: "#f0fdf4" },
+  deliveryCardTitle: { fontWeight: 600, fontSize: 14, marginBottom: 3, color: C.dark },
+  deliveryCardSub: { fontSize: 12, color: "#64748b" },
+  slotGrid: { display: "flex", gap: 8, flexWrap: "wrap", marginTop: 8 },
+  slotBtn: { padding: "8px 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", background: "#fff", cursor: "pointer", fontSize: 13, fontWeight: 500, color: C.dark, transition: "all 0.15s" },
+  slotBtnActive: { border: `2px solid ${C.green}`, background: "#f0fdf4", color: C.green, fontWeight: 600 },
+  infoBox: { background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 8, padding: "10px 14px", fontSize: 13, color: "#92400e", marginTop: 8 },
+  adminSection: { background: "#fff", borderRadius: 10, padding: 24, marginBottom: 20, border: "1px solid #e2e8f0" },
+  adminLogin: { maxWidth: 380, margin: "80px auto", background: "#fff", borderRadius: 16, padding: 36, boxShadow: "0 4px 24px rgba(0,0,0,0.08)", textAlign: "center", border: "1px solid #e2e8f0" },
   adminTable: { width: "100%", borderCollapse: "collapse", marginTop: 12, display: "block", overflowX: "auto" },
-  th: { background: "#f9fafb", padding: "9px 12px", textAlign: "left", fontSize: 12, fontWeight: 700, color: C.gray, whiteSpace: "nowrap", borderBottom: "1px solid #e5e7eb" },
-  td: { padding: "10px 12px", borderBottom: "1px solid #f3f4f6", fontSize: 13, verticalAlign: "middle", whiteSpace: "nowrap" },
-  badge: { display: "inline-block", padding: "3px 10px", borderRadius: 20, fontSize: 11, fontWeight: 700 },
-  badgeGreen: { background: C.greenPale, color: C.green },
-  badgeGray: { background: "#f3f4f6", color: C.gray },
+  th: { background: "#f8fafc", padding: "10px 14px", textAlign: "left", fontSize: 12, fontWeight: 600, color: "#64748b", whiteSpace: "nowrap", borderBottom: "1px solid #e2e8f0" },
+  td: { padding: "12px 14px", borderBottom: "1px solid #f1f5f9", fontSize: 13, verticalAlign: "middle", whiteSpace: "nowrap", color: C.dark },
+  badge: { display: "inline-block", padding: "3px 10px", borderRadius: 6, fontSize: 11, fontWeight: 600 },
+  badgeGreen: { background: "#f0fdf4", color: C.green },
+  badgeGray: { background: "#f1f5f9", color: "#64748b" },
   badgeOrange: { background: "#fff7ed", color: "#c2410c" },
-  actionBtn: { padding: "5px 11px", borderRadius: 6, border: "none", cursor: "pointer", fontSize: 12, fontWeight: 600, marginRight: 4 },
-  emptyCart: { textAlign: "center", padding: "60px 20px", color: C.gray },
+  actionBtn: { padding: "6px 12px", borderRadius: 6, border: "none", cursor: "pointer", fontSize: 12, fontWeight: 600, marginRight: 4 },
+  emptyCart: { textAlign: "center", padding: "80px 20px", color: "#94a3b8" },
 };
 
 function App() {
@@ -536,43 +537,42 @@ function App() {
               <div style={{fontSize:15,opacity:0.85,maxWidth:420,margin:"0 auto 20px",lineHeight:1.6}}>
                 Čerstvé ovocie a zelenina priamo od nás — pohodlne z domu alebo kancelárie. Objednajte si tovar online a my sa postaráme o zvyšok.
               </div>
-              <div style={{display:"flex",justifyContent:"center",gap:10,flexWrap:"wrap"}}>
-                <div style={{background:"rgba(255,255,255,0.15)",borderRadius:12,padding:"8px 16px",fontSize:13,fontWeight:600}}>🚚 Trenčiansky kraj</div>
-                <div style={{background:"rgba(255,255,255,0.15)",borderRadius:12,padding:"8px 16px",fontSize:13,fontWeight:600}}>🚚 Žilinský kraj</div>
-                <div style={{background:"rgba(255,255,255,0.15)",borderRadius:12,padding:"8px 16px",fontSize:13,fontWeight:600}}>🚚 Nitriansky kraj</div>
-                <div style={{background:"rgba(255,255,255,0.15)",borderRadius:12,padding:"8px 16px",fontSize:13,fontWeight:600}}>🏭 Sklad — Malý Kolačín 342</div>
-                <div style={{background:"rgba(255,255,255,0.15)",borderRadius:12,padding:"8px 16px",fontSize:13,fontWeight:600}}>📞 0948 816 686 · 0915 497 010</div>
+              <div style={{display:"flex",gap:10,flexWrap:"wrap",marginTop:4}}>
+                <div style={S.heroNote}>🚚 Trenčiansky kraj</div>
+                <div style={S.heroNote}>🚚 Žilinský kraj</div>
+                <div style={S.heroNote}>🚚 Nitriansky kraj</div>
+                <div style={S.heroNote}>🏭 Malý Kolačín 342</div>
+                <div style={S.heroNote}>📞 0948 816 686</div>
               </div>
             </div>
 
             {/* DIVIDER */}
-            <div style={{textAlign:"center",marginBottom:24}}>
-              <div style={{fontSize:16,fontWeight:700,color:C.dark,marginBottom:4}}>Kto ste?</div>
-              <div style={{fontSize:14,color:C.gray}}>Vyberte typ zákazníka pre pokračovanie</div>
+            <div style={{marginBottom:16}}>
+              <div style={{fontSize:18,fontWeight:700,color:C.dark,marginBottom:4}}>Ako chcete nakupovať?</div>
+              <div style={{fontSize:14,color:"#64748b"}}>Vyberte typ zákazníka</div>
             </div>
-            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
-              <div onClick={() => { setCustomerType("domacnost"); setFirmReady(true); }} style={{background:"#fff",borderRadius:16,padding:28,cursor:"pointer",border:"2px solid #e8e8e8",textAlign:"center",boxShadow:"0 2px 12px rgba(0,0,0,0.06)"}}>
-                <div style={{fontSize:44,marginBottom:12}}>🏠</div>
-                <div style={{fontWeight:800,fontSize:18,marginBottom:8,color:"#1a1a1a"}}>Som domácnosť</div>
-                <div style={{fontSize:13,color:"#6b7280",lineHeight:1.5}}>Fyzická osoba / súkromná spotreba</div>
-                <div style={{marginTop:10,background:"#fff7ed",border:"1px solid #fed7aa",borderRadius:8,padding:"8px 10px",fontSize:12,color:"#9a3412",lineHeight:1.5}}>
-                  ⚠️ Pre domácnosti je momentálne dostupné len <strong>vyzdvihnutie na sklade</strong>.<br/>
-                  📍 Nová Dubnica – Malý Kolačín 342<br/>
-                  🕘 Výdaj tovaru: <strong>9:00 – 13:00</strong>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+              <div onClick={() => { setCustomerType("domacnost"); setFirmReady(true); window.scrollTo(0,0); }} style={{background:"#fff",borderRadius:12,padding:24,cursor:"pointer",border:"1.5px solid #e2e8f0",transition:"all 0.15s"}}>
+                <div style={{width:44,height:44,background:"#f0fdf4",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,marginBottom:14}}>🏠</div>
+                <div style={{fontWeight:700,fontSize:16,marginBottom:6,color:C.dark}}>Som domácnosť</div>
+                <div style={{fontSize:13,color:"#64748b",lineHeight:1.5,marginBottom:14}}>Fyzická osoba · súkromná spotreba</div>
+                <div style={{background:"#fffbeb",border:"1px solid #fde68a",borderRadius:8,padding:"10px 12px",fontSize:12,color:"#92400e",lineHeight:1.6,marginBottom:14}}>
+                  ⚠️ Dostupné len <strong>vyzdvihnutie v sklade</strong><br/>
+                  📍 Malý Kolačín 342 · 🕘 9:00–13:00
                 </div>
-                <div style={{marginTop:12,background:"#2a7a3b",color:"#fff",borderRadius:8,padding:"10px 0",fontWeight:700,fontSize:14}}>Vybrať</div>
+                <div style={{background:C.green,color:"#fff",borderRadius:8,padding:"10px 0",fontWeight:600,fontSize:14,textAlign:"center"}}>Pokračovať</div>
               </div>
-              <div onClick={() => setCustomerType("firma")} style={{background:"#fff",borderRadius:16,padding:28,cursor:"pointer",border:"2px solid #e8e8e8",textAlign:"center",boxShadow:"0 2px 12px rgba(0,0,0,0.06)"}}>
-                <div style={{fontSize:44,marginBottom:12}}>🏢</div>
-                <div style={{fontWeight:800,fontSize:18,marginBottom:8,color:"#1a1a1a"}}>B2B / Firemný odber</div>
-                <div style={{fontSize:12,color:"#6b7280",lineHeight:1.7,marginBottom:4}}>
-                  🍽️ HORECA (reštaurácie, hotely, catering)<br/>
-                  🛒 Maloobchod a predajne<br/>
-                  🏫 Školstvo a zariadenia<br/>
-                  🏭 Iný platca DPH
+              <div onClick={() => setCustomerType("firma")} style={{background:"#fff",borderRadius:12,padding:24,cursor:"pointer",border:"1.5px solid #e2e8f0",transition:"all 0.15s"}}>
+                <div style={{width:44,height:44,background:"#f0fdf4",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,marginBottom:14}}>🏢</div>
+                <div style={{fontWeight:700,fontSize:16,marginBottom:6,color:C.dark}}>B2B / Firemný odber</div>
+                <div style={{fontSize:13,color:"#64748b",lineHeight:1.7,marginBottom:14}}>
+                  Reštaurácie · Hotely · HORECA<br/>
+                  Maloobchod · Školy · Iný platca DPH
                 </div>
-                <div style={{background:"#e8f5ea",borderRadius:8,padding:"6px 10px",fontSize:12,color:"#2a7a3b",fontWeight:600}}>Fakturácia · Veľkoobchodné ceny</div>
-                <div style={{marginTop:12,background:"#2a7a3b",color:"#fff",borderRadius:8,padding:"10px 0",fontWeight:700,fontSize:14}}>Vybrať</div>
+                <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:8,padding:"8px 12px",fontSize:12,color:C.green,fontWeight:600,marginBottom:14}}>
+                  Fakturácia · Veľkoobchodné ceny
+                </div>
+                <div style={{background:C.green,color:"#fff",borderRadius:8,padding:"10px 0",fontWeight:600,fontSize:14,textAlign:"center"}}>Pokračovať</div>
               </div>
             </div>
           </div>
@@ -726,7 +726,8 @@ function App() {
           <div style={S.searchWrap}>
             <div style={S.searchInner}>
               <div style={S.searchBox}>
-                <input style={S.searchInput} placeholder="🔍  Hľadať produkt... (min. 3 písmená)" value={search} onChange={e => setSearch(e.target.value)} />
+                <span style={S.searchIcon}>🔍</span>
+                <input style={S.searchInput} placeholder="Hľadať produkt... (min. 3 písmená)" value={search} onChange={e => setSearch(e.target.value)} />
               </div>
               {searchActive && <div style={S.searchResults}>{filtered.length > 0 ? `${filtered.length} výsledkov pre „${searchTrimmed}"` : `Žiadny produkt pre „${searchTrimmed}"`}</div>}
             </div>
