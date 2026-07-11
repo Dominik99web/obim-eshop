@@ -402,6 +402,7 @@ function App() {
 
   const [pickupSlot, setPickupSlot] = useState("");
   const [pieceNotes, setPieceNotes] = useState({});
+  const [toast, setToast] = useState(null);
   const [orderForm, setOrderForm] = useState({
     name: "", phone: "", email: "", address: "", city: "", zip: "",
     payment: "dobierka", note: "",
@@ -413,6 +414,11 @@ function App() {
   // cartTotal defined above
 
   const setQty = (id, val) => setQuantities(q => ({ ...q, [id]: Math.max(1, val) }));
+  const showToast = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 2000);
+  };
+
   const addToCart = (product) => {
     let qty = parseFloat(String(quantities[product.id]).replace(',', '.')) || 1;
     if (product.unit === "ks") qty = Math.max(1, Math.floor(qty));
@@ -423,6 +429,7 @@ function App() {
       if (ex) return c.map(i => i.id === product.id ? { ...i, qty: i.qty + qty, pieceNote: pieceNote || i.pieceNote } : i);
       return [...c, { ...product, qty, pieceNote }];
     });
+    showToast(`✅ ${product.name} pridané do košíka`);
   };
   const updateCartQty = (id, qty) => {
     if (qty <= 0) setCart(c => c.filter(i => i.id !== id));
@@ -763,6 +770,7 @@ function App() {
                                   }
                                   setQuantities(q => ({...q, [p.id]: val}));
                                 }}
+                                onKeyDown={e => { if (e.key === "Enter" && p.available) addToCart(p); }}
                                 placeholder={p.unit === "ks" ? "0" : "0.00"}
                                 style={{width:"100%",padding:"9px 12px",borderRadius:8,border:"1.5px solid #ddd",fontSize:15,outline:"none",boxSizing:"border-box",fontWeight:600,color:C.dark}}
                               />
@@ -1075,6 +1083,25 @@ function App() {
           </div>
         )
       )}
+    {/* TOAST NOTIFICATION */}
+      {toast && (
+        <div style={{
+          position:"fixed", bottom:28, left:"50%", transform:"translateX(-50%)",
+          background:"#1a6b2f", color:"#fff", padding:"12px 24px",
+          borderRadius:12, fontSize:14, fontWeight:600,
+          boxShadow:"0 4px 20px rgba(0,0,0,0.2)", zIndex:9999,
+          display:"flex", alignItems:"center", gap:8,
+          animation:"fadeInUp 0.2s ease"
+        }}>
+          {toast}
+        </div>
+      )}
+      <style>{`
+        @keyframes fadeInUp {
+          from { opacity:0; transform:translate(-50%, 12px); }
+          to { opacity:1; transform:translate(-50%, 0); }
+        }
+      `}</style>
     </div>
   );
 }
