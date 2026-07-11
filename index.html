@@ -297,7 +297,7 @@ const S = {
   heroNote: { display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(255,255,255,0.12)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.25)", borderRadius: 24, padding: "6px 14px", fontSize: 12, fontWeight: 500 },
 
   // SEARCH
-  searchWrap: { background: "#fff", borderBottom: "1px solid #e5e7eb", padding: "12px 20px" },
+  searchWrap: { background: "#fff", borderBottom: "1px solid #e5e7eb", padding: "12px 20px", position: "sticky", top: 57, zIndex: 90, boxShadow: "0 2px 8px rgba(0,0,0,0.05)" },
   searchInner: { maxWidth: 1200, margin: "0 auto" },
   searchBox: { position: "relative" },
   searchInput: { width: "100%", padding: "11px 44px 11px 16px", borderRadius: 10, border: "1.5px solid #e5e7eb", fontSize: 15, outline: "none", boxSizing: "border-box", background: "#f9fafb", transition: "border-color 0.15s" },
@@ -305,7 +305,7 @@ const S = {
   searchResults: { marginTop: 6, fontSize: 12, color: C.gray },
 
   // CATEGORY BAR
-  catBar: { background: "#fff", borderBottom: "1px solid #e5e7eb", padding: "0 20px", overflowX: "auto", whiteSpace: "nowrap", scrollbarWidth: "none" },
+  catBar: { background: "#fff", borderBottom: "1px solid #e5e7eb", padding: "0 20px", overflowX: "auto", whiteSpace: "nowrap", scrollbarWidth: "none", position: "sticky", top: 105, zIndex: 89 },
   catBarInner: { maxWidth: 1200, margin: "0 auto", display: "flex", gap: 0 },
   catBtn: { display: "inline-flex", alignItems: "center", gap: 6, padding: "12px 16px", border: "none", background: "transparent", cursor: "pointer", fontSize: 13, fontWeight: 500, color: C.gray, borderBottom: "2px solid transparent", whiteSpace: "nowrap", transition: "all 0.15s" },
   catBtnActive: { color: C.green, borderBottom: `2px solid ${C.green}`, fontWeight: 700 },
@@ -454,8 +454,12 @@ function App() {
 
   const searchTrimmed = search.trim();
   const searchActive = searchTrimmed.length >= 3;
+
+  // Auto-switch to Všetko when searching
+  const effectiveCat = searchActive ? "Všetko" : filterCat;
+
   const filtered = products.filter(p => {
-    const catMatch = filterCat === "Všetko" || p.category === filterCat;
+    const catMatch = effectiveCat === "Všetko" || p.category === effectiveCat;
     if (!searchActive) return catMatch;
     const nameNorm = removeDiacritics(p.name);
     const searchNorm = removeDiacritics(searchTrimmed);
@@ -712,7 +716,7 @@ function App() {
           <div style={S.catBar}>
             <div style={S.catBarInner}>
               {CATEGORIES.map(c => (
-                <button key={c} style={{ ...S.catBtn, ...(filterCat === c ? S.catBtnActive : {}) }} onClick={() => setFilterCat(c)}>
+                <button key={c} style={{ ...S.catBtn, ...(effectiveCat === c ? S.catBtnActive : {}) }} onClick={() => setFilterCat(c)}>
                   <span>{CAT_ICONS[c]}</span> {c}
                 </button>
               ))}
