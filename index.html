@@ -39,152 +39,152 @@ const PICKUP_SLOTS = [
 
 const initialProducts = [
   // OVOCIE
-  { id: 1, name: "Ananás cal. 8", unit: "ks", price: 2.49, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Ananas_comosus_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-016.jpg/300px-Ananas_comosus_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-016.jpg", origin: "CR", grade: "1.tr.", available: true },
-  { id: 2, name: "Avokádo cal. 20", unit: "ks", price: 1.39, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Avocado_with_cross_section_edit.jpg/300px-Avocado_with_cross_section_edit.jpg", origin: "PE", grade: "1.tr.", available: true },
-  { id: 3, name: "Banány Yellow", unit: "kg", price: 1.19, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Fruit-Pieces.jpg/300px-Banana-Fruit-Pieces.jpg", origin: "EC/CO", grade: "1.tr.", available: true },
-  { id: 4, name: "Broskyňa plato cal. 22", unit: "kg", price: 1.99, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Autumn_Red_peaches.jpg/300px-Autumn_Red_peaches.jpg", origin: "GR/IT", grade: "1.tr.", available: true },
-  { id: 5, name: "Černice 125g", unit: "ks", price: 3.59, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Blackberries_-_whole_%28Rubus_fruticosus%29.jpg/300px-Blackberries_-_whole_%28Rubus_fruticosus%29.jpg", origin: "IT/PT", grade: "1.tr.", available: true },
-  { id: 6, name: "Čučoriedky 125g", unit: "ks", price: 1.49, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Blueberry_fruits.jpg/300px-Blueberry_fruits.jpg", origin: "ES", grade: "1.tr.", available: true },
-  { id: 7, name: "Granátové jablko cal. 10", unit: "ks", price: 1.59, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Pomegranate_fruit_-_whole_and_piece_with_arils.jpg/300px-Pomegranate_fruit_-_whole_and_piece_with_arils.jpg", origin: "TR", grade: "1.tr.", available: true },
-  { id: 8, name: "Grep červený Star Ruby", unit: "kg", price: 1.39, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Grapefruit_mercola.jpg/300px-Grapefruit_mercola.jpg", origin: "ZA", grade: "1.tr.", available: true },
-  { id: 9, name: "Hrozno biele Victoria", unit: "kg", price: 2.99, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Table_grapes_on_white.jpg/300px-Table_grapes_on_white.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 10, name: "Hrozno tmavé Black Magic", unit: "kg", price: 3.29, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Kyoho-grape.jpg/300px-Kyoho-grape.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 11, name: "Hrušky Conference", unit: "kg", price: 1.99, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Pears.jpg/300px-Pears.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 12, name: "Jablká červené PRINCE", unit: "kg", price: 0.99, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/300px-Red_Apple.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 13, name: "Jablká Golden Delicious", unit: "kg", price: 1.39, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Yellow_apple.jpg/300px-Yellow_apple.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 14, name: "Jahody 250g", unit: "ks", price: 2.99, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/PerfectStrawberry.jpg/300px-PerfectStrawberry.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 15, name: "Jahody 500g", unit: "ks", price: 5.99, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/PerfectStrawberry.jpg/300px-PerfectStrawberry.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 16, name: "Jahody voľné", unit: "kg", price: 8.99, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/PerfectStrawberry.jpg/300px-PerfectStrawberry.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 17, name: "Kiwi cal. 23", unit: "kg", price: 3.29, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Kiwi_2_%28Malus_domestica%29.jpg/300px-Kiwi_2_%28Malus_domestica%29.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 18, name: "Maliny 125g", unit: "ks", price: 2.49, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Raspberry_-_whole_%28Rubus_idaeus%29.jpg/300px-Raspberry_-_whole_%28Rubus_idaeus%29.jpg", origin: "ES", grade: "1.tr.", available: true },
-  { id: 19, name: "Mandarínky Nadorcott", unit: "kg", price: 1.99, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Clementine.jpg/300px-Clementine.jpg", origin: "PE", grade: "1.tr.", available: true },
-  { id: 20, name: "Mango RTE cal. 7", unit: "ks", price: 1.79, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Hapus_Mango.jpg/300px-Hapus_Mango.jpg", origin: "BR", grade: "1.tr.", available: true },
-  { id: 21, name: "Marhuľa", unit: "kg", price: 2.39, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Apricot_and_cross_section.jpg/300px-Apricot_and_cross_section.jpg", origin: "ES", grade: "1.tr.", available: true },
-  { id: 22, name: "Melón Cantaloupe", unit: "kg", price: 1.99, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Cantaloup_melon_%28Cucumis_melo%29.jpg/300px-Cantaloup_melon_%28Cucumis_melo%29.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 23, name: "Melón červený", unit: "kg", price: 0.65, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Betterwatermelon.jpg/300px-Betterwatermelon.jpg", origin: "GR", grade: "1.tr.", available: true },
-  { id: 24, name: "Melón žltý Honeydew", unit: "kg", price: 1.89, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Cantaloup_melon_%28Cucumis_melo%29.jpg/300px-Cantaloup_melon_%28Cucumis_melo%29.jpg", origin: "ES", grade: "1.tr.", available: true },
-  { id: 25, name: "Nektarinky žltomäsité cal. 22", unit: "kg", price: 2.29, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Nectarines_-_whole_and_halved.jpg/300px-Nectarines_-_whole_and_halved.jpg", origin: "GR/IT", grade: "1.tr.", available: true },
-  { id: 26, name: "Pomaranč Lane Late", unit: "kg", price: 1.39, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Oranges_and_orange_juice.jpg/300px-Oranges_and_orange_juice.jpg", origin: "ES", grade: "1.tr.", available: true },
-  { id: 27, name: "Ribezle 125g", unit: "ks", price: 4.99, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Redcurrant_gcc.jpg/300px-Redcurrant_gcc.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 28, name: "Slivky Angeleno cal. AAA", unit: "kg", price: 2.49, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Plums_september_2013.jpg/300px-Plums_september_2013.jpg", origin: "ES", grade: "1.tr.", available: true },
-  { id: 29, name: "Physalis", unit: "ks", price: 1.49, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Physalis_peruviana2.jpg/300px-Physalis_peruviana2.jpg", origin: "CO", grade: "1.tr.", available: true },
+  { id: 1, name: "Ananás cal. 8", unit: "ks", price: 2.49, category: "Ovocie", img: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=300&q=80", origin: "CR", grade: "1.tr.", available: true },
+  { id: 2, name: "Avokádo cal. 20", unit: "ks", price: 1.39, category: "Ovocie", img: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=300&q=80", origin: "PE", grade: "1.tr.", available: true },
+  { id: 3, name: "Banány Yellow", unit: "kg", price: 1.19, category: "Ovocie", img: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=300&q=80", origin: "EC/CO", grade: "1.tr.", available: true },
+  { id: 4, name: "Broskyňa plato cal. 22", unit: "kg", price: 1.99, category: "Ovocie", img: "https://images.unsplash.com/photo-1595743825637-cdafc8ad4173?w=300&q=80", origin: "GR/IT", grade: "1.tr.", available: true },
+  { id: 5, name: "Černice 125g", unit: "ks", price: 3.59, category: "Ovocie", img: "https://images.unsplash.com/photo-1587049633312-d628ae50a8ae?w=300&q=80", origin: "IT/PT", grade: "1.tr.", available: true },
+  { id: 6, name: "Čučoriedky 125g", unit: "ks", price: 1.49, category: "Ovocie", img: "https://images.unsplash.com/photo-1498557850523-fd3d118b962e?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
+  { id: 7, name: "Granátové jablko cal. 10", unit: "ks", price: 1.59, category: "Ovocie", img: "https://images.unsplash.com/photo-1541344999736-83eca272f6fc?w=300&q=80", origin: "TR", grade: "1.tr.", available: true },
+  { id: 8, name: "Grep červený Star Ruby", unit: "kg", price: 1.39, category: "Ovocie", img: "https://images.unsplash.com/photo-1577234286642-fc512a5f8f11?w=300&q=80", origin: "ZA", grade: "1.tr.", available: true },
+  { id: 9, name: "Hrozno biele Victoria", unit: "kg", price: 2.99, category: "Ovocie", img: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 10, name: "Hrozno tmavé Black Magic", unit: "kg", price: 3.29, category: "Ovocie", img: "https://images.unsplash.com/photo-1596363505729-4190a9506133?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 11, name: "Hrušky Conference", unit: "kg", price: 1.99, category: "Ovocie", img: "https://images.unsplash.com/photo-1514756331096-242fdeb70d4a?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 12, name: "Jablká červené PRINCE", unit: "kg", price: 0.99, category: "Ovocie", img: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 13, name: "Jablká Golden Delicious", unit: "kg", price: 1.39, category: "Ovocie", img: "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 14, name: "Jahody 250g", unit: "ks", price: 2.99, category: "Ovocie", img: "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 15, name: "Jahody 500g", unit: "ks", price: 5.99, category: "Ovocie", img: "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 16, name: "Jahody voľné", unit: "kg", price: 8.99, category: "Ovocie", img: "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 17, name: "Kiwi cal. 23", unit: "kg", price: 3.29, category: "Ovocie", img: "https://images.unsplash.com/photo-1585059895524-72359e06133a?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 18, name: "Maliny 125g", unit: "ks", price: 2.49, category: "Ovocie", img: "https://images.unsplash.com/photo-1577069861033-55d04cec4ef5?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
+  { id: 19, name: "Mandarínky Nadorcott", unit: "kg", price: 1.99, category: "Ovocie", img: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab12?w=300&q=80", origin: "PE", grade: "1.tr.", available: true },
+  { id: 20, name: "Mango RTE cal. 7", unit: "ks", price: 1.79, category: "Ovocie", img: "https://images.unsplash.com/photo-1553279768-865429fa0078?w=300&q=80", origin: "BR", grade: "1.tr.", available: true },
+  { id: 21, name: "Marhuľa", unit: "kg", price: 2.39, category: "Ovocie", img: "https://images.unsplash.com/photo-1628689469838-524a4a973b8e?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
+  { id: 22, name: "Melón Cantaloupe", unit: "kg", price: 1.99, category: "Ovocie", img: "https://images.unsplash.com/photo-1571575173700-afb9492d6b9e?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 23, name: "Melón červený", unit: "kg", price: 0.65, category: "Ovocie", img: "https://images.unsplash.com/photo-1563114773-84221bd62daa?w=300&q=80", origin: "GR", grade: "1.tr.", available: true },
+  { id: 24, name: "Melón žltý Honeydew", unit: "kg", price: 1.89, category: "Ovocie", img: "https://images.unsplash.com/photo-1571575173700-afb9492d6b9e?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
+  { id: 25, name: "Nektarinky žltomäsité cal. 22", unit: "kg", price: 2.29, category: "Ovocie", img: "https://images.unsplash.com/photo-1595743825637-cdafc8ad4173?w=300&q=80", origin: "GR/IT", grade: "1.tr.", available: true },
+  { id: 26, name: "Pomaranč Lane Late", unit: "kg", price: 1.39, category: "Ovocie", img: "https://images.unsplash.com/photo-1547514701-42782101795e?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
+  { id: 27, name: "Ribezle 125g", unit: "ks", price: 4.99, category: "Ovocie", img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 28, name: "Slivky Angeleno cal. AAA", unit: "kg", price: 2.49, category: "Ovocie", img: "https://images.unsplash.com/photo-1596397249129-c7a8f5e68e8d?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
+  { id: 29, name: "Physalis", unit: "ks", price: 1.49, category: "Ovocie", img: "https://images.unsplash.com/photo-1616770546812-209e8b9a0dce?w=300&q=80", origin: "CO", grade: "1.tr.", available: true },
 
   // ZELENINA
-  { id: 30, name: "Baklažán", unit: "kg", price: 2.49, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Aubergine.jpg/300px-Aubergine.jpg", origin: "NL", grade: "1.tr.", available: true },
+  { id: 30, name: "Baklažán", unit: "kg", price: 2.49, category: "Zelenina", img: "https://images.unsplash.com/photo-1615484477778-ca3b77940c25?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
   { id: 31, name: "Brokolica", unit: "kg", price: 3.09, category: "Zelenina", img: "https://images.pexels.com/photos/1453493/pexels-photo-1453493.jpeg?w=300", origin: "ES", grade: "1.tr.", available: true },
-  { id: 32, name: "Brokolica fólia 500g", unit: "ks", price: 1.49, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Fresh_broccoli_heads.jpg/300px-Fresh_broccoli_heads.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 33, name: "Cesnak čistený vákuový", unit: "kg", price: 4.49, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Allium_sativum._Restra_de_allos_de_Oroso_%28Galiza%29_01.jpg/300px-Allium_sativum._Restra_de_allos_de_Oroso_%28Galiza%29_01.jpg", origin: "CN", grade: "1.tr.", available: true },
-  { id: 34, name: "Cesnak", unit: "kg", price: 3.29, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Allium_sativum._Restra_de_allos_de_Oroso_%28Galiza%29_01.jpg/300px-Allium_sativum._Restra_de_allos_de_Oroso_%28Galiza%29_01.jpg", origin: "CN", grade: "1.tr.", available: true },
-  { id: 35, name: "Cibuľa červená", unit: "kg", price: 0.79, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/2006-02-13_Udany_Cebula_p.jpg/300px-2006-02-13_Udany_Cebula_p.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 36, name: "Cibuľa žltá cal. 50-70", unit: "kg", price: 0.59, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Onion_as_food.jpg/300px-Onion_as_food.jpg", origin: "SK", grade: "1.tr.", available: true },
-  { id: 37, name: "Cibuľa žltá bal. 1kg", unit: "ks", price: 1.29, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Onion_as_food.jpg/300px-Onion_as_food.jpg", origin: "SK", grade: "1.tr.", available: true },
-  { id: 38, name: "Cibuľka lahôdková", unit: "ks", price: 0.79, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Onion_as_food.jpg/300px-Onion_as_food.jpg", origin: "CZ", grade: "1.tr.", available: true },
-  { id: 39, name: "Cibuľka šalotka", unit: "kg", price: 1.69, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Onion_as_food.jpg/300px-Onion_as_food.jpg", origin: "FR", grade: "1.tr.", available: true },
-  { id: 40, name: "Cuketa", unit: "kg", price: 0.99, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Courgettes.jpg/300px-Courgettes.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 41, name: "Cvikla varená 500g", unit: "ks", price: 1.19, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Beetroot_on_white.jpg/300px-Beetroot_on_white.jpg", origin: "SK", grade: "1.tr.", available: true },
-  { id: 42, name: "Cvikla", unit: "kg", price: 0.49, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Beetroot_on_white.jpg/300px-Beetroot_on_white.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 43, name: "Čakanka biela", unit: "kg", price: 2.89, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Cichorium_intybus_001.jpg/300px-Cichorium_intybus_001.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 44, name: "Čakanka červená", unit: "kg", price: 3.89, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Cichorium_intybus_001.jpg/300px-Cichorium_intybus_001.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 45, name: "Fenikel", unit: "kg", price: 2.99, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Fennel_leaves_and_bulb.jpg/300px-Fennel_leaves_and_bulb.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 46, name: "Chilli", unit: "kg", price: 9.99, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Capsicum_annuum_4.jpg/300px-Capsicum_annuum_4.jpg", origin: "ES", grade: "1.tr.", available: true },
-  { id: 47, name: "Chren", unit: "kg", price: 7.89, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Armoracia_rusticana2.jpg/300px-Armoracia_rusticana2.jpg", origin: "SK", grade: "1.tr.", available: true },
-  { id: 48, name: "Kalerábik lahôdkový", unit: "ks", price: 0.69, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Kohlrabi_01.jpg/300px-Kohlrabi_01.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 49, name: "Kapusta biela", unit: "kg", price: 0.59, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Wei%C3%9Fkohl.jpg/300px-Wei%C3%9Fkohl.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 50, name: "Kapusta červená", unit: "kg", price: 0.69, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Rotkohl.jpg/300px-Rotkohl.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 51, name: "Kapusta čínska", unit: "kg", price: 1.29, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Chinese-cabbage.jpg/300px-Chinese-cabbage.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 52, name: "Kapusta kvasená 1kg", unit: "kg", price: 1.09, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Wei%C3%9Fkohl.jpg/300px-Wei%C3%9Fkohl.jpg", origin: "SK", grade: "1.tr.", available: true },
+  { id: 32, name: "Brokolica fólia 500g", unit: "ks", price: 1.49, category: "Zelenina", img: "https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 33, name: "Cesnak čistený vákuový", unit: "kg", price: 4.49, category: "Zelenina", img: "https://images.unsplash.com/photo-1615475532358-1e8e82f73543?w=300&q=80", origin: "CN", grade: "1.tr.", available: true },
+  { id: 34, name: "Cesnak", unit: "kg", price: 3.29, category: "Zelenina", img: "https://images.unsplash.com/photo-1615475532358-1e8e82f73543?w=300&q=80", origin: "CN", grade: "1.tr.", available: true },
+  { id: 35, name: "Cibuľa červená", unit: "kg", price: 0.79, category: "Zelenina", img: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 36, name: "Cibuľa žltá cal. 50-70", unit: "kg", price: 0.59, category: "Zelenina", img: "https://images.unsplash.com/photo-1508747703725-719777637510?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 37, name: "Cibuľa žltá bal. 1kg", unit: "ks", price: 1.29, category: "Zelenina", img: "https://images.unsplash.com/photo-1508747703725-719777637510?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 38, name: "Cibuľka lahôdková", unit: "ks", price: 0.79, category: "Zelenina", img: "https://images.unsplash.com/photo-1508747703725-719777637510?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
+  { id: 39, name: "Cibuľka šalotka", unit: "kg", price: 1.69, category: "Zelenina", img: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?w=300&q=80", origin: "FR", grade: "1.tr.", available: true },
+  { id: 40, name: "Cuketa", unit: "kg", price: 0.99, category: "Zelenina", img: "https://images.unsplash.com/photo-1628689469838-524a4a973b8e?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 41, name: "Cvikla varená 500g", unit: "ks", price: 1.19, category: "Zelenina", img: "https://images.unsplash.com/photo-1593105544559-ecb03bf76f82?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 42, name: "Cvikla", unit: "kg", price: 0.49, category: "Zelenina", img: "https://images.unsplash.com/photo-1593105544559-ecb03bf76f82?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 43, name: "Čakanka biela", unit: "kg", price: 2.89, category: "Zelenina", img: "https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 44, name: "Čakanka červená", unit: "kg", price: 3.89, category: "Zelenina", img: "https://images.unsplash.com/photo-1607305387299-a3d9611cd469?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 45, name: "Fenikel", unit: "kg", price: 2.99, category: "Zelenina", img: "https://images.unsplash.com/photo-1600189261867-30e5ffe7b8da?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 46, name: "Chilli", unit: "kg", price: 9.99, category: "Zelenina", img: "https://images.unsplash.com/photo-1583119022894-919a68a3d0e3?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
+  { id: 47, name: "Chren", unit: "kg", price: 7.89, category: "Zelenina", img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 48, name: "Kalerábik lahôdkový", unit: "ks", price: 0.69, category: "Zelenina", img: "https://images.unsplash.com/photo-1582515073490-39981397c445?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 49, name: "Kapusta biela", unit: "kg", price: 0.59, category: "Zelenina", img: "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 50, name: "Kapusta červená", unit: "kg", price: 0.69, category: "Zelenina", img: "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 51, name: "Kapusta čínska", unit: "kg", price: 1.29, category: "Zelenina", img: "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 52, name: "Kapusta kvasená 1kg", unit: "kg", price: 1.09, category: "Zelenina", img: "https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
   { id: 53, name: "Kapusta kyslá 10kg", unit: "kg", price: 0.99, category: "Zelenina", img: "https://images.pexels.com/photos/1199562/pexels-photo-1199562.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
   { id: 54, name: "Kapusta kyslá 5kg", unit: "kg", price: 1.29, category: "Zelenina", img: "https://images.pexels.com/photos/1199562/pexels-photo-1199562.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
   { id: 55, name: "Kapustnica biela 1l", unit: "ks", price: 0.79, category: "Zelenina", img: "https://images.pexels.com/photos/1199562/pexels-photo-1199562.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
   { id: 56, name: "Kapustový šalát 1kg", unit: "ks", price: 1.79, category: "Zelenina", img: "https://images.pexels.com/photos/1199562/pexels-photo-1199562.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
   { id: 57, name: "Kapustový šalát 5kg", unit: "ks", price: 8.89, category: "Zelenina", img: "https://images.pexels.com/photos/1199562/pexels-photo-1199562.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
   { id: 58, name: "Kapustový šalát pikant 1kg", unit: "ks", price: 1.79, category: "Zelenina", img: "https://images.pexels.com/photos/1199562/pexels-photo-1199562.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
-  { id: 59, name: "Karfiol cal. 6", unit: "ks", price: 1.59, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/WhiteCauliflower.jpg/300px-WhiteCauliflower.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 60, name: "Kel", unit: "kg", price: 1.19, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Chou_fris%C3%A9.jpg/300px-Chou_fris%C3%A9.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 61, name: "Kukurica lahôdková", unit: "ks", price: 0.79, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/MaizTikal.jpg/300px-MaizTikal.jpg", origin: "HU", grade: "1.tr.", available: true },
-  { id: 62, name: "Mrkva baby 200g", unit: "ks", price: 1.29, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Vegetable-Carrot-Bundle-wStalks.jpg/300px-Vegetable-Carrot-Bundle-wStalks.jpg", origin: "CZ", grade: "1.tr.", available: true },
-  { id: 63, name: "Mrkva karotka žltá", unit: "kg", price: 2.39, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Vegetable-Carrot-Bundle-wStalks.jpg/300px-Vegetable-Carrot-Bundle-wStalks.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 64, name: "Mrkva praná", unit: "kg", price: 0.79, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Vegetable-Carrot-Bundle-wStalks.jpg/300px-Vegetable-Carrot-Bundle-wStalks.jpg", origin: "PL/CZ", grade: "1.tr.", available: true },
-  { id: 65, name: "Pak Choi", unit: "ks", price: 1.99, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Pak_choi_P1110661.jpg/300px-Pak_choi_P1110661.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 66, name: "Paprika červená GG", unit: "kg", price: 2.99, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Red_capsicum_and_cross_section.jpg/300px-Red_capsicum_and_cross_section.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 67, name: "Paprika oranžová GG", unit: "kg", price: 2.79, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/OrangeBellPepper.jpg/300px-OrangeBellPepper.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 68, name: "Paprika PCR", unit: "kg", price: 1.99, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Red_capsicum_and_cross_section.jpg/300px-Red_capsicum_and_cross_section.jpg", origin: "GR", grade: "1.tr.", available: true },
-  { id: 69, name: "Paprika trikolóra GG 3ks bal.", unit: "kg", price: 4.99, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Red_capsicum_and_cross_section.jpg/300px-Red_capsicum_and_cross_section.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 70, name: "Paprika zelená GG", unit: "kg", price: 2.69, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/GreenPepperCapsicum.jpg/300px-GreenPepperCapsicum.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 71, name: "Paprika žltá GG", unit: "kg", price: 2.99, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/YellowBellPepper.jpg/300px-YellowBellPepper.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 72, name: "Paradajky Cherry 200g", unit: "ks", price: 1.29, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tomato_je.jpg/300px-Tomato_je.jpg", origin: "HU", grade: "1.tr.", available: true },
-  { id: 73, name: "Paradajky Cherry strapec", unit: "kg", price: 3.99, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tomato_je.jpg/300px-Tomato_je.jpg", origin: "HU", grade: "1.tr.", available: true },
-  { id: 74, name: "Paradajky strapec", unit: "kg", price: 1.39, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tomato_je.jpg/300px-Tomato_je.jpg", origin: "HU", grade: "1.tr.", available: true },
-  { id: 75, name: "Paštrnák", unit: "kg", price: 1.49, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Parsnip_with_floret.jpg/300px-Parsnip_with_floret.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 76, name: "Polievková zmes", unit: "kg", price: 2.19, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Vegetable-Carrot-Bundle-wStalks.jpg/300px-Vegetable-Carrot-Bundle-wStalks.jpg", origin: "SK/IT/NL/PL", grade: "1.tr.", available: true },
-  { id: 77, name: "Pór", unit: "kg", price: 1.59, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Leek_on_white.jpg/300px-Leek_on_white.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 78, name: "Reďkovka biela", unit: "kg", price: 1.69, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Daikon-Radish.jpg/300px-Daikon-Radish.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 79, name: "Reďkovka červená balená 250g", unit: "ks", price: 0.79, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Radishes.jpg/300px-Radishes.jpg", origin: "CZ", grade: "1.tr.", available: true },
-  { id: 80, name: "Reďkovka červená zv.", unit: "ks", price: 0.79, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Radishes.jpg/300px-Radishes.jpg", origin: "CZ", grade: "1.tr.", available: true },
-  { id: 81, name: "Tekvica hokkaido", unit: "kg", price: 2.39, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Hokkaido_pumpkins.jpg/300px-Hokkaido_pumpkins.jpg", origin: "CZ", grade: "1.tr.", available: true },
-  { id: 82, name: "Tekvica maslová", unit: "kg", price: 1.39, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Butternut_squash.jpg/300px-Butternut_squash.jpg", origin: "CZ", grade: "1.tr.", available: true },
-  { id: 83, name: "Uhorky Midios", unit: "kg", price: 1.49, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Cucumbers_on_white.jpg/300px-Cucumbers_on_white.jpg", origin: "HU/PL", grade: "1.tr.", available: true },
-  { id: 84, name: "Uhorky nakladačky", unit: "kg", price: 2.49, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Cucumbers_on_white.jpg/300px-Cucumbers_on_white.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 85, name: "Zeler stopkatý", unit: "ks", price: 1.19, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Celery_cross_section.jpg/300px-Celery_cross_section.jpg", origin: "ES", grade: "1.tr.", available: true },
-  { id: 86, name: "Zeler", unit: "kg", price: 0.89, category: "Zelenina", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Celeriac-2009.jpg/300px-Celeriac-2009.jpg", origin: "CZ", grade: "1.tr.", available: true },
+  { id: 59, name: "Karfiol cal. 6", unit: "ks", price: 1.59, category: "Zelenina", img: "https://images.unsplash.com/photo-1510627489930-0c1b0bfb6785?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 60, name: "Kel", unit: "kg", price: 1.19, category: "Zelenina", img: "https://images.unsplash.com/photo-1524179091875-bf99a9a6af57?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 61, name: "Kukurica lahôdková", unit: "ks", price: 0.79, category: "Zelenina", img: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=300&q=80", origin: "HU", grade: "1.tr.", available: true },
+  { id: 62, name: "Mrkva baby 200g", unit: "ks", price: 1.29, category: "Zelenina", img: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
+  { id: 63, name: "Mrkva karotka žltá", unit: "kg", price: 2.39, category: "Zelenina", img: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 64, name: "Mrkva praná", unit: "kg", price: 0.79, category: "Zelenina", img: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=300&q=80", origin: "PL/CZ", grade: "1.tr.", available: true },
+  { id: 65, name: "Pak Choi", unit: "ks", price: 1.99, category: "Zelenina", img: "https://images.unsplash.com/photo-1582515073490-39981397c445?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 66, name: "Paprika červená GG", unit: "kg", price: 2.99, category: "Zelenina", img: "https://images.unsplash.com/photo-1592417817098-8fd3d4dbaed0?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 67, name: "Paprika oranžová GG", unit: "kg", price: 2.79, category: "Zelenina", img: "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 68, name: "Paprika PCR", unit: "kg", price: 1.99, category: "Zelenina", img: "https://images.unsplash.com/photo-1592417817098-8fd3d4dbaed0?w=300&q=80", origin: "GR", grade: "1.tr.", available: true },
+  { id: 69, name: "Paprika trikolóra GG 3ks bal.", unit: "kg", price: 4.99, category: "Zelenina", img: "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 70, name: "Paprika zelená GG", unit: "kg", price: 2.69, category: "Zelenina", img: "https://images.unsplash.com/photo-1561136594-7f68413baa99?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 71, name: "Paprika žltá GG", unit: "kg", price: 2.99, category: "Zelenina", img: "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 72, name: "Paradajky Cherry 200g", unit: "ks", price: 1.29, category: "Zelenina", img: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=300&q=80", origin: "HU", grade: "1.tr.", available: true },
+  { id: 73, name: "Paradajky Cherry strapec", unit: "kg", price: 3.99, category: "Zelenina", img: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=300&q=80", origin: "HU", grade: "1.tr.", available: true },
+  { id: 74, name: "Paradajky strapec", unit: "kg", price: 1.39, category: "Zelenina", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "HU", grade: "1.tr.", available: true },
+  { id: 75, name: "Paštrnák", unit: "kg", price: 1.49, category: "Zelenina", img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 76, name: "Polievková zmes", unit: "kg", price: 2.19, category: "Zelenina", img: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=300&q=80", origin: "SK/IT/NL/PL", grade: "1.tr.", available: true },
+  { id: 77, name: "Pór", unit: "kg", price: 1.59, category: "Zelenina", img: "https://images.unsplash.com/photo-1590165482129-1b8b27698780?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 78, name: "Reďkovka biela", unit: "kg", price: 1.69, category: "Zelenina", img: "https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 79, name: "Reďkovka červená balená 250g", unit: "ks", price: 0.79, category: "Zelenina", img: "https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
+  { id: 80, name: "Reďkovka červená zv.", unit: "ks", price: 0.79, category: "Zelenina", img: "https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
+  { id: 81, name: "Tekvica hokkaido", unit: "kg", price: 2.39, category: "Zelenina", img: "https://images.unsplash.com/photo-1570586437263-ab629fccc818?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
+  { id: 82, name: "Tekvica maslová", unit: "kg", price: 1.39, category: "Zelenina", img: "https://images.unsplash.com/photo-1570586437263-ab629fccc818?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
+  { id: 83, name: "Uhorky Midios", unit: "kg", price: 1.49, category: "Zelenina", img: "https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?w=300&q=80", origin: "HU/PL", grade: "1.tr.", available: true },
+  { id: 84, name: "Uhorky nakladačky", unit: "kg", price: 2.49, category: "Zelenina", img: "https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 85, name: "Zeler stopkatý", unit: "ks", price: 1.19, category: "Zelenina", img: "https://images.unsplash.com/photo-1550411294-25b2b5a9e77a?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
+  { id: 86, name: "Zeler", unit: "kg", price: 0.89, category: "Zelenina", img: "https://images.unsplash.com/photo-1550411294-25b2b5a9e77a?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
 
   // ŠALÁTY
-  { id: 87, name: "Rukola 125g", unit: "ks", price: 0.89, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Eruca_sativa_2_cropped.jpg/300px-Eruca_sativa_2_cropped.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 88, name: "Šalát dubový list červený", unit: "ks", price: 1.29, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Lettuce_tiny.jpg/300px-Lettuce_tiny.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 89, name: "Šalát Frisee", unit: "ks", price: 2.69, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Lettuce_tiny.jpg/300px-Lettuce_tiny.jpg", origin: "ES", grade: "1.tr.", available: true },
-  { id: 90, name: "Šalát hlávkový", unit: "ks", price: 0.99, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Lettuce_tiny.jpg/300px-Lettuce_tiny.jpg", origin: "HU", grade: "1.tr.", available: true },
-  { id: 91, name: "Šalát ľadový cal. 10", unit: "ks", price: 1.19, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Iceberg_lettuce_in_SB.jpg/300px-Iceberg_lettuce_in_SB.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 92, name: "Šalát ľadový", unit: "kg", price: 2.99, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Iceberg_lettuce_in_SB.jpg/300px-Iceberg_lettuce_in_SB.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 93, name: "Šalát lolo biondo", unit: "ks", price: 1.09, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Lettuce_tiny.jpg/300px-Lettuce_tiny.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 94, name: "Šalát lolo rosso", unit: "ks", price: 1.09, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Lettuce_tiny.jpg/300px-Lettuce_tiny.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 95, name: "Šalát mix 125g", unit: "ks", price: 0.99, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Lettuce_tiny.jpg/300px-Lettuce_tiny.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 96, name: "Šalát poľný 125g", unit: "ks", price: 1.39, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Lettuce_tiny.jpg/300px-Lettuce_tiny.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 97, name: "Šalát Red Chard 125g", unit: "ks", price: 0.99, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Spinach_leaves.jpg/300px-Spinach_leaves.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 98, name: "Šalát Rímsky", unit: "ks", price: 1.19, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Iceberg_lettuce_in_SB.jpg/300px-Iceberg_lettuce_in_SB.jpg", origin: "CZ", grade: "1.tr.", available: true },
-  { id: 99, name: "Šalátové lístky MIX 500g", unit: "ks", price: 2.39, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Lettuce_tiny.jpg/300px-Lettuce_tiny.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 100, name: "Špenát 125g", unit: "ks", price: 0.99, category: "Šaláty", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Spinach_leaves.jpg/300px-Spinach_leaves.jpg", origin: "IT", grade: "1.tr.", available: true },
+  { id: 87, name: "Rukola 125g", unit: "ks", price: 0.89, category: "Šaláty", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 88, name: "Šalát dubový list červený", unit: "ks", price: 1.29, category: "Šaláty", img: "https://images.unsplash.com/photo-1622205313162-be1d5712a43f?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 89, name: "Šalát Frisee", unit: "ks", price: 2.69, category: "Šaláty", img: "https://images.unsplash.com/photo-1622205313162-be1d5712a43f?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
+  { id: 90, name: "Šalát hlávkový", unit: "ks", price: 0.99, category: "Šaláty", img: "https://images.unsplash.com/photo-1622205313162-be1d5712a43f?w=300&q=80", origin: "HU", grade: "1.tr.", available: true },
+  { id: 91, name: "Šalát ľadový cal. 10", unit: "ks", price: 1.19, category: "Šaláty", img: "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 92, name: "Šalát ľadový", unit: "kg", price: 2.99, category: "Šaláty", img: "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 93, name: "Šalát lolo biondo", unit: "ks", price: 1.09, category: "Šaláty", img: "https://images.unsplash.com/photo-1622205313162-be1d5712a43f?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 94, name: "Šalát lolo rosso", unit: "ks", price: 1.09, category: "Šaláty", img: "https://images.unsplash.com/photo-1622205313162-be1d5712a43f?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 95, name: "Šalát mix 125g", unit: "ks", price: 0.99, category: "Šaláty", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 96, name: "Šalát poľný 125g", unit: "ks", price: 1.39, category: "Šaláty", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 97, name: "Šalát Red Chard 125g", unit: "ks", price: 0.99, category: "Šaláty", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 98, name: "Šalát Rímsky", unit: "ks", price: 1.19, category: "Šaláty", img: "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
+  { id: 99, name: "Šalátové lístky MIX 500g", unit: "ks", price: 2.39, category: "Šaláty", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 100, name: "Špenát 125g", unit: "ks", price: 0.99, category: "Šaláty", img: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
 
   // BYLINKY A KORENINY
-  { id: 101, name: "Bazalka čínska Shiso", unit: "ks", price: 3.59, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Basil-Basilico-Ocimum_basilicum-albahaca.jpg/300px-Basil-Basilico-Ocimum_basilicum-albahaca.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 102, name: "Bazalka zelená rezaná", unit: "kg", price: 19.99, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Basil-Basilico-Ocimum_basilicum-albahaca.jpg/300px-Basil-Basilico-Ocimum_basilicum-albahaca.jpg", origin: "KE", grade: "1.tr.", available: true },
-  { id: 103, name: "Citrónová tráva voľná", unit: "kg", price: 19.99, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Mintleaf_edit.jpg/300px-Mintleaf_edit.jpg", origin: "TH", grade: "1.tr.", available: true },
-  { id: 104, name: "Koriander", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Petroselinum_crispum_Parsley_leaves.jpg/300px-Petroselinum_crispum_Parsley_leaves.jpg", origin: "ES", grade: "1.tr.", available: true },
-  { id: 105, name: "Kôpor", unit: "kg", price: 8.99, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Dill_Anethum_graveolens.jpg/300px-Dill_Anethum_graveolens.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 106, name: "Ligurček lekársky", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Mintleaf_edit.jpg/300px-Mintleaf_edit.jpg", origin: "SK", grade: "1.tr.", available: true },
-  { id: 107, name: "Mäta rezaná", unit: "kg", price: 17.90, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Mintleaf_edit.jpg/300px-Mintleaf_edit.jpg", origin: "ES", grade: "1.tr.", available: true },
-  { id: 108, name: "Oregano", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Mintleaf_edit.jpg/300px-Mintleaf_edit.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 109, name: "Pažitka", unit: "kg", price: 13.99, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Allium_schoenoprasum_in_flower.jpg/300px-Allium_schoenoprasum_in_flower.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 110, name: "Petržlen", unit: "kg", price: 1.39, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Petroselinum_crispum_Parsley_leaves.jpg/300px-Petroselinum_crispum_Parsley_leaves.jpg", origin: "PL", grade: "1.tr.", available: true },
-  { id: 111, name: "Petržlenová vňať hladká", unit: "kg", price: 3.89, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Petroselinum_crispum_Parsley_leaves.jpg/300px-Petroselinum_crispum_Parsley_leaves.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 112, name: "Petržlenová vňať kučeravá", unit: "kg", price: 4.89, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Petroselinum_crispum_Parsley_leaves.jpg/300px-Petroselinum_crispum_Parsley_leaves.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 113, name: "Rozmarín", unit: "kg", price: 18.90, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Rosemary_bush.jpg/300px-Rosemary_bush.jpg", origin: "IL", grade: "1.tr.", available: true },
-  { id: 114, name: "Šalvia", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Salvia_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-257.jpg/300px-Salvia_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-257.jpg", origin: "IT", grade: "1.tr.", available: true },
-  { id: 115, name: "Tymián", unit: "kg", price: 17.90, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Mintleaf_edit.jpg/300px-Mintleaf_edit.jpg", origin: "IL", grade: "1.tr.", available: true },
-  { id: 116, name: "Trebulka 100g", unit: "ks", price: 3.29, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Petroselinum_crispum_Parsley_leaves.jpg/300px-Petroselinum_crispum_Parsley_leaves.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 117, name: "Zázvor", unit: "kg", price: 2.99, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Zingiber_officinale_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-211.jpg/300px-Zingiber_officinale_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-211.jpg", origin: "BR", grade: "1.tr.", available: true },
-  { id: 118, name: "Žerucha", unit: "ks", price: 2.39, category: "Bylinky a koreniny", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Petroselinum_crispum_Parsley_leaves.jpg/300px-Petroselinum_crispum_Parsley_leaves.jpg", origin: "NL", grade: "1.tr.", available: true },
+  { id: 101, name: "Bazalka čínska Shiso", unit: "ks", price: 3.59, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 102, name: "Bazalka zelená rezaná", unit: "kg", price: 19.99, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=300&q=80", origin: "KE", grade: "1.tr.", available: true },
+  { id: 103, name: "Citrónová tráva voľná", unit: "kg", price: 19.99, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?w=300&q=80", origin: "TH", grade: "1.tr.", available: true },
+  { id: 104, name: "Koriander", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
+  { id: 105, name: "Kôpor", unit: "kg", price: 8.99, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 106, name: "Ligurček lekársky", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 107, name: "Mäta rezaná", unit: "kg", price: 17.90, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
+  { id: 108, name: "Oregano", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 109, name: "Pažitka", unit: "kg", price: 13.99, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 110, name: "Petržlen", unit: "kg", price: 1.39, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
+  { id: 111, name: "Petržlenová vňať hladká", unit: "kg", price: 3.89, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 112, name: "Petržlenová vňať kučeravá", unit: "kg", price: 4.89, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 113, name: "Rozmarín", unit: "kg", price: 18.90, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?w=300&q=80", origin: "IL", grade: "1.tr.", available: true },
+  { id: 114, name: "Šalvia", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 115, name: "Tymián", unit: "kg", price: 17.90, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?w=300&q=80", origin: "IL", grade: "1.tr.", available: true },
+  { id: 116, name: "Trebulka 100g", unit: "ks", price: 3.29, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 117, name: "Zázvor", unit: "kg", price: 2.99, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1573414405798-df4e8e3a3181?w=300&q=80", origin: "BR", grade: "1.tr.", available: true },
+  { id: 118, name: "Žerucha", unit: "ks", price: 2.39, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
 
   // HUBY
-  { id: 119, name: "Hliva balená", unit: "kg", price: 4.29, category: "Huby", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/2013-01-13_Pleurotus_ostreatus_70594.jpg/300px-2013-01-13_Pleurotus_ostreatus_70594.jpg", origin: "SK", grade: "1.tr.", available: true },
-  { id: 120, name: "Hliva čerstvá", unit: "kg", price: 3.49, category: "Huby", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/2013-01-13_Pleurotus_ostreatus_70594.jpg/300px-2013-01-13_Pleurotus_ostreatus_70594.jpg", origin: "SK", grade: "1.tr.", available: true },
-  { id: 121, name: "Hríby sušené dubové 20g", unit: "ks", price: 2.09, category: "Huby", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg/300px-Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg", origin: "SK", grade: "1.tr.", available: true },
-  { id: 122, name: "Sušené dubáky 20g", unit: "ks", price: 2.09, category: "Huby", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg/300px-Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg", origin: "SK", grade: "1.tr.", available: true },
-  { id: 123, name: "Šampiňón hnedý", unit: "kg", price: 3.49, category: "Huby", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg/300px-Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg", origin: "SK", grade: "1.tr.", available: true },
-  { id: 124, name: "Šampiňóny bal. 250g", unit: "ks", price: 1.09, category: "Huby", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg/300px-Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg", origin: "SK", grade: "1.tr.", available: true },
-  { id: 125, name: "Šampiňóny hnedé bal. 250g", unit: "ks", price: 1.29, category: "Huby", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg/300px-Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg", origin: "SK", grade: "1.tr.", available: true },
-  { id: 126, name: "Šampiňóny Portobello", unit: "kg", price: 7.29, category: "Huby", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg/300px-Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg", origin: "SK", grade: "1.tr.", available: true },
-  { id: 127, name: "Šampiňóny voľné", unit: "kg", price: 2.89, category: "Huby", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg/300px-Agaricus_bisporus_%28Psilocybe_Semilanceata_17_edit%29.jpg", origin: "SK", grade: "1.tr.", available: true },
+  { id: 119, name: "Hliva balená", unit: "kg", price: 4.29, category: "Huby", img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 120, name: "Hliva čerstvá", unit: "kg", price: 3.49, category: "Huby", img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 121, name: "Hríby sušené dubové 20g", unit: "ks", price: 2.09, category: "Huby", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 122, name: "Sušené dubáky 20g", unit: "ks", price: 2.09, category: "Huby", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 123, name: "Šampiňón hnedý", unit: "kg", price: 3.49, category: "Huby", img: "https://images.unsplash.com/photo-1552825897-bb4e4b4afa01?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 124, name: "Šampiňóny bal. 250g", unit: "ks", price: 1.09, category: "Huby", img: "https://images.unsplash.com/photo-1552825897-bb4e4b4afa01?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 125, name: "Šampiňóny hnedé bal. 250g", unit: "ks", price: 1.29, category: "Huby", img: "https://images.unsplash.com/photo-1552825897-bb4e4b4afa01?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 126, name: "Šampiňóny Portobello", unit: "kg", price: 7.29, category: "Huby", img: "https://images.unsplash.com/photo-1552825897-bb4e4b4afa01?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 127, name: "Šampiňóny voľné", unit: "kg", price: 2.89, category: "Huby", img: "https://images.unsplash.com/photo-1552825897-bb4e4b4afa01?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
 
   // ZEMIAKY
-  { id: 128, name: "Zemiaky AGRIA vt.C", unit: "kg", price: 1.09, category: "Zemiaky", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Potato_and_cross_section.jpg/300px-Potato_and_cross_section.jpg", origin: "NL", grade: "1.tr.", available: true },
-  { id: 129, name: "Zemiaky baby 25/35mm", unit: "kg", price: 0.69, category: "Zemiaky", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Potato_and_cross_section.jpg/300px-Potato_and_cross_section.jpg", origin: "CZ", grade: "1.tr.", available: true },
-  { id: 130, name: "Zemiaky BATATY", unit: "kg", price: 1.99, category: "Zemiaky", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Ipomoea_batatas_006.jpg/300px-Ipomoea_batatas_006.jpg", origin: "EG/US", grade: "1.tr.", available: true },
-  { id: 131, name: "Zemiaky Colomba 2KG", unit: "ks", price: 1.39, category: "Zemiaky", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Potato_and_cross_section.jpg/300px-Potato_and_cross_section.jpg", origin: "CZ", grade: "1.tr.", available: true },
-  { id: 132, name: "Zemiaky PRANÉ skoré Colomba", unit: "kg", price: 0.79, category: "Zemiaky", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Potato_and_cross_section.jpg/300px-Potato_and_cross_section.jpg", origin: "CZ", grade: "1.tr.", available: true },
-  { id: 133, name: "Zemiaky SKORÉ Colomba", unit: "kg", price: 0.59, category: "Zemiaky", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Potato_and_cross_section.jpg/300px-Potato_and_cross_section.jpg", origin: "CZ", grade: "1.tr.", available: true },
+  { id: 128, name: "Zemiaky AGRIA vt.C", unit: "kg", price: 1.09, category: "Zemiaky", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 129, name: "Zemiaky baby 25/35mm", unit: "kg", price: 0.69, category: "Zemiaky", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
+  { id: 130, name: "Zemiaky BATATY", unit: "kg", price: 1.99, category: "Zemiaky", img: "https://images.unsplash.com/photo-1596097634026-a0d6e68e2e2b?w=300&q=80", origin: "EG/US", grade: "1.tr.", available: true },
+  { id: 131, name: "Zemiaky Colomba 2KG", unit: "ks", price: 1.39, category: "Zemiaky", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
+  { id: 132, name: "Zemiaky PRANÉ skoré Colomba", unit: "kg", price: 0.79, category: "Zemiaky", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
+  { id: 133, name: "Zemiaky SKORÉ Colomba", unit: "kg", price: 0.59, category: "Zemiaky", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
 
   // VAJCIA
-  { id: 134, name: "Vajcia čerstvé L kartón 30ks", unit: "ks", price: 7.49, category: "Vajcia", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Egg_on_white_background.jpg/300px-Egg_on_white_background.jpg", origin: "SK", grade: "1.tr.", available: true },
+  { id: 134, name: "Vajcia čerstvé L kartón 30ks", unit: "ks", price: 7.49, category: "Vajcia", img: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
 
   // VAKUOVÉ PRODUKTY
   { id: 135, name: "Vákuová cibuľa celá čistená 3KG", unit: "ks", price: 5.99, category: "Vakuové produkty", img: "https://images.pexels.com/photos/4197430/pexels-photo-4197430.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
@@ -461,7 +461,7 @@ function App() {
   const canSubmit = orderForm.name && orderForm.phone && orderForm.deliveryType &&
     (orderForm.deliveryType === "sklad"
       ? (customerType === "domacnost" ? !!pickupSlot : true)
-      : (orderForm.deliveryCity && orderForm.deliverySlot));
+      : (customerType === "firma" ? !!orderForm.deliverySlot : false));
 
   const goShop = () => { setView("shop"); setOrderDone(false); };
 
@@ -505,10 +505,12 @@ function App() {
               <div style={{fontSize:15,opacity:0.85,maxWidth:420,margin:"0 auto 20px",lineHeight:1.6}}>
                 Čerstvé ovocie a zelenina priamo od nás — pohodlne z domu alebo kancelárie. Objednajte si tovar online a my sa postaráme o zvyšok.
               </div>
-              <div style={{display:"flex",justifyContent:"center",gap:16,flexWrap:"wrap"}}>
-                <div style={{background:"rgba(255,255,255,0.15)",borderRadius:12,padding:"8px 16px",fontSize:13,fontWeight:600}}>🚚 Rozvoz — Trenčín, NMnV, Dubnica</div>
-                <div style={{background:"rgba(255,255,255,0.15)",borderRadius:12,padding:"8px 16px",fontSize:13,fontWeight:600}}>🏭 Sklad — Veľký Kolačín 342</div>
-                <div style={{background:"rgba(255,255,255,0.15)",borderRadius:12,padding:"8px 16px",fontSize:13,fontWeight:600}}>📞 042/44 23 052</div>
+              <div style={{display:"flex",justifyContent:"center",gap:10,flexWrap:"wrap"}}>
+                <div style={{background:"rgba(255,255,255,0.15)",borderRadius:12,padding:"8px 16px",fontSize:13,fontWeight:600}}>🚚 Trenčiansky kraj</div>
+                <div style={{background:"rgba(255,255,255,0.15)",borderRadius:12,padding:"8px 16px",fontSize:13,fontWeight:600}}>🚚 Žilinský kraj</div>
+                <div style={{background:"rgba(255,255,255,0.15)",borderRadius:12,padding:"8px 16px",fontSize:13,fontWeight:600}}>🚚 Nitriansky kraj</div>
+                <div style={{background:"rgba(255,255,255,0.15)",borderRadius:12,padding:"8px 16px",fontSize:13,fontWeight:600}}>🏭 Sklad — Malý Kolačín 342</div>
+                <div style={{background:"rgba(255,255,255,0.15)",borderRadius:12,padding:"8px 16px",fontSize:13,fontWeight:600}}>📞 0948 816 686 · 0915 497 010</div>
               </div>
             </div>
 
@@ -524,7 +526,7 @@ function App() {
                 <div style={{fontSize:13,color:"#6b7280",lineHeight:1.5}}>Ceny sú uvedené <strong>s DPH</strong></div>
                 <div style={{marginTop:10,background:"#fff7ed",border:"1px solid #fed7aa",borderRadius:8,padding:"8px 10px",fontSize:12,color:"#9a3412",lineHeight:1.5}}>
                   ⚠️ Pre domácnosti je momentálne dostupné len <strong>vyzdvihnutie na sklade</strong>.<br/>
-                  📍 Nová Dubnica – Veľký Kolačín 342<br/>
+                  📍 Nová Dubnica – Malý Kolačín 342<br/>
                   🕘 Výdaj tovaru: <strong>9:00 – 13:00</strong>
                 </div>
                 <div style={{marginTop:12,background:"#2a7a3b",color:"#fff",borderRadius:8,padding:"10px 0",fontWeight:700,fontSize:14}}>Vybrať</div>
@@ -856,44 +858,36 @@ function App() {
                   </div>
                 </div>
 
-                {/* DOVOZ — city + slot */}
-                {orderForm.deliveryType === "dovoz" && (
-                  <div style={{ marginTop: 16, marginBottom: 8 }}>
-                    <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 10 }}>Vyberte mesto doručenia *</div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                      {DELIVERY_CITIES.map(d => (
-                        <div key={d.city}>
-                          <button
-                            style={{ ...S.filterBtn, ...(orderForm.deliveryCity === d.city ? S.filterBtnActive : {}), marginBottom: 6 }}
-                            onClick={() => { setField("deliveryCity", d.city); setField("deliverySlot", ""); }}
-                          >{d.city}</button>
-                          {orderForm.deliveryCity === d.city && (
-                            <div>
-                              <div style={{ fontSize: 13, color: C.gray, marginBottom: 6, fontWeight: 600 }}>Vyberte časový slot:</div>
-                              <div style={S.slotGrid}>
-                                {d.slots.map(slot => (
-                                  <button key={slot} style={{ ...S.slotBtn, ...(orderForm.deliverySlot === slot ? S.slotBtnActive : {}) }} onClick={() => setField("deliverySlot", slot)}>
-                                    🕐 {slot}
-                                  </button>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
+                {/* DOVOZ — len casove okno pre firmy, bez vyber mesta */}
+                {orderForm.deliveryType === "dovoz" && customerType === "firma" && (
+                  <div style={{ marginTop: 14, marginBottom: 8 }}>
+                    <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 10 }}>Vyberte časové okno doručenia *</div>
+                    <div style={S.slotGrid}>
+                      {["5:30 - 7:00", "7:00 - 9:00", "9:00 - 12:00"].map(slot => (
+                        <button key={slot} style={{ ...S.slotBtn, ...(orderForm.deliverySlot === slot ? S.slotBtnActive : {}) }} onClick={() => setField("deliverySlot", slot)}>
+                          🕐 {slot}
+                        </button>
                       ))}
                     </div>
-                    {orderForm.deliveryCity && orderForm.deliverySlot && (
-                      <div style={{ ...S.infoBox, marginTop: 12 }}>
-                        ✅ Doručenie: <strong>{orderForm.deliveryCity}</strong> o <strong>{orderForm.deliverySlot}</strong>
+                    {orderForm.deliverySlot && (
+                      <div style={{ ...S.infoBox, marginTop: 10, background:"#e6f4ea", border:"1px solid #86efac", color:"#14532d" }}>
+                        ✅ Požadovaný čas doručenia: <strong>{orderForm.deliverySlot}</strong>
                       </div>
                     )}
+                  </div>
+                )}
+
+                {/* DOVOZ — domacnost (sklad only, no dovoz city) */}
+                {orderForm.deliveryType === "dovoz" && customerType === "domacnost" && (
+                  <div style={{...S.infoBox, marginTop: 10}}>
+                    ⚠️ Rozvoz je dostupný len pre firemných zákazníkov. Pre domácnosti je k dispozícii vyzdvihnutie na sklade.
                   </div>
                 )}
 
                 {orderForm.deliveryType === "sklad" && (
                   <div style={{marginBottom:8}}>
                     <div style={{...S.infoBox, marginBottom:12}}>
-                      📍 <strong>Nová Dubnica – Veľký Kolačín 342</strong><br/>
+                      📍 <strong>Nová Dubnica – Malý Kolačín 342</strong><br/>
                       🕘 Výdaj tovaru: <strong>9:00 – 13:00</strong>, Po–Pi
                     </div>
                     <div style={{fontWeight:700,fontSize:15,marginBottom:10}}>Vyberte čas vyzdvihnutia *</div>
@@ -1009,7 +1003,7 @@ function App() {
                           <td style={S.td}>{o.date}</td>
                           <td style={S.td}><strong>{o.name}</strong></td>
                           <td style={S.td}>{o.phone}</td>
-                          <td style={S.td}>{o.deliveryType === "sklad" ? `🏭 Sklad ${o.pickupSlot ? "— " + o.pickupSlot : ""}` : `🚚 ${o.deliveryCity} ${o.deliverySlot}`}</td>
+                          <td style={S.td}>{o.deliveryType === "sklad" ? `🏭 Sklad ${o.pickupSlot ? "— " + o.pickupSlot : ""}` : `🚚 Dovoz — ${o.deliverySlot}`}</td>
                           <td style={S.td}>{o.payment === "dobierka" ? "💵 Dobierka" : "💳 Karta"}</td>
                           <td style={S.td}><strong>{o.total.toFixed(2)} €</strong></td>
                           <td style={S.td}><span style={{ ...S.badge, ...(o.status === "Nová" ? S.badgeOrange : o.status === "Vybavená" ? S.badgeGreen : S.badgeGray) }}>{o.status}</span></td>
