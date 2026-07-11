@@ -1,0 +1,528 @@
+import { useState } from "react";
+
+const ADMIN_PASSWORD = "admin123";
+
+const DELIVERY_CITIES = [
+  {
+    city: "Trenčín",
+    slots: ["6:00 - 9:00", "9:00 - 12:00"]
+  },
+  {
+    city: "Nové Mesto nad Váhom",
+    slots: ["6:00 - 10:00"]
+  },
+  {
+    city: "Dubnica nad Váhom",
+    slots: ["6:00 - 8:30", "8:30 - 10:00", "10:00 - 12:00"]
+  },
+];
+
+const initialProducts = [
+  { id: 1, name: "Jablká (Golden)", unit: "kg", price: 0.89, category: "Ovocie", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/300px-Red_Apple.jpg", available: true },
+  { id: 2, name: "Hrušky Williams", unit: "kg", price: 1.20, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/03/05/19/02/pears-1238929_640.jpg", available: true },
+  { id: 3, name: "Banány", unit: "kg", price: 1.10, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2017/06/27/22/21/banana-2449019_640.jpg", available: true },
+  { id: 4, name: "Pomaranče", unit: "kg", price: 1.30, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2017/01/20/15/06/oranges-1995044_640.jpg", available: true },
+  { id: 5, name: "Citrony", unit: "kg", price: 1.50, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/02/23/17/29/orange-1218160_640.jpg", available: true },
+  { id: 6, name: "Hrozno červené", unit: "kg", price: 2.40, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2014/08/12/21/10/grapes-416482_640.jpg", available: true },
+  { id: 7, name: "Jahody", unit: "kg", price: 3.50, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/06/11/16/36/strawberry-1450480_640.jpg", available: false },
+  { id: 8, name: "Melón vodový", unit: "ks", price: 4.90, category: "Ovocie", img: "https://cdn.pixabay.com/photo/2016/05/30/14/29/watermelon-1424812_640.jpg", available: true },
+  { id: 9, name: "Mrkva", unit: "kg", price: 0.65, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2015/08/10/12/45/carrots-883040_640.jpg", available: true },
+  { id: 10, name: "Zemiaky", unit: "kg", price: 0.55, category: "Zemiaky", img: "https://cdn.pixabay.com/photo/2016/09/08/22/43/potatoes-1652093_640.jpg", available: true },
+  { id: 11, name: "Cibuľa žltá", unit: "kg", price: 0.70, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/11/08/04/onions-1584999_640.jpg", available: true },
+  { id: 12, name: "Cesnak", unit: "kg", price: 3.20, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/10/26/19/25/garlic-1773780_640.jpg", available: true },
+  { id: 13, name: "Paradajky cherry", unit: "kg", price: 2.80, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2019/04/07/20/19/tomatoes-4110892_640.jpg", available: true },
+  { id: 14, name: "Uhorky šalátové", unit: "ks", price: 0.85, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/24/11/09/cucumbers-1617698_640.jpg", available: true },
+  { id: 15, name: "Šalát ľadový", unit: "ks", price: 1.10, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 16, name: "Šalát rímsky", unit: "ks", price: 1.20, category: "Šaláty", img: "https://cdn.pixabay.com/photo/2016/09/10/17/47/salad-1659029_640.jpg", available: true },
+  { id: 17, name: "Brokolica", unit: "ks", price: 1.90, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/03/05/19/02/broccoli-1238250_640.jpg", available: true },
+  { id: 18, name: "Paprika červená", unit: "kg", price: 2.20, category: "Zelenina", img: "https://cdn.pixabay.com/photo/2016/08/05/09/25/paprika-1571739_640.jpg", available: true },
+  { id: 19, name: "Bazalka", unit: "zväzok", price: 0.80, category: "Bylinky", img: "https://cdn.pixabay.com/photo/2016/08/22/21/24/basil-1612462_640.jpg", available: true },
+  { id: 20, name: "Petržlen", unit: "zväzok", price: 0.70, category: "Bylinky", img: "https://cdn.pixabay.com/photo/2016/08/19/15/31/parsley-1606493_640.jpg", available: true },
+  { id: 21, name: "Mango", unit: "ks", price: 2.20, category: "Exotické ovocie", img: "https://cdn.pixabay.com/photo/2018/07/22/13/07/mango-3554992_640.jpg", available: true },
+  { id: 22, name: "Ananás", unit: "ks", price: 3.50, category: "Exotické ovocie", img: "https://cdn.pixabay.com/photo/2016/01/03/17/59/fruit-1119418_640.jpg", available: true },
+  { id: 23, name: "Avokádo", unit: "ks", price: 1.80, category: "Exotické ovocie", img: "https://cdn.pixabay.com/photo/2015/03/26/09/47/avocado-690979_640.jpg", available: true },
+  { id: 24, name: "Kokos", unit: "ks", price: 3.90, category: "Exotické ovocie", img: "https://cdn.pixabay.com/photo/2018/05/11/11/59/coconut-3390568_640.jpg", available: true },
+];
+
+const CATEGORIES = ["Všetko", "Ovocie", "Zelenina", "Bylinky", "Exotické ovocie", "Zemiaky", "Šaláty"];
+
+const C = {
+  green: "#2d6a4f", greenLight: "#40916c", greenPale: "#d8f3dc",
+  orange: "#e76f00", cream: "#fefae0", dark: "#1b1b1b",
+  gray: "#6b7280", grayLight: "#f3f4f6",
+  red: "#dc2626", redLight: "#fee2e2",
+};
+
+const S = {
+  app: { fontFamily: "'Segoe UI', system-ui, sans-serif", minHeight: "100vh", background: C.cream, color: C.dark },
+  header: { background: C.green, color: "#fff", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 2px 12px rgba(0,0,0,0.15)" },
+  headerInner: { maxWidth: 1100, margin: "0 auto", padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap" },
+  logo: { display: "flex", alignItems: "center", gap: 10, color: "#fff" },
+  logoEmoji: { fontSize: 28 },
+  logoText: { fontSize: 20, fontWeight: 700 },
+  logoSub: { fontSize: 11, opacity: 0.75, display: "block", marginTop: -2 },
+  nav: { display: "flex", gap: 8, alignItems: "center" },
+  navBtn: { background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)", color: "#fff", padding: "8px 16px", borderRadius: 8, cursor: "pointer", fontSize: 14, fontWeight: 500 },
+  navBtnActive: { background: "#fff", color: C.green },
+  cartBtn: { background: C.orange, border: "none", color: "#fff", padding: "8px 18px", borderRadius: 8, cursor: "pointer", fontSize: 14, fontWeight: 600, display: "flex", alignItems: "center", gap: 6 },
+  cartBadge: { background: "#fff", color: C.orange, borderRadius: "50%", width: 18, height: 18, fontSize: 11, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center" },
+  hero: { background: `linear-gradient(135deg, ${C.green} 0%, ${C.greenLight} 100%)`, color: "#fff", padding: "40px 20px", textAlign: "center" },
+  heroTitle: { fontSize: 32, fontWeight: 800, marginBottom: 8 },
+  heroSub: { fontSize: 16, opacity: 0.85, marginBottom: 20 },
+  heroNote: { display: "inline-block", background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)", borderRadius: 20, padding: "6px 16px", fontSize: 13 },
+  searchWrap: { maxWidth: 1100, margin: "0 auto", padding: "24px 20px 0" },
+  searchBox: { position: "relative" },
+  searchInput: { width: "100%", padding: "13px 48px 13px 18px", borderRadius: 12, border: "2px solid #e5e7eb", fontSize: 16, outline: "none", boxSizing: "border-box", background: "#fff", boxShadow: "0 1px 4px rgba(0,0,0,0.06)" },
+  searchIcon: { position: "absolute", right: 16, top: "50%", transform: "translateY(-50%)", fontSize: 20, pointerEvents: "none" },
+  searchResults: { marginTop: 8, fontSize: 13, color: C.gray, fontWeight: 500 },
+  main: { maxWidth: 1100, margin: "0 auto", padding: "20px 20px 32px" },
+  filterRow: { display: "flex", gap: 8, marginBottom: 24, flexWrap: "wrap" },
+  filterBtn: { padding: "7px 16px", borderRadius: 20, border: `2px solid ${C.greenLight}`, background: "#fff", color: C.green, cursor: "pointer", fontSize: 13, fontWeight: 500 },
+  filterBtnActive: { background: C.green, color: "#fff", borderColor: C.green },
+  grid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 16 },
+  card: { background: "#fff", borderRadius: 14, overflow: "hidden", display: "flex", flexDirection: "column", boxShadow: "0 1px 6px rgba(0,0,0,0.07)", border: "1px solid #eee" },
+  cardUnavailable: { opacity: 0.55 },
+  cardImg: { width: "100%", height: 140, objectFit: "cover", background: C.grayLight },
+  cardBody: { padding: "12px 14px 14px", display: "flex", flexDirection: "column", gap: 8, flex: 1 },
+  cardName: { fontWeight: 700, fontSize: 14, color: C.dark },
+  cardCat: { fontSize: 11, color: C.gray, background: C.grayLight, borderRadius: 20, padding: "2px 8px", alignSelf: "flex-start" },
+  cardPrice: { fontSize: 20, fontWeight: 800, color: C.green },
+  cardUnit: { fontSize: 12, color: C.gray, fontWeight: 400 },
+  unavailableBadge: { background: C.grayLight, color: C.gray, borderRadius: 6, padding: "4px 8px", fontSize: 12, textAlign: "center" },
+  qtyRow: { display: "flex", alignItems: "center", gap: 8 },
+  qtyBtn: { width: 30, height: 30, borderRadius: 8, border: `2px solid ${C.green}`, background: "#fff", color: C.green, cursor: "pointer", fontSize: 18, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center" },
+  qtyNum: { minWidth: 28, textAlign: "center", fontWeight: 700, fontSize: 15 },
+  addBtn: { background: C.green, color: "#fff", border: "none", borderRadius: 8, padding: "9px 0", cursor: "pointer", fontSize: 14, fontWeight: 600, width: "100%", marginTop: "auto" },
+  noResults: { textAlign: "center", padding: "60px 20px", color: C.gray },
+  panel: { maxWidth: 900, margin: "0 auto", padding: "32px 20px" },
+  sectionTitle: { fontSize: 22, fontWeight: 800, marginBottom: 20, color: C.dark },
+  cartItem: { background: "#fff", borderRadius: 12, padding: "12px 16px", display: "flex", alignItems: "center", gap: 14, marginBottom: 10, boxShadow: "0 1px 4px rgba(0,0,0,0.06)", border: "1px solid #eee" },
+  cartItemImg: { width: 52, height: 52, borderRadius: 8, objectFit: "cover", background: C.grayLight, flexShrink: 0 },
+  cartItemInfo: { flex: 1, minWidth: 0 },
+  cartItemName: { fontWeight: 600, fontSize: 14 },
+  cartItemPrice: { color: C.gray, fontSize: 13 },
+  cartItemTotal: { fontWeight: 700, fontSize: 15, color: C.green, minWidth: 65, textAlign: "right" },
+  removeBtn: { background: C.redLight, color: C.red, border: "none", borderRadius: 6, padding: "5px 10px", cursor: "pointer", fontSize: 13, fontWeight: 600 },
+  orderSummary: { background: "#fff", borderRadius: 14, padding: 24, marginTop: 20, boxShadow: "0 1px 6px rgba(0,0,0,0.07)", border: "1px solid #eee" },
+  totalRow: { display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 20, fontWeight: 800, marginBottom: 20, paddingBottom: 16, borderBottom: "2px solid #eee" },
+  form: { display: "flex", flexDirection: "column", gap: 14 },
+  formRow: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 },
+  label: { fontSize: 13, fontWeight: 600, color: C.gray, marginBottom: 4, display: "block" },
+  input: { width: "100%", padding: "10px 12px", borderRadius: 8, border: "1.5px solid #e5e7eb", fontSize: 15, outline: "none", boxSizing: "border-box" },
+  textarea: { width: "100%", padding: "10px 12px", borderRadius: 8, border: "1.5px solid #e5e7eb", fontSize: 15, minHeight: 80, outline: "none", resize: "vertical", boxSizing: "border-box" },
+  select: { width: "100%", padding: "10px 12px", borderRadius: 8, border: "1.5px solid #e5e7eb", fontSize: 15, outline: "none", background: "#fff", boxSizing: "border-box" },
+  submitBtn: { background: C.orange, color: "#fff", border: "none", borderRadius: 10, padding: "14px 0", fontSize: 16, fontWeight: 700, cursor: "pointer", marginTop: 8, width: "100%" },
+  successBox: { background: C.greenPale, border: `2px solid ${C.green}`, borderRadius: 14, padding: 32, textAlign: "center" },
+  successTitle: { fontSize: 24, fontWeight: 800, color: C.green, marginBottom: 8 },
+  successText: { color: C.gray, fontSize: 15 },
+  deliveryOptions: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 4 },
+  deliveryCard: { border: "2px solid #e5e7eb", borderRadius: 10, padding: "14px 16px", cursor: "pointer", transition: "all 0.15s", background: "#fff" },
+  deliveryCardActive: { border: `2px solid ${C.green}`, background: C.greenPale },
+  deliveryCardTitle: { fontWeight: 700, fontSize: 15, marginBottom: 4 },
+  deliveryCardSub: { fontSize: 13, color: C.gray },
+  slotGrid: { display: "flex", gap: 8, flexWrap: "wrap", marginTop: 4 },
+  slotBtn: { padding: "8px 14px", borderRadius: 8, border: "2px solid #e5e7eb", background: "#fff", cursor: "pointer", fontSize: 13, fontWeight: 600, color: C.dark },
+  slotBtnActive: { border: `2px solid ${C.green}`, background: C.greenPale, color: C.green },
+  infoBox: { background: "#fff7ed", border: "1px solid #fed7aa", borderRadius: 8, padding: "10px 14px", fontSize: 13, color: "#9a3412", marginTop: 4 },
+  adminSection: { background: "#fff", borderRadius: 14, padding: 24, marginBottom: 24, boxShadow: "0 1px 6px rgba(0,0,0,0.07)", border: "1px solid #eee" },
+  adminLogin: { maxWidth: 400, margin: "80px auto", background: "#fff", borderRadius: 16, padding: 36, boxShadow: "0 2px 20px rgba(0,0,0,0.1)", textAlign: "center" },
+  adminTable: { width: "100%", borderCollapse: "collapse", marginTop: 12, display: "block", overflowX: "auto" },
+  th: { background: C.grayLight, padding: "10px 12px", textAlign: "left", fontSize: 13, fontWeight: 700, color: C.gray, whiteSpace: "nowrap" },
+  td: { padding: "10px 12px", borderBottom: "1px solid #f3f4f6", fontSize: 14, verticalAlign: "middle", whiteSpace: "nowrap" },
+  badge: { display: "inline-block", padding: "3px 10px", borderRadius: 20, fontSize: 12, fontWeight: 600 },
+  badgeGreen: { background: C.greenPale, color: C.green },
+  badgeGray: { background: C.grayLight, color: C.gray },
+  badgeOrange: { background: "#fff7ed", color: "#c2410c" },
+  actionBtn: { padding: "5px 12px", borderRadius: 6, border: "none", cursor: "pointer", fontSize: 13, fontWeight: 600, marginRight: 4 },
+  emptyCart: { textAlign: "center", padding: "60px 20px", color: C.gray },
+};
+
+export default function App() {
+  const [view, setView] = useState("shop");
+  const [products, setProducts] = useState(initialProducts);
+  const [cart, setCart] = useState([]);
+  const [quantities, setQuantities] = useState({});
+  const [filterCat, setFilterCat] = useState("Všetko");
+  const [search, setSearch] = useState("");
+  const [orderDone, setOrderDone] = useState(false);
+  const [orders, setOrders] = useState([]);
+  const [adminLoggedIn, setAdminLoggedIn] = useState(false);
+  const [adminPass, setAdminPass] = useState("");
+  const [adminError, setAdminError] = useState("");
+  const [adminTab, setAdminTab] = useState("orders");
+  const [newProduct, setNewProduct] = useState({ name: "", unit: "kg", price: "", category: "Ovocie", img: "" });
+
+  const [orderForm, setOrderForm] = useState({
+    name: "", phone: "", email: "", address: "", city: "", zip: "",
+    payment: "dobierka", note: "",
+    deliveryType: "", deliveryCity: "", deliverySlot: "",
+  });
+
+  const cartCount = cart.reduce((s, i) => s + i.qty, 0);
+  const cartTotal = cart.reduce((s, i) => s + i.qty * i.price, 0);
+
+  const setQty = (id, val) => setQuantities(q => ({ ...q, [id]: Math.max(1, val) }));
+  const addToCart = (product) => {
+    const qty = quantities[product.id] || 1;
+    setCart(c => {
+      const ex = c.find(i => i.id === product.id);
+      if (ex) return c.map(i => i.id === product.id ? { ...i, qty: i.qty + qty } : i);
+      return [...c, { ...product, qty }];
+    });
+  };
+  const updateCartQty = (id, qty) => {
+    if (qty <= 0) setCart(c => c.filter(i => i.id !== id));
+    else setCart(c => c.map(i => i.id === id ? { ...i, qty } : i));
+  };
+
+  const setField = (field, val) => setOrderForm(f => ({ ...f, [field]: val }));
+
+  const submitOrder = () => {
+    const order = { id: Date.now(), date: new Date().toLocaleString("sk-SK"), items: [...cart], total: cartTotal, ...orderForm, status: "Nová" };
+    setOrders(o => [order, ...o]);
+    setCart([]);
+    setOrderForm({ name: "", phone: "", email: "", address: "", city: "", zip: "", payment: "dobierka", note: "", deliveryType: "", deliveryCity: "", deliverySlot: "" });
+    setOrderDone(true);
+  };
+
+  const searchTrimmed = search.trim();
+  const searchActive = searchTrimmed.length >= 3;
+  const filtered = products.filter(p => {
+    const catMatch = filterCat === "Všetko" || p.category === filterCat;
+    const searchMatch = !searchActive || p.name.toLowerCase().includes(searchTrimmed.toLowerCase());
+    return catMatch && searchMatch;
+  });
+
+  const selectedCitySlots = DELIVERY_CITIES.find(d => d.city === orderForm.deliveryCity)?.slots || [];
+
+  const canSubmit = orderForm.name && orderForm.phone && orderForm.deliveryType &&
+    (orderForm.deliveryType === "sklad" || (orderForm.deliveryCity && orderForm.deliverySlot));
+
+  const goShop = () => { setView("shop"); setOrderDone(false); };
+
+  return (
+    <div style={S.app}>
+      {/* HEADER */}
+      <header style={S.header}>
+        <div style={S.headerInner}>
+          <div style={S.logo}>
+            <span style={S.logoEmoji}>🥦</span>
+            <div>
+              <span style={S.logoText}>FreshMarket</span>
+              <span style={S.logoSub}>Veľkoobchod ovocia a zeleniny</span>
+            </div>
+          </div>
+          <div style={S.nav}>
+            <button style={{ ...S.navBtn, ...(view === "shop" ? S.navBtnActive : {}) }} onClick={goShop}>Tovar</button>
+            <button style={{ ...S.navBtn, ...(view === "admin" ? S.navBtnActive : {}) }} onClick={() => setView("admin")}>Admin</button>
+            {view !== "cart" && (
+              <button style={S.cartBtn} onClick={() => { setView("cart"); setOrderDone(false); }}>
+                🛒 Košík {cartCount > 0 && <span style={S.cartBadge}>{cartCount}</span>}
+              </button>
+            )}
+          </div>
+        </div>
+      </header>
+
+      {/* SHOP */}
+      {view === "shop" && (
+        <>
+          <div style={S.hero}>
+            <div style={S.heroTitle}>Čerstvé ovocie a zelenina 🍎🥕</div>
+            <div style={S.heroSub}>Veľkoobchodné ceny priamo pre vás</div>
+            <span style={S.heroNote}>📦 Dodávka na adresu · 🏭 Vyzdvihnutie v sklade</span>
+          </div>
+          <div style={S.searchWrap}>
+            <div style={S.searchBox}>
+              <input style={S.searchInput} placeholder="Hľadať produkt... (min. 3 písmená)" value={search} onChange={e => setSearch(e.target.value)} />
+              <span style={S.searchIcon}>🔍</span>
+            </div>
+            {searchActive && <div style={S.searchResults}>{filtered.length > 0 ? `Nájdených: ${filtered.length} produkt${filtered.length === 1 ? "" : filtered.length < 5 ? "y" : "ov"} pre „${searchTrimmed}"` : `Žiadny produkt nenájdený pre „${searchTrimmed}"`}</div>}
+          </div>
+          <div style={S.main}>
+            <div style={S.filterRow}>
+              {CATEGORIES.map(c => <button key={c} style={{ ...S.filterBtn, ...(filterCat === c ? S.filterBtnActive : {}) }} onClick={() => setFilterCat(c)}>{c}</button>)}
+            </div>
+            {filtered.length === 0 ? (
+              <div style={S.noResults}><div style={{ fontSize: 48, marginBottom: 12 }}>🔍</div><div style={{ fontWeight: 700, fontSize: 18 }}>Nič sme nenašli</div></div>
+            ) : (
+              <div style={S.grid}>
+                {filtered.map(p => {
+                  const qty = quantities[p.id] || 1;
+                  return (
+                    <div key={p.id} style={{ ...S.card, ...(p.available ? {} : S.cardUnavailable) }}>
+                      <img src={p.img} alt={p.name} style={S.cardImg} onError={e => { e.target.style.display = "none"; }} />
+                      <div style={S.cardBody}>
+                        <div style={S.cardCat}>{p.category}</div>
+                        <div style={S.cardName}>{p.name}</div>
+                        <div style={S.cardPrice}>{p.price.toFixed(2)} €<span style={S.cardUnit}>/{p.unit}</span></div>
+                        {!p.available ? (
+                          <div style={S.unavailableBadge}>Nedostupné</div>
+                        ) : (
+                          <>
+                            <div style={S.qtyRow}>
+                              <button style={S.qtyBtn} onClick={() => setQty(p.id, qty - 1)}>−</button>
+                              <span style={S.qtyNum}>{qty}</span>
+                              <button style={S.qtyBtn} onClick={() => setQty(p.id, qty + 1)}>+</button>
+                            </div>
+                            <button style={S.addBtn} onClick={() => addToCart(p)}>Pridať do košíka</button>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </>
+      )}
+
+      {/* CART */}
+      {view === "cart" && (
+        <div style={S.panel}>
+          <div style={S.sectionTitle}>🛒 Košík</div>
+          {orderDone ? (
+            <div style={S.successBox}>
+              <div style={{ fontSize: 56, marginBottom: 12 }}>✅</div>
+              <div style={S.successTitle}>Objednávka odoslaná!</div>
+              <div style={S.successText}>Ďakujeme! Budeme vás kontaktovať na zadaný telefón alebo e-mail.</div>
+              <button style={{ ...S.submitBtn, maxWidth: 220, margin: "24px auto 0" }} onClick={goShop}>Späť na tovar</button>
+            </div>
+          ) : cart.length === 0 ? (
+            <div style={S.emptyCart}>
+              <div style={{ fontSize: 56, marginBottom: 12 }}>🛒</div>
+              <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 8 }}>Košík je prázdny</div>
+              <button style={{ ...S.submitBtn, maxWidth: 200, margin: "20px auto 0" }} onClick={goShop}>Ísť nakupovať</button>
+            </div>
+          ) : (
+            <>
+              {cart.map(item => (
+                <div key={item.id} style={S.cartItem}>
+                  <img src={item.img} alt={item.name} style={S.cartItemImg} onError={e => { e.target.style.display = "none"; }} />
+                  <div style={S.cartItemInfo}>
+                    <div style={S.cartItemName}>{item.name}</div>
+                    <div style={S.cartItemPrice}>{item.price.toFixed(2)} €/{item.unit}</div>
+                  </div>
+                  <div style={S.qtyRow}>
+                    <button style={S.qtyBtn} onClick={() => updateCartQty(item.id, item.qty - 1)}>−</button>
+                    <span style={S.qtyNum}>{item.qty}</span>
+                    <button style={S.qtyBtn} onClick={() => updateCartQty(item.id, item.qty + 1)}>+</button>
+                  </div>
+                  <div style={S.cartItemTotal}>{(item.qty * item.price).toFixed(2)} €</div>
+                  <button style={S.removeBtn} onClick={() => updateCartQty(item.id, 0)}>✕</button>
+                </div>
+              ))}
+
+              <div style={S.orderSummary}>
+                <div style={S.totalRow}>
+                  <span>Spolu</span>
+                  <span style={{ color: C.green }}>{cartTotal.toFixed(2)} €</span>
+                </div>
+
+                {/* DELIVERY TYPE */}
+                <div style={{ fontWeight: 700, fontSize: 16, marginBottom: 12 }}>Spôsob prevzatia *</div>
+                <div style={S.deliveryOptions}>
+                  <div style={{ ...S.deliveryCard, ...(orderForm.deliveryType === "sklad" ? S.deliveryCardActive : {}) }} onClick={() => setField("deliveryType", "sklad")}>
+                    <div style={S.deliveryCardTitle}>🏭 Vyzdvihnutie v sklade</div>
+                    <div style={S.deliveryCardSub}>Príďte si osobne prevziať tovar</div>
+                  </div>
+                  <div style={{ ...S.deliveryCard, ...(orderForm.deliveryType === "dovoz" ? S.deliveryCardActive : {}) }} onClick={() => { setField("deliveryType", "dovoz"); setField("deliveryCity", ""); setField("deliverySlot", ""); }}>
+                    <div style={S.deliveryCardTitle}>🚚 Dovoz tovaru</div>
+                    <div style={S.deliveryCardSub}>Doručíme priamo k vám</div>
+                  </div>
+                </div>
+
+                {/* DOVOZ — city + slot */}
+                {orderForm.deliveryType === "dovoz" && (
+                  <div style={{ marginTop: 16, marginBottom: 8 }}>
+                    <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 10 }}>Vyberte mesto doručenia *</div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                      {DELIVERY_CITIES.map(d => (
+                        <div key={d.city}>
+                          <button
+                            style={{ ...S.filterBtn, ...(orderForm.deliveryCity === d.city ? S.filterBtnActive : {}), marginBottom: 6 }}
+                            onClick={() => { setField("deliveryCity", d.city); setField("deliverySlot", ""); }}
+                          >{d.city}</button>
+                          {orderForm.deliveryCity === d.city && (
+                            <div>
+                              <div style={{ fontSize: 13, color: C.gray, marginBottom: 6, fontWeight: 600 }}>Vyberte časový slot:</div>
+                              <div style={S.slotGrid}>
+                                {d.slots.map(slot => (
+                                  <button key={slot} style={{ ...S.slotBtn, ...(orderForm.deliverySlot === slot ? S.slotBtnActive : {}) }} onClick={() => setField("deliverySlot", slot)}>
+                                    🕐 {slot}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    {orderForm.deliveryCity && orderForm.deliverySlot && (
+                      <div style={{ ...S.infoBox, marginTop: 12 }}>
+                        ✅ Doručenie: <strong>{orderForm.deliveryCity}</strong> o <strong>{orderForm.deliverySlot}</strong>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {orderForm.deliveryType === "sklad" && (
+                  <div style={{ ...S.infoBox, marginBottom: 8 }}>
+                    📍 Adresa skladu: <strong>zadajte vlastnú adresu skladu</strong> — otvorené Po–Pi 5:00–14:00
+                  </div>
+                )}
+
+                {/* KONTAKTNÉ ÚDAJE */}
+                <div style={{ fontWeight: 700, fontSize: 16, margin: "20px 0 12px" }}>Kontaktné údaje</div>
+                <div style={S.form}>
+                  <div style={S.formRow}>
+                    <div><label style={S.label}>Meno a priezvisko *</label><input style={S.input} value={orderForm.name} onChange={e => setField("name", e.target.value)} placeholder="Ján Novák" /></div>
+                    <div><label style={S.label}>Telefón *</label><input style={S.input} value={orderForm.phone} onChange={e => setField("phone", e.target.value)} placeholder="+421 900 000 000" /></div>
+                  </div>
+                  <div><label style={S.label}>E-mail</label><input style={S.input} value={orderForm.email} onChange={e => setField("email", e.target.value)} placeholder="jan@email.sk" /></div>
+                  {orderForm.deliveryType === "dovoz" && (
+                    <>
+                      <div><label style={S.label}>Adresa doručenia *</label><input style={S.input} value={orderForm.address} onChange={e => setField("address", e.target.value)} placeholder="Ulica a číslo" /></div>
+                      <div style={S.formRow}>
+                        <div><label style={S.label}>Mesto</label><input style={S.input} value={orderForm.deliveryCity} readOnly placeholder="Vybrané vyššie" /></div>
+                        <div><label style={S.label}>PSČ</label><input style={S.input} value={orderForm.zip} onChange={e => setField("zip", e.target.value)} placeholder="911 01" /></div>
+                      </div>
+                    </>
+                  )}
+                  <div>
+                    <label style={S.label}>Spôsob platby *</label>
+                    <select style={S.select} value={orderForm.payment} onChange={e => setField("payment", e.target.value)}>
+                      <option value="dobierka">💵 Platba pri prevzatí (dobierka)</option>
+                      <option value="karta">💳 Online platba kartou</option>
+                    </select>
+                  </div>
+                  <div><label style={S.label}>Poznámka</label><textarea style={S.textarea} value={orderForm.note} onChange={e => setField("note", e.target.value)} placeholder="Napr. špecifické požiadavky..." /></div>
+                  <button style={{ ...S.submitBtn, opacity: canSubmit ? 1 : 0.45 }} disabled={!canSubmit} onClick={submitOrder}>
+                    ✅ Objednať — {cartTotal.toFixed(2)} €
+                  </button>
+                  {!canSubmit && <div style={{ fontSize: 12, color: C.gray, textAlign: "center" }}>Vyplňte meno, telefón a spôsob prevzatia</div>}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+
+      {/* ADMIN */}
+      {view === "admin" && (
+        !adminLoggedIn ? (
+          <div style={S.adminLogin}>
+            <div style={{ fontSize: 48, marginBottom: 12 }}>🔐</div>
+            <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 20 }}>Admin prístup</div>
+            <label style={S.label}>Heslo</label>
+            <input type="password" style={S.input} value={adminPass} onChange={e => setAdminPass(e.target.value)}
+              onKeyDown={e => { if (e.key === "Enter") { if (adminPass === ADMIN_PASSWORD) { setAdminLoggedIn(true); setAdminError(""); } else setAdminError("Nesprávne heslo"); } }}
+              placeholder="Zadajte heslo" />
+            {adminError && <div style={{ color: C.red, marginTop: 8, fontSize: 14 }}>{adminError}</div>}
+            <button style={{ ...S.submitBtn, marginTop: 16 }} onClick={() => { if (adminPass === ADMIN_PASSWORD) { setAdminLoggedIn(true); setAdminError(""); } else setAdminError("Nesprávne heslo"); }}>Prihlásiť sa</button>
+            <div style={{ marginTop: 12, fontSize: 12, color: C.gray }}>Demo heslo: admin123</div>
+          </div>
+        ) : (
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 20px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+              <div style={S.sectionTitle}>⚙️ Admin panel</div>
+              <button style={{ padding: "6px 14px", borderRadius: 6, border: "none", cursor: "pointer", background: C.redLight, color: C.red, fontWeight: 600 }} onClick={() => { setAdminLoggedIn(false); setAdminPass(""); }}>Odhlásiť</button>
+            </div>
+            <div style={{ display: "flex", gap: 10, marginBottom: 24 }}>
+              {["orders", "products"].map(t => (
+                <button key={t} style={{ ...S.navBtn, ...(adminTab === t ? { background: C.green, color: "#fff", borderColor: C.green } : { background: "#fff", color: C.green, border: `2px solid ${C.green}` }) }} onClick={() => setAdminTab(t)}>
+                  {t === "orders" ? "📋 Objednávky" : "🥦 Produkty"}
+                </button>
+              ))}
+            </div>
+
+            {adminTab === "orders" && (
+              <div style={S.adminSection}>
+                <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 14 }}>Objednávky ({orders.length})</div>
+                {orders.length === 0 ? (
+                  <div style={{ color: C.gray, padding: "20px 0", textAlign: "center" }}>Žiadne objednávky zatiaľ.</div>
+                ) : (
+                  <table style={S.adminTable}>
+                    <thead><tr>{["Dátum", "Zákazník", "Telefón", "Prevzatie", "Platba", "Suma", "Status", "Akcia"].map(h => <th key={h} style={S.th}>{h}</th>)}</tr></thead>
+                    <tbody>
+                      {orders.map(o => (
+                        <tr key={o.id}>
+                          <td style={S.td}>{o.date}</td>
+                          <td style={S.td}><strong>{o.name}</strong></td>
+                          <td style={S.td}>{o.phone}</td>
+                          <td style={S.td}>{o.deliveryType === "sklad" ? "🏭 Sklad" : `🚚 ${o.deliveryCity} ${o.deliverySlot}`}</td>
+                          <td style={S.td}>{o.payment === "dobierka" ? "💵 Dobierka" : "💳 Karta"}</td>
+                          <td style={S.td}><strong>{o.total.toFixed(2)} €</strong></td>
+                          <td style={S.td}><span style={{ ...S.badge, ...(o.status === "Nová" ? S.badgeOrange : o.status === "Vybavená" ? S.badgeGreen : S.badgeGray) }}>{o.status}</span></td>
+                          <td style={S.td}>
+                            <button style={{ ...S.actionBtn, background: C.greenPale, color: C.green }} onClick={() => setOrders(os => os.map(x => x.id === o.id ? { ...x, status: "Vybavená" } : x))}>✓</button>
+                            <button style={{ ...S.actionBtn, background: C.grayLight, color: C.gray }} onClick={() => setOrders(os => os.map(x => x.id === o.id ? { ...x, status: "Zrušená" } : x))}>✕</button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+            )}
+
+            {adminTab === "products" && (
+              <div>
+                <div style={S.adminSection}>
+                  <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 14 }}>Pridať produkt</div>
+                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "flex-end" }}>
+                    <div style={{ flex: 2, minWidth: 140 }}><label style={S.label}>Názov</label><input style={S.input} value={newProduct.name} onChange={e => setNewProduct(p => ({ ...p, name: e.target.value }))} placeholder="Napr. Mango" /></div>
+                    <div><label style={S.label}>Cena €</label><input style={{ ...S.input, width: 80 }} type="number" value={newProduct.price} onChange={e => setNewProduct(p => ({ ...p, price: e.target.value }))} placeholder="1.50" /></div>
+                    <div><label style={S.label}>Jednotka</label>
+                      <select style={{ ...S.select, width: 100 }} value={newProduct.unit} onChange={e => setNewProduct(p => ({ ...p, unit: e.target.value }))}>
+                        <option>kg</option><option>ks</option><option>zväzok</option>
+                      </select>
+                    </div>
+                    <div><label style={S.label}>Kategória</label>
+                      <select style={{ ...S.select, width: 160 }} value={newProduct.category} onChange={e => setNewProduct(p => ({ ...p, category: e.target.value }))}>
+                        {CATEGORIES.filter(c => c !== "Všetko").map(c => <option key={c}>{c}</option>)}
+                      </select>
+                    </div>
+                    <div style={{ flex: 3, minWidth: 200 }}><label style={S.label}>URL fotky (Unsplash alebo vlastná)</label><input style={S.input} value={newProduct.img} onChange={e => setNewProduct(p => ({ ...p, img: e.target.value }))} placeholder="https://..." /></div>
+                    <button style={{ ...S.submitBtn, width: "auto", padding: "10px 20px", marginTop: 18 }}
+                      onClick={() => {
+                        if (!newProduct.name || !newProduct.price) return;
+                        setProducts(ps => [...ps, { ...newProduct, id: Date.now(), price: parseFloat(newProduct.price), available: true }]);
+                        setNewProduct({ name: "", unit: "kg", price: "", category: "Ovocie", img: "" });
+                      }}>+ Pridať</button>
+                  </div>
+                </div>
+                <div style={S.adminSection}>
+                  <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 14 }}>Správa produktov ({products.length})</div>
+                  <table style={S.adminTable}>
+                    <thead><tr>{["Foto", "Produkt", "Kategória", "Cena", "Dostupnosť", "Akcia"].map(h => <th key={h} style={S.th}>{h}</th>)}</tr></thead>
+                    <tbody>
+                      {products.map(p => (
+                        <tr key={p.id}>
+                          <td style={S.td}><img src={p.img} alt="" style={{ width: 40, height: 40, borderRadius: 6, objectFit: "cover" }} onError={e => { e.target.style.display = "none"; }} /></td>
+                          <td style={S.td}><strong>{p.name}</strong></td>
+                          <td style={S.td}>{p.category}</td>
+                          <td style={S.td}>{p.price.toFixed(2)} €/{p.unit}</td>
+                          <td style={S.td}><span style={{ ...S.badge, ...(p.available ? S.badgeGreen : S.badgeGray) }}>{p.available ? "Dostupné" : "Nedostupné"}</span></td>
+                          <td style={S.td}>
+                            <button style={{ ...S.actionBtn, background: p.available ? C.grayLight : C.greenPale, color: p.available ? C.gray : C.green }}
+                              onClick={() => setProducts(ps => ps.map(x => x.id === p.id ? { ...x, available: !x.available } : x))}>
+                              {p.available ? "Skryť" : "Zobraziť"}
+                            </button>
+                            <button style={{ ...S.actionBtn, background: C.redLight, color: C.red }}
+                              onClick={() => setProducts(ps => ps.filter(x => x.id !== p.id))}>Zmazať</button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+          </div>
+        )
+      )}
+    </div>
+  );
+}
