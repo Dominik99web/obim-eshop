@@ -1,4 +1,18 @@
-import { useState } from "react";
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obim - Ovocie a Zelenina</title>
+  <meta name="theme-color" content="#2d6a4f" />
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body style="margin:0;padding:0;">
+  <div id="root"></div>
+  <script type="text/babel">
+
 
 const ADMIN_PASSWORD = "admin123";
 
@@ -137,7 +151,7 @@ const S = {
   emptyCart: { textAlign: "center", padding: "60px 20px", color: C.gray },
 };
 
-export default function App() {
+function App() {
   const [view, setView] = useState("shop");
   const [products, setProducts] = useState(initialProducts);
   const [cart, setCart] = useState([]);
@@ -526,3 +540,9 @@ export default function App() {
     </div>
   );
 }
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<React.StrictMode><App /></React.StrictMode>);
+  </script>
+</body>
+</html>
