@@ -17,6 +17,7 @@ const { useState } = React;
 
 
 const ADMIN_PASSWORD = "admin123";
+const B2B_PASSWORD = "obim2025"; // Heslo pre existujucich B2B zakaznikov
 
 const DELIVERY_CITIES = [
   {
@@ -399,6 +400,8 @@ function App() {
   const [customerType, setCustomerType] = useState(null);
   const [firmType, setFirmType] = useState(null); // 'existujuci' or 'novy'
   const [firmData, setFirmData] = useState({ nazov: "", mesto: "", ico: "", dic: "", adresa: "", psc: "", kontakt: "", email: "", telefon: "" });
+  const [b2bPass, setB2bPass] = useState("");
+  const [b2bError, setB2bError] = useState("");
   const [firmReady, setFirmReady] = useState(false);
 
   const [pickupSlot, setPickupSlot] = useState("");
@@ -506,7 +509,7 @@ function App() {
       {/* HEADER */}
       <header style={S.header}>
         <div style={S.headerInner}>
-          <div style={{...S.logo, cursor:"pointer"}} onClick={() => { setView("shop"); window.scrollTo(0,0); }}>
+          <div style={{...S.logo, cursor:"pointer"}} onClick={() => { setView("shop"); setSearch(""); setFilterCat("Všetko"); window.scrollTo(0,0); }}>
             <img src="https://obim.sk/wp-content/uploads/2025/11/Obim_LOGO.png" alt="Obim s.r.o." style={{height:44, width:"auto"}} />
           </div>
           <div style={S.nav}>
