@@ -539,7 +539,7 @@ function App() {
               <div style={{fontSize:34,fontWeight:800,color:"#fff",letterSpacing:"-1px",lineHeight:1.15,marginBottom:10}}>Čerstvé ovocie<br/>a zelenina</div>
               <div style={{fontSize:15,color:"rgba(255,255,255,0.75)",marginBottom:24,maxWidth:420,lineHeight:1.6}}>Čerstvo, kvalitne a rýchlo. Objednajte si tovar online priamo z pohodlia domova alebo kancelárie.</div>
               <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
-                {["🚚 Trenčiansky kraj","🚚 Žilinský kraj","🚚 Nitriansky kraj","🏭 Malý Kolačín 342","📞 042/44 23 052 · +421 915 497 010 · +421 948 358 899"].map(t => (
+                {["🚚 Trenčiansky kraj","🚚 Žilinský kraj","🚚 Nitriansky kraj","🏭 Malý Kolačín 342","📞 +421 915 497 010 · +421 915 497 010 · +421 948 358 899"].map(t => (
                   <span key={t} style={{background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:20,padding:"5px 12px",fontSize:12,color:"rgba(255,255,255,0.85)",fontWeight:500}}>{t}</span>
                 ))}
               </div>
@@ -650,7 +650,7 @@ function App() {
                       }}}
                     />
                     {b2bError && <div style={{color:"#ef4444",fontSize:12,marginTop:4}}>{b2bError}</div>}
-                    <div style={{fontSize:11,color:"#94a3b8",marginTop:5}}>Heslo ste dostali od nás pri registrácii. Kontakt: 042/44 23 052</div>
+                    <div style={{fontSize:11,color:"#94a3b8",marginTop:5}}>Heslo ste dostali od nás pri registrácii. Kontakt: +421 915 497 010 · +421 948 358 899</div>
                   </div>
                 </div>
                 <button
@@ -745,7 +745,6 @@ function App() {
 
             <button onClick={() => { setCustomerType(null); setFirmType(null); setFirmReady(false); }} style={{width:"100%",background:"none",border:"none",color:"#475569",fontSize:12,cursor:"pointer",marginTop:16,padding:"6px 0"}}>← Späť na výber zákazníka</button>
           </div>
-        </div>
       )}
 
       {customerType && firmReady && view === "shop" && (
