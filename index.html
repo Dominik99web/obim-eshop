@@ -530,16 +530,19 @@ function App() {
         <div style={{height:"calc(100vh - 64px)",background:"#f8fafc",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",padding:"0 24px"}}>
           <div style={{width:"100%",maxWidth:780}}>
 
-            {/* INFO BANNER - kompaktný */}
-            <div style={{background:"linear-gradient(135deg, #15803d 0%, #16a34a 100%)",borderRadius:16,padding:"20px 28px",marginBottom:20,position:"relative",overflow:"hidden"}}>
+            {/* INFO BANNER */}
+            <div style={{background:"linear-gradient(135deg, #15803d 0%, #16a34a 100%)",borderRadius:16,padding:"24px 28px",marginBottom:20,position:"relative",overflow:"hidden"}}>
               <div style={{position:"absolute",top:-40,right:-40,width:180,height:180,borderRadius:"50%",background:"rgba(255,255,255,0.05)"}}></div>
-              <div style={{fontSize:11,fontWeight:600,letterSpacing:"2px",textTransform:"uppercase",color:"rgba(255,255,255,0.65)",marginBottom:6}}>Vitajte v našom novom e-shope</div>
-              <div style={{fontSize:24,fontWeight:800,color:"#fff",letterSpacing:"-0.5px",marginBottom:4}}>Čerstvé ovocie a zelenina</div>
-              <div style={{fontSize:13,color:"rgba(255,255,255,0.75)",marginBottom:14}}>Čerstvo, kvalitne a rýchlo.</div>
+              <div style={{fontSize:11,fontWeight:600,letterSpacing:"2px",textTransform:"uppercase",color:"rgba(255,255,255,0.65)",marginBottom:8}}>Vitajte v našom novom e-shope</div>
+              <div style={{fontSize:30,fontWeight:800,color:"#fff",letterSpacing:"-0.5px",marginBottom:6}}>Čerstvé ovocie a zelenina</div>
+              <div style={{fontSize:15,color:"rgba(255,255,255,0.85)",marginBottom:16,fontWeight:500}}>Čerstvo, kvalitne a rýchlo.</div>
               <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
-                {["🚚 Trenčiansky kraj","🚚 Žilinský kraj","🚚 Nitriansky kraj","🏭 Malý Kolačín 342","📞 +421 915 497 010 · +421 948 358 899","✉️ obim@obim.sk"].map(t => (
-                  <span key={t} style={{background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:20,padding:"4px 10px",fontSize:11,color:"rgba(255,255,255,0.9)",fontWeight:500}}>{t}</span>
-                ))}
+                <span style={{background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:20,padding:"5px 12px",fontSize:12,color:"rgba(255,255,255,0.9)",fontWeight:500}}>🚚 Trenčiansky kraj</span>
+                <span style={{background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:20,padding:"5px 12px",fontSize:12,color:"rgba(255,255,255,0.9)",fontWeight:500}}>🚚 Žilinský kraj</span>
+                <span style={{background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:20,padding:"5px 12px",fontSize:12,color:"rgba(255,255,255,0.9)",fontWeight:500}}>🚚 Nitriansky kraj</span>
+                <span style={{background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:20,padding:"5px 12px",fontSize:12,color:"rgba(255,255,255,0.9)",fontWeight:500}}>🏭 Malý Kolačín 342, 018 51 Nová Dubnica</span>
+                <span style={{background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:20,padding:"5px 12px",fontSize:12,color:"rgba(255,255,255,0.9)",fontWeight:500}}>📞 +421 915 497 010 · +421 948 358 899</span>
+                <a href="mailto:obim@obim.sk" style={{background:"rgba(255,255,255,0.18)",border:"1px solid rgba(255,255,255,0.3)",borderRadius:20,padding:"5px 12px",fontSize:12,color:"#fff",fontWeight:600,textDecoration:"none"}}>✉️ obim@obim.sk</a>
               </div>
             </div>
 
@@ -553,9 +556,10 @@ function App() {
                 <div style={{fontSize:32,marginBottom:12}}>🏠</div>
                 <div style={{fontWeight:700,fontSize:18,color:"#0f172a",marginBottom:6}}>Som domácnosť</div>
                 <div style={{fontSize:13,color:"#64748b",lineHeight:1.6,marginBottom:14}}>Fyzická osoba · súkromná spotreba</div>
-                <div style={{background:"#fffbeb",borderRadius:8,padding:"10px 12px",fontSize:12,color:"#92400e",lineHeight:1.6,marginBottom:16}}>
+                <div style={{background:"#fffbeb",borderRadius:8,padding:"10px 12px",fontSize:12,color:"#92400e",lineHeight:1.7,marginBottom:16}}>
                   ⚠️ Momentálne len <strong>osobný odber v sklade</strong><br/>
-                  📍 Malý Kolačín 342 · 🕘 9:00 – 13:00
+                  📍 Malý Kolačín 342, 018 51 Nová Dubnica<br/>
+                  🕘 Po–Pi · 9:00 – 13:00
                 </div>
                 <div style={{background:"#16a34a",color:"#fff",borderRadius:8,padding:"12px 0",fontWeight:600,fontSize:14,textAlign:"center"}}>Pokračovať →</div>
               </div>
@@ -569,7 +573,7 @@ function App() {
                   HORECA · Maloobchod · Školy · Iný platca DPH
                 </div>
                 <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:8,padding:"10px 12px",fontSize:12,color:"#16a34a",fontWeight:600,marginBottom:16}}>
-                  ✓ Fakturácia · Veľkoobchodné ceny bez DPH
+                  🚚 Rozvoz priamo do vašej prevádzky · Po–Pi
                 </div>
                 <div style={{background:"#16a34a",color:"#fff",borderRadius:8,padding:"12px 0",fontWeight:600,fontSize:14,textAlign:"center"}}>Pokračovať →</div>
               </div>
