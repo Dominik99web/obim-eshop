@@ -151,7 +151,7 @@ const initialProducts = [
   { id: 102, name: "Bazalka zelená rezaná", unit: "kg", price: 19.99, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1618375569909-3c8616cf7733?w=300&q=80", origin: "KE", grade: "1.tr.", available: true },
   { id: 103, name: "Citrónová tráva voľná", unit: "kg", price: 19.99, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?w=300&q=80", origin: "TH", grade: "1.tr.", available: true },
   { id: 104, name: "Koriander", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
-  { id: 105, name: "Kôpor", unit: "kg", price: 8.99, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
+  { id: 105, name: "Kôpor", unit: "kg", price: 8.99, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1535189043414-47a3c49a0bed?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
   { id: 106, name: "Ligurček lekársky", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
   { id: 107, name: "Mäta rezaná", unit: "kg", price: 17.90, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
   { id: 108, name: "Oregano", unit: "kg", price: 19.90, category: "Bylinky a koreniny", img: "https://images.unsplash.com/photo-1628556270448-4d4e4148e1b1?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
@@ -169,8 +169,8 @@ const initialProducts = [
   // HUBY
   { id: 119, name: "Hliva balená", unit: "kg", price: 4.29, category: "Huby", img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
   { id: 120, name: "Hliva čerstvá", unit: "kg", price: 3.49, category: "Huby", img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
-  { id: 121, name: "Hríby sušené dubové 20g", unit: "ks", price: 2.09, category: "Huby", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
-  { id: 122, name: "Sušené dubáky 20g", unit: "ks", price: 2.09, category: "Huby", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 121, name: "Hríby sušené dubové 20g", unit: "ks", price: 2.09, category: "Huby", img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 122, name: "Sušené dubáky 20g", unit: "ks", price: 2.09, category: "Huby", img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
   { id: 123, name: "Šampiňón hnedý", unit: "kg", price: 3.49, category: "Huby", img: "https://images.unsplash.com/photo-1552825897-bb4e4b4afa01?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
   { id: 124, name: "Šampiňóny bal. 250g", unit: "ks", price: 1.09, category: "Huby", img: "https://images.unsplash.com/photo-1552825897-bb4e4b4afa01?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
   { id: 125, name: "Šampiňóny hnedé bal. 250g", unit: "ks", price: 1.29, category: "Huby", img: "https://images.unsplash.com/photo-1552825897-bb4e4b4afa01?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
@@ -539,7 +539,7 @@ function App() {
               <div style={{fontSize:34,fontWeight:800,color:"#fff",letterSpacing:"-1px",lineHeight:1.15,marginBottom:10}}>Čerstvé ovocie<br/>a zelenina</div>
               <div style={{fontSize:15,color:"rgba(255,255,255,0.75)",marginBottom:24,maxWidth:420,lineHeight:1.6}}>Čerstvo, kvalitne a rýchlo. Objednajte si tovar online priamo z pohodlia domova alebo kancelárie.</div>
               <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
-                {["🚚 Trenčiansky kraj","🚚 Žilinský kraj","🚚 Nitriansky kraj","🏭 Malý Kolačín 342","📞 +421 915 497 010 · +421 915 497 010 · +421 948 358 899"].map(t => (
+                {["🚚 Trenčiansky kraj","🚚 Žilinský kraj","🚚 Nitriansky kraj","🏭 Malý Kolačín 342","📞 +421 915 497 010  ·  +421 948 358 899"].map(t => (
                   <span key={t} style={{background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:20,padding:"5px 12px",fontSize:12,color:"rgba(255,255,255,0.85)",fontWeight:500}}>{t}</span>
                 ))}
               </div>
@@ -794,7 +794,7 @@ function App() {
                 {filtered.map(p => {
                   const qty = quantities[p.id] || 1;
                   return (
-                    <div key={p.id} style={{ ...S.card, ...(p.available ? {} : S.cardUnavailable) }}>
+                    <div key={p.id} style={{ ...S.card, ...(p.available ? {} : S.cardUnavailable), ...(cart.find(i => i.id === p.id) ? {border:"2px solid #16a34a", boxShadow:"0 0 0 1px #16a34a"} : {}) }}>
                       {p.img ? (
                         <img src={p.img} alt={p.name} style={S.cardImg} onError={e => { e.target.style.display="none"; e.target.nextSibling.style.display="flex"; }} />
                       ) : null}
@@ -842,7 +842,11 @@ function App() {
                                 />
                               )}
                             </div>
-                            <button style={S.addBtn} onClick={() => addToCart(p)}>Pridať do košíka</button>
+                            <button 
+                            style={{...S.addBtn, background: cart.find(i => i.id === p.id) ? "#15803d" : C.green}}
+                            onClick={() => addToCart(p)}>
+                            {cart.find(i => i.id === p.id) ? `✓ V košíku (${cart.find(i => i.id === p.id).qty} ${p.unit})` : "Pridať do košíka"}
+                          </button>
                           </>
                         )}
                         <button style={{background:"none",border:"none",color:C.gray,fontSize:12,cursor:"pointer",padding:"4px 0",textAlign:"left"}} onClick={() => setExpandedId(expandedId === p.id ? null : p.id)}>
