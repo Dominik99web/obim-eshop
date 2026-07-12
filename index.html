@@ -527,55 +527,65 @@ function App() {
       {/* SHOP */}
       {/* CUSTOMER TYPE SELECTOR */}
       {!customerType && view === "shop" && (
-        <div style={{minHeight:"100vh",background:"#f8fafc",display:"flex",alignItems:"center",justifyContent:"center",padding:"16px 20px"}}>
-          <div style={{maxWidth:640,width:"100%"}}>
-            {/* HERO BANNER */}
-            <div style={{background:`linear-gradient(135deg, ${C.greenDark} 0%, ${C.green} 100%)`,borderRadius:20,padding:"36px 32px",marginBottom:32,color:"#fff",textAlign:"center",position:"relative",overflow:"hidden"}}>
-              <div style={{position:"absolute",top:-20,right:-20,fontSize:120,opacity:0.08}}>🥦</div>
-              <div style={{position:"absolute",bottom:-20,left:-20,fontSize:100,opacity:0.06}}>🍎</div>
-              <div style={{fontSize:13,fontWeight:600,letterSpacing:"2px",textTransform:"uppercase",opacity:0.7,marginBottom:12}}>Obim s.r.o. — od roku 1999</div>
-              <div style={{fontSize:28,fontWeight:900,marginBottom:10,lineHeight:1.2,letterSpacing:"-0.5px"}}>
-                Vitajte v našom<br/>novom e-shope! 🎉
-              </div>
-              <div style={{fontSize:15,opacity:0.85,maxWidth:420,margin:"0 auto 20px",lineHeight:1.6}}>
-                Čerstvé ovocie a zelenina priamo od nás — pohodlne z domu alebo kancelárie. Objednajte si tovar online a my sa postaráme o zvyšok.
-              </div>
-              <div style={{display:"flex",gap:10,flexWrap:"wrap",marginTop:4}}>
-                <div style={S.heroNote}>🚚 Trenčiansky kraj</div>
-                <div style={S.heroNote}>🚚 Žilinský kraj</div>
-                <div style={S.heroNote}>🚚 Nitriansky kraj</div>
-                <div style={S.heroNote}>🏭 Malý Kolačín 342</div>
-                <div style={S.heroNote}>📞 0948 816 686</div>
-              </div>
-            </div>
+        <div style={{minHeight:"100vh",background:"#fff",display:"flex",flexDirection:"column"}}>
 
-            {/* DIVIDER */}
-            <div style={{marginBottom:12}}>
-              <div style={{fontSize:15,fontWeight:600,color:C.dark}}>Ako chcete nakupovať?</div>
-            </div>
-            <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
-              <div onClick={() => { setCustomerType("domacnost"); setFirmReady(true); window.scrollTo(0,0); }} style={{background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:12,padding:16,cursor:"pointer",transition:"all 0.15s",display:"flex",alignItems:"center",gap:14}}>
-                <div style={{width:42,height:42,background:"rgba(22,163,74,0.15)",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>🏠</div>
-                <div style={{flex:1}}>
-                  <div style={{fontWeight:700,fontSize:14,color:"#f1f5f9",marginBottom:2}}>Som domácnosť</div>
-                  <div style={{fontSize:11,color:"#64748b"}}>Osobný odber · Malý Kolačín · 9:00–13:00</div>
-                </div>
-                <div style={{color:"#475569",fontSize:18}}>→</div>
-              </div>
-              <div onClick={() => setCustomerType("firma")} style={{background:"rgba(22,163,74,0.08)",border:"1px solid rgba(22,163,74,0.2)",borderRadius:12,padding:16,cursor:"pointer",transition:"all 0.15s",display:"flex",alignItems:"center",gap:14}}>
-                <div style={{width:42,height:42,background:"rgba(22,163,74,0.15)",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>🏢</div>
-                <div style={{flex:1}}>
-                  <div style={{fontWeight:700,fontSize:14,color:"#f1f5f9",marginBottom:2}}>B2B / Firemný odber</div>
-                  <div style={{fontSize:11,color:"#64748b"}}>Reštaurácie · Hotely · HORECA · Školy · Fakturácia</div>
-                </div>
-                <div style={{color:"#475569",fontSize:18}}>→</div>
+          {/* TOP HALF - zelena */}
+          <div style={{background:"#16a34a",flex:"0 0 auto",padding:"48px 40px 40px",position:"relative",overflow:"hidden"}}>
+            <div style={{position:"absolute",top:-60,right:-60,width:300,height:300,borderRadius:"50%",background:"rgba(255,255,255,0.04)"}}></div>
+            <div style={{position:"absolute",bottom:-80,left:-40,width:240,height:240,borderRadius:"50%",background:"rgba(255,255,255,0.03)"}}></div>
+            <div style={{maxWidth:860,margin:"0 auto",position:"relative"}}>
+              <img src="https://obim.sk/wp-content/uploads/2025/11/Obim_LOGO.png" alt="Obim" style={{height:36,marginBottom:20,filter:"brightness(0) invert(1)"}} onError={e => e.target.style.display="none"} />
+              <div style={{fontSize:36,fontWeight:800,color:"#fff",letterSpacing:"-1px",lineHeight:1.15,marginBottom:12}}>Čerstvé ovocie<br/>a zelenina</div>
+              <div style={{fontSize:15,color:"rgba(255,255,255,0.75)",marginBottom:28,maxWidth:420,lineHeight:1.6}}>Veľkoobchodné dodávky pre reštaurácie, hotely, školy a maloobchod.</div>
+              <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+                {["🚚 Trenčiansky kraj","🚚 Žilinský kraj","🚚 Nitriansky kraj","🏭 Malý Kolačín 342","📞 0948 816 686  ·  0915 497 010"].map(t => (
+                  <span key={t} style={{background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:20,padding:"5px 12px",fontSize:12,color:"rgba(255,255,255,0.85)",fontWeight:500}}>{t}</span>
+                ))}
               </div>
             </div>
           </div>
+
+          {/* BOTTOM HALF - výber */}
+          <div style={{flex:"1 1 auto",padding:"40px 40px",background:"#fff",display:"flex",alignItems:"center"}}>
+            <div style={{maxWidth:860,margin:"0 auto",width:"100%"}}>
+              <div style={{fontSize:13,fontWeight:600,color:"#94a3b8",letterSpacing:"1px",textTransform:"uppercase",marginBottom:20}}>Ako chcete nakupovať?</div>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16}}>
+
+                {/* Domácnosť */}
+                <div onClick={() => { setCustomerType("domacnost"); setFirmReady(true); window.scrollTo(0,0); }}
+                  style={{border:"1.5px solid #e2e8f0",borderRadius:14,padding:24,cursor:"pointer",transition:"all 0.2s",background:"#fff"}}>
+                  <div style={{fontSize:28,marginBottom:14}}>🏠</div>
+                  <div style={{fontWeight:700,fontSize:17,color:"#0f172a",marginBottom:6}}>Som domácnosť</div>
+                  <div style={{fontSize:13,color:"#64748b",lineHeight:1.6,marginBottom:14}}>Fyzická osoba · súkromná spotreba</div>
+                  <div style={{background:"#fffbeb",borderRadius:8,padding:"10px 12px",fontSize:12,color:"#92400e",lineHeight:1.6,marginBottom:16}}>
+                    ⚠️ Momentálne len <strong>osobný odber v sklade</strong><br/>
+                    📍 Malý Kolačín 342 · 🕘 9:00 – 13:00
+                  </div>
+                  <div style={{background:"#16a34a",color:"#fff",borderRadius:8,padding:"11px 0",fontWeight:600,fontSize:14,textAlign:"center"}}>Pokračovať →</div>
+                </div>
+
+                {/* B2B */}
+                <div onClick={() => setCustomerType("firma")}
+                  style={{border:"1.5px solid #e2e8f0",borderRadius:14,padding:24,cursor:"pointer",transition:"all 0.2s",background:"#fff"}}>
+                  <div style={{fontSize:28,marginBottom:14}}>🏢</div>
+                  <div style={{fontWeight:700,fontSize:17,color:"#0f172a",marginBottom:6}}>B2B / Firemný odber</div>
+                  <div style={{fontSize:13,color:"#64748b",lineHeight:1.6,marginBottom:14}}>
+                    Reštaurácie · Hotely · HORECA<br/>
+                    Maloobchod · Školy · Iný platca DPH
+                  </div>
+                  <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:8,padding:"10px 12px",fontSize:12,color:"#16a34a",fontWeight:600,marginBottom:16}}>
+                    ✓ Fakturácia · Veľkoobchodné ceny bez DPH
+                  </div>
+                  <div style={{background:"#16a34a",color:"#fff",borderRadius:8,padding:"11px 0",fontWeight:600,fontSize:14,textAlign:"center"}}>Pokračovať →</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </div>
       )}
 
-      {/* FIRMA — existujúci alebo nový zákazník */}
       {customerType === "firma" && !firmReady && view === "shop" && (
         <div style={{minHeight:"100vh",background:"#0f172a",display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
           <div style={{maxWidth:480,width:"100%"}}>
