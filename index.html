@@ -527,7 +527,7 @@ function App() {
       {/* SHOP */}
       {/* CUSTOMER TYPE SELECTOR */}
       {!customerType && view === "shop" && (
-        <div style={{height:"100vh",background:"#f8fafc",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",padding:"0 24px"}}>
+        <div style={{height:"calc(100vh - 64px)",background:"#f8fafc",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",padding:"0 24px"}}>
           <div style={{width:"100%",maxWidth:780}}>
 
             {/* INFO BANNER - kompaktný */}
@@ -566,8 +566,7 @@ function App() {
                 <div style={{fontSize:32,marginBottom:12}}>🏢</div>
                 <div style={{fontWeight:700,fontSize:18,color:"#0f172a",marginBottom:6}}>B2B / Firemný odber</div>
                 <div style={{fontSize:13,color:"#64748b",lineHeight:1.6,marginBottom:14}}>
-                  HORECA · Maloobchod · Školy · Iný platca DPH<br/>
-                  Maloobchod · Školy · Iný platca DPH
+                  HORECA · Maloobchod · Školy · Iný platca DPH
                 </div>
                 <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:8,padding:"10px 12px",fontSize:12,color:"#16a34a",fontWeight:600,marginBottom:16}}>
                   ✓ Fakturácia · Veľkoobchodné ceny bez DPH
