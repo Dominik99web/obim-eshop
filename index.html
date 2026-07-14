@@ -252,8 +252,13 @@ const getDPH = (category) => {
   return 0.05;
 };
 
+// Príplatok pre domácnosti (maloobchodná marža)
+const DOMACNOST_MARKUP = 0.20; // +20%
+
 const getPriceWithDPH = (price, category) => {
-  return price * (1 + getDPH(category));
+  // Domácnosť: základná cena + 20% príplatok + DPH
+  const withMarkup = price * (1 + DOMACNOST_MARKUP);
+  return withMarkup * (1 + getDPH(category));
 };
 
 const CATEGORIES = ["Všetko", "Ovocie", "Zelenina", "Šaláty", "Bylinky a koreniny", "Huby", "Zemiaky", "Vakuové produkty", "Vajcia", "Sezónne produkty"];
@@ -408,6 +413,7 @@ function App() {
   const [firmData, setFirmData] = useState({ nazov: "", mesto: "", ico: "", dic: "", adresa: "", psc: "", kontakt: "", email: "", telefon: "" });
   const [b2bPass, setB2bPass] = useState("");
   const [b2bError, setB2bError] = useState("");
+  const [regDone, setRegDone] = useState(false);
   const [firmReady, setFirmReady] = useState(false);
 
   const [pickupSlot, setPickupSlot] = useState("");
@@ -656,7 +662,32 @@ function App() {
         </div>
       )}
 
-      {customerType === "firma" && !firmReady && view === "shop" && (
+      {/* ĎAKOVNÁ OBRAZOVKA PO REGISTRÁCII */}
+      {customerType === "firma" && firmType === "novy" && regDone && view === "shop" && (
+        <div style={{minHeight:"calc(100vh - 64px)",background:"#f8fafc",display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+          <div style={{maxWidth:520,width:"100%",background:"#fff",borderRadius:16,padding:"40px 36px",boxShadow:"0 4px 24px rgba(0,0,0,0.08)",textAlign:"center"}}>
+            <div style={{width:72,height:72,background:"#f0fdf4",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:36,margin:"0 auto 20px"}}>✅</div>
+            <div style={{fontSize:24,fontWeight:800,color:"#0f172a",marginBottom:12}}>Ďakujeme za prejavený záujem!</div>
+            <div style={{fontSize:15,color:"#475569",lineHeight:1.7,marginBottom:24}}>
+              Vašu registráciu sme úspešne prijali. Náš tím vás bude <strong>obratom kontaktovať</strong> ohľadom vašich prihlasovacích údajov a hesla, aby sme vám umožnili vstup do e-shopu.
+            </div>
+            <div style={{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:10,padding:"16px 20px",marginBottom:24,textAlign:"left"}}>
+              <div style={{fontSize:12,fontWeight:600,color:"#94a3b8",textTransform:"uppercase",letterSpacing:"0.5px",marginBottom:8}}>Registrovaná prevádzka</div>
+              <div style={{fontSize:15,fontWeight:700,color:"#0f172a"}}>{firmData.nazov}</div>
+              <div style={{fontSize:13,color:"#64748b",marginTop:2}}>{firmData.mesto} · {firmData.email}</div>
+            </div>
+            <div style={{fontSize:13,color:"#94a3b8",marginBottom:20}}>
+              Máte otázky? Kontaktujte nás na <a href="mailto:obim@obim.sk" style={{color:"#16a34a"}}>obim@obim.sk</a> alebo +421 915 497 010
+            </div>
+            <button onClick={() => { setCustomerType(null); setFirmType(null); setRegDone(false); setFirmData({ nazov: "", mesto: "", ico: "", dic: "", adresa: "", psc: "", kontakt: "", email: "", telefon: "" }); }}
+              style={{background:"#16a34a",color:"#fff",border:"none",borderRadius:10,padding:"12px 32px",fontSize:14,fontWeight:600,cursor:"pointer"}}>
+              Späť na úvod
+            </button>
+          </div>
+        </div>
+      )}
+
+      {customerType === "firma" && !firmReady && !regDone && view === "shop" && (
         <div style={{minHeight:"100vh",background:"#f8fafc",display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
           <div style={{maxWidth:480,width:"100%",background:"#fff",borderRadius:16,padding:32,boxShadow:"0 4px 24px rgba(0,0,0,0.08)"}}>
             <div style={{marginBottom:24}}>
@@ -802,10 +833,24 @@ function App() {
                   </div>
                 </div>
                 <button
-                  style={{width:"100%",background: (firmData.nazov && firmData.ico && firmData.adresa && firmData.mesto && firmData.kontakt && firmData.email && firmData.telefon) ? "#2a7a3b" : "#ccc",color:"#fff",border:"none",borderRadius:10,padding:"13px 0",fontSize:16,fontWeight:700,cursor:"pointer",marginTop:16}}
+                  style={{width:"100%",background: (firmData.nazov && firmData.ico && firmData.adresa && firmData.mesto && firmData.kontakt && firmData.email && firmData.telefon) ? "#16a34a" : "#ccc",color:"#fff",border:"none",borderRadius:10,padding:"13px 0",fontSize:16,fontWeight:700,cursor:"pointer",marginTop:16}}
                   disabled={!(firmData.nazov && firmData.ico && firmData.adresa && firmData.mesto && firmData.kontakt && firmData.email && firmData.telefon)}
-                  onClick={() => { setFirmReady(true); window.scrollTo(0,0); }}>
-                  Pokračovať do e-shopu →
+                  onClick={() => {
+                    // Odoslanie registrácie na email
+                    emailjs.send("service_1ru9fi8", "template_xejeb4d", {
+                      customer_name: "🆕 NOVÁ REGISTRÁCIA: " + firmData.nazov,
+                      contact_person: firmData.kontakt,
+                      customer_type: "Nový B2B zákazník — čaká na schválenie",
+                      phone: firmData.telefon,
+                      delivery_time: "—",
+                      delivery_address: `${firmData.adresa}, ${firmData.mesto} ${firmData.psc}`,
+                      order_items: `<tr><td style="padding:10px;">IČO: ${firmData.ico}</td><td style="padding:10px;">DIČ: ${firmData.dic || "—"}</td><td style="padding:10px;">Email: ${firmData.email}</td></tr>`,
+                      note: "Nový zákazník žiada o prístup do e-shopu. Kontaktujte ho ohľadom prihlasovacích údajov.",
+                    }).then(() => {}, (err) => console.error(err));
+                    setRegDone(true);
+                    window.scrollTo(0,0);
+                  }}>
+                  Odoslať registráciu →
                 </button>
                 <div style={{fontSize:12,color:"#6b7280",textAlign:"center",marginTop:8}}>Vaše údaje použijeme len pre fakturáciu</div>
                 <button onClick={() => setFirmType(null)} style={{width:"100%",background:"none",border:"none",color:"#6b7280",fontSize:13,cursor:"pointer",marginTop:6,padding:"6px 0"}}>← Späť</button>
