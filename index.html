@@ -6,6 +6,12 @@
   <title>Obim s.r.o. - Veľkoobchod ovocia a zeleniny</title>
   <meta name="theme-color" content="#16a34a" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init({ publicKey: "u4fjDJoDEG2qdsQqE" });
+    })();
+  </script>
 </head>
 <body style="margin:0;padding:0;">
   <div id="root"></div>
@@ -465,6 +471,55 @@ function App() {
     const paymentLabel = customerType === "domacnost" ? "Hotovosť na sklade" :
       firmType === "existujuci" ? "Hotovosť / Osobitné podmienky" : "Hotovosť pri dodávke";
     const order = { id: Date.now(), date: new Date().toLocaleString("sk-SK"), items: [...cart], total: cartTotal, ...orderForm, payment: paymentLabel, customerType, firmType, firmName: firmData.nazov, firmMesto: firmData.mesto, firmICO: firmData.ico, pickupSlot, status: "Nová" };
+
+    // Zostavenie zoznamu tovaru pre email
+    const itemsText = cart.map(i => {
+      const mnozstvo = i.pieceNote
+        ? `${i.qty} ${i.unit}  ⚠️ ZÁKAZNÍK CHCE: ${i.pieceNote}`
+        : `${i.qty} ${i.unit}`;
+      return `• ${i.name}  —  ${mnozstvo}`;
+    }).join("\n");
+
+    // Zostavenie adresy / termínu
+    let terminText = "";
+    let adresaText = "—";
+    if (customerType === "domacnost") {
+      terminText = `Osobný odber v sklade · ${pickupSlot || ""}`;
+      adresaText = "Malý Kolačín 342, 018 51 Nová Dubnica (osobný odber)";
+    } else {
+      if (orderForm.deliveryType === "sklad") {
+        terminText = "Osobný odber v sklade";
+        adresaText = "Malý Kolačín 342, 018 51 Nová Dubnica (osobný odber)";
+      } else {
+        terminText = `Rozvoz · ${orderForm.deliverySlot || ""}`;
+        adresaText = firmType === "novy"
+          ? `${orderForm.address || ""}, ${orderForm.city || ""} ${orderForm.zip || ""}`
+          : `${firmData.nazov || ""} — ${firmData.mesto || ""} (adresa v systéme)`;
+      }
+    }
+
+    const custName = customerType === "domacnost"
+      ? orderForm.name
+      : `${firmData.nazov || orderForm.name} (${orderForm.name})`;
+
+    const custType = customerType === "domacnost"
+      ? "Domácnosť"
+      : firmType === "existujuci" ? "B2B — existujúci zákazník" : "B2B — nový zákazník";
+
+    // Odoslanie emailu cez EmailJS
+    emailjs.send("service_1ru9fi8", "template_xejeb4d", {
+      customer_name: custName,
+      customer_type: custType,
+      phone: orderForm.phone,
+      delivery_time: terminText,
+      delivery_address: adresaText,
+      order_items: itemsText,
+      note: orderForm.note || "—",
+    }).then(
+      () => { console.log("Email odoslaný"); },
+      (err) => { console.error("Email zlyhal:", err); }
+    );
+
     setOrders(o => [order, ...o]);
     setCart([]);
     setOrderForm({ name: "", phone: "", email: "", address: "", city: "", zip: "", payment: "dobierka", note: "", deliveryType: "", deliveryCity: "", deliverySlot: "" });
