@@ -472,13 +472,13 @@ function App() {
       firmType === "existujuci" ? "Hotovosť / Osobitné podmienky" : "Hotovosť pri dodávke";
     const order = { id: Date.now(), date: new Date().toLocaleString("sk-SK"), items: [...cart], total: cartTotal, ...orderForm, payment: paymentLabel, customerType, firmType, firmName: firmData.nazov, firmMesto: firmData.mesto, firmICO: firmData.ico, pickupSlot, status: "Nová" };
 
-    // Zostavenie zoznamu tovaru pre email
+    // Zostavenie zoznamu tovaru pre email - HTML riadky tabuľky
     const itemsText = cart.map(i => {
-      const mnozstvo = i.pieceNote
-        ? `${i.qty} ${i.unit}  ⚠️ ZÁKAZNÍK CHCE: ${i.pieceNote}`
+      const objednane = i.pieceNote
+        ? `${i.qty} ${i.unit}<br><span style="color:#c00;font-weight:bold;font-size:14px;">CHCE: ${i.pieceNote}</span>`
         : `${i.qty} ${i.unit}`;
-      return `• ${i.name}  —  ${mnozstvo}`;
-    }).join("\n");
+      return `<tr style="border-bottom:1px solid #ccc;"><td style="padding:12px 6px;font-weight:bold;">${i.name}</td><td style="padding:12px 6px;text-align:center;">${objednane}</td><td style="padding:12px 6px;border-left:1px solid #ccc;">&nbsp;</td></tr>`;
+    }).join("");
 
     // Zostavenie adresy / termínu
     let terminText = "";
