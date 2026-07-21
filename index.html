@@ -12,6 +12,13 @@
       emailjs.init({ publicKey: "u4fjDJoDEG2qdsQqE" });
     })();
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    var supabaseClient = window.supabase.createClient(
+      "https://skrenrasgyejcvvgfdwh.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrcmVucmFzZ3llamN2dmdmZHdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ1OTI2MDcsImV4cCI6MjEwMDE2ODYwN30.oIkeWmxk-Di_cyERfIcHu-URf8sCEYlNJ62Rxr8SfF8"
+    );
+  </script>
 </head>
 <body style="margin:0;padding:0;">
   <div id="root"></div>
@@ -19,10 +26,9 @@
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
   <script type="text/babel" data-presets="react">
-const { useState } = React;
+const { useState, useEffect } = React;
 
 
-const ADMIN_PASSWORD = "admin123";
 const B2B_PASSWORD = "obim2025"; // Heslo pre existujucich B2B zakaznikov
 
 const DELIVERY_CITIES = [
@@ -422,8 +428,10 @@ function App() {
   const [orderDone, setOrderDone] = useState(false);
   const [orders, setOrders] = useState([]);
   const [adminLoggedIn, setAdminLoggedIn] = useState(false);
+  const [adminEmail, setAdminEmail] = useState("");
   const [adminPass, setAdminPass] = useState("");
   const [adminError, setAdminError] = useState("");
+  const [ordersLoading, setOrdersLoading] = useState(false);
   const [adminTab, setAdminTab] = useState("orders");
   const [newProduct, setNewProduct] = useState({ name: "", unit: "kg", price: "", category: "Ovocie", img: "" });
   const [expandedId, setExpandedId] = useState(null);
@@ -495,7 +503,6 @@ function App() {
     setFormErrors({});
     const paymentLabel = customerType === "domacnost" ? "Hotovosť na sklade" :
       firmType === "existujuci" ? "Hotovosť / Osobitné podmienky" : "Hotovosť pri dodávke";
-    const order = { id: Date.now(), date: new Date().toLocaleString("sk-SK"), items: [...cart], total: cartTotal, ...orderForm, payment: paymentLabel, customerType, firmType, firmName: firmData.nazov, firmMesto: firmData.mesto, firmICO: firmData.ico, pickupSlot, status: "Nová" };
 
     // Zostavenie zoznamu tovaru pre email - HTML riadky tabuľky
     const itemsText = cart.map(i => {
@@ -545,10 +552,79 @@ function App() {
       (err) => { console.error("Email zlyhal:", err); }
     );
 
-    setOrders(o => [order, ...o]);
+    // Uloženie objednávky do databázy (Supabase)
+    supabaseClient.from("orders").insert({
+      customer_type: custType,
+      company_name: firmData.nazov || null,
+      contact_person: custName,
+      ico: firmData.ico || null,
+      dic: firmData.dic || null,
+      address: adresaText,
+      email: orderForm.email || null,
+      phone: orderForm.phone,
+      delivery_slot: terminText,
+      items: cart,
+      total_price: cartTotal,
+      status: "Nová",
+      notes: orderForm.note || null,
+      payment: paymentLabel,
+    }).then(({ error }) => {
+      if (error) console.error("Chyba pri ukladaní objednávky do databázy:", error);
+    });
+
     setCart([]);
     setOrderForm({ name: "", phone: "", email: "", address: "", city: "", zip: "", payment: "dobierka", note: "", deliveryType: "", deliveryCity: "", deliverySlot: "" });
     setOrderDone(true);
+  };
+
+  const fetchOrders = async () => {
+    setOrdersLoading(true);
+    const { data, error } = await supabaseClient
+      .from("orders")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (!error && data) {
+      setOrders(data.map(row => ({
+        id: row.id,
+        date: new Date(row.created_at).toLocaleString("sk-SK"),
+        name: row.contact_person,
+        phone: row.phone,
+        email: row.email,
+        deliverySlotText: row.delivery_slot,
+        payment: row.payment,
+        note: row.notes,
+        total: row.total_price || 0,
+        status: row.status,
+        items: row.items || [],
+      })));
+    } else if (error) {
+      console.error("Chyba pri načítaní objednávok:", error);
+    }
+    setOrdersLoading(false);
+  };
+
+  useEffect(() => {
+    if (adminLoggedIn) fetchOrders();
+  }, [adminLoggedIn]);
+
+  const updateOrderStatus = async (id, newStatus) => {
+    setOrders(os => os.map(x => x.id === id ? { ...x, status: newStatus } : x));
+    const { error } = await supabaseClient.from("orders").update({ status: newStatus }).eq("id", id);
+    if (error) console.error("Chyba pri zmene stavu objednávky:", error);
+  };
+
+  const handleAdminLogin = async () => {
+    const { error } = await supabaseClient.auth.signInWithPassword({ email: adminEmail, password: adminPass });
+    if (error) { setAdminError("Nesprávny email alebo heslo"); return; }
+    setAdminError("");
+    setAdminLoggedIn(true);
+  };
+
+  const handleAdminLogout = async () => {
+    await supabaseClient.auth.signOut();
+    setAdminLoggedIn(false);
+    setAdminPass("");
+    setAdminEmail("");
   };
 
   const removeDiacritics = (str) => {
@@ -1185,19 +1261,21 @@ function App() {
           <div style={S.adminLogin}>
             <div style={{ fontSize: 48, marginBottom: 12 }}>🔐</div>
             <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 20 }}>Admin prístup</div>
-            <label style={S.label}>Heslo</label>
+            <label style={S.label}>Email</label>
+            <input type="email" style={S.input} value={adminEmail} onChange={e => setAdminEmail(e.target.value)}
+              placeholder="admin@obim.sk" />
+            <label style={{ ...S.label, marginTop: 12 }}>Heslo</label>
             <input type="password" style={S.input} value={adminPass} onChange={e => setAdminPass(e.target.value)}
-              onKeyDown={e => { if (e.key === "Enter") { if (adminPass === ADMIN_PASSWORD) { setAdminLoggedIn(true); setAdminError(""); } else setAdminError("Nesprávne heslo"); } }}
+              onKeyDown={e => { if (e.key === "Enter") handleAdminLogin(); }}
               placeholder="Zadajte heslo" />
             {adminError && <div style={{ color: C.red, marginTop: 8, fontSize: 14 }}>{adminError}</div>}
-            <button style={{ ...S.submitBtn, marginTop: 16 }} onClick={() => { if (adminPass === ADMIN_PASSWORD) { setAdminLoggedIn(true); setAdminError(""); } else setAdminError("Nesprávne heslo"); }}>Prihlásiť sa</button>
-            <div style={{ marginTop: 12, fontSize: 12, color: C.gray }}>Demo heslo: admin123</div>
+            <button style={{ ...S.submitBtn, marginTop: 16 }} onClick={handleAdminLogin}>Prihlásiť sa</button>
           </div>
         ) : (
           <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 20px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
               <div style={S.sectionTitle}>⚙️ Admin panel</div>
-              <button style={{ padding: "6px 14px", borderRadius: 6, border: "none", cursor: "pointer", background: C.redLight, color: C.red, fontWeight: 600 }} onClick={() => { setAdminLoggedIn(false); setAdminPass(""); }}>Odhlásiť</button>
+              <button style={{ padding: "6px 14px", borderRadius: 6, border: "none", cursor: "pointer", background: C.redLight, color: C.red, fontWeight: 600 }} onClick={handleAdminLogout}>Odhlásiť</button>
             </div>
             <div style={{ display: "flex", gap: 10, marginBottom: 24 }}>
               {["orders", "products"].map(t => (
@@ -1209,8 +1287,13 @@ function App() {
 
             {adminTab === "orders" && (
               <div style={S.adminSection}>
-                <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 14 }}>Objednávky ({orders.length})</div>
-                {orders.length === 0 ? (
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+                  <div style={{ fontWeight: 700, fontSize: 17 }}>Objednávky ({orders.length})</div>
+                  <button style={{ ...S.actionBtn, background: "#f0fdf4", color: C.green }} onClick={fetchOrders}>🔄 Obnoviť</button>
+                </div>
+                {ordersLoading ? (
+                  <div style={{ color: C.gray, padding: "20px 0", textAlign: "center" }}>Načítavam objednávky...</div>
+                ) : orders.length === 0 ? (
                   <div style={{ color: C.gray, padding: "20px 0", textAlign: "center" }}>Žiadne objednávky zatiaľ.</div>
                 ) : (
                   <div style={{display:"flex",flexDirection:"column",gap:16}}>
@@ -1223,15 +1306,15 @@ function App() {
                             <div style={{fontWeight:700,fontSize:15}}>{o.name}</div>
                             <div style={{fontSize:13,color:"#64748b"}}>{o.phone}</div>
                             {o.email && <div style={{fontSize:13,color:"#64748b"}}>{o.email}</div>}
-                            <div style={{fontSize:13}}>{o.deliveryType === "sklad" ? `🏭 Sklad ${o.pickupSlot ? "— " + o.pickupSlot : ""}` : `🚚 Dovoz — ${o.deliverySlot}`}</div>
+                            <div style={{fontSize:13}}>{o.deliverySlotText || "—"}</div>
                             <div style={{fontSize:13}}>{o.payment}</div>
                             {o.note && <div style={{fontSize:13,color:"#92400e",background:"#fffbeb",padding:"2px 8px",borderRadius:6}}>📝 {o.note}</div>}
                           </div>
                           <div style={{display:"flex",gap:8,alignItems:"center"}}>
                             <div style={{fontWeight:700,fontSize:16,color:C.dark}}>{o.total.toFixed(2)} €</div>
                             <span style={{ ...S.badge, ...(o.status === "Nová" ? S.badgeOrange : o.status === "Vybavená" ? S.badgeGreen : S.badgeGray) }}>{o.status}</span>
-                            <button style={{ ...S.actionBtn, background:"#f0fdf4", color: C.green }} onClick={() => setOrders(os => os.map(x => x.id === o.id ? { ...x, status: "Vybavená" } : x))}>✓ Vybaviť</button>
-                            <button style={{ ...S.actionBtn, background:"#f1f5f9", color: "#64748b" }} onClick={() => setOrders(os => os.map(x => x.id === o.id ? { ...x, status: "Zrušená" } : x))}>✕ Zrušiť</button>
+                            <button style={{ ...S.actionBtn, background:"#f0fdf4", color: C.green }} onClick={() => updateOrderStatus(o.id, "Vybavená")}>✓ Vybaviť</button>
+                            <button style={{ ...S.actionBtn, background:"#f1f5f9", color: "#64748b" }} onClick={() => updateOrderStatus(o.id, "Zrušená")}>✕ Zrušiť</button>
                           </div>
                         </div>
                         {/* Order items */}
