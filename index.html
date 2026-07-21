@@ -4,14 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Obim s.r.o. - Veľkoobchod ovocia a zeleniny</title>
-  <meta name="theme-color" content="#16a34a" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#1F4D3A" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
     (function() {
       emailjs.init({ publicKey: "u4fjDJoDEG2qdsQqE" });
     })();
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     var supabaseClient = window.supabase.createClient(
@@ -289,14 +290,17 @@ const getPriceWithDPH = (product) => {
 const CATEGORIES = ["Všetko", "Ovocie", "Zelenina", "Šaláty", "Bylinky a koreniny", "Huby", "Zemiaky", "Vakuové produkty", "Vajcia", "Sezónne produkty"];
 
 const C = {
-  green: "#16a34a", greenLight: "#22c55e", greenPale: "#f0fdf4",
-  greenDark: "#15803d", greenMid: "#dcfce7",
-  orange: "#f97316", orangeLight: "#fff7ed",
-  cream: "#ffffff", dark: "#0f172a",
-  gray: "#64748b", grayLight: "#f8fafc", grayMid: "#e2e8f0",
-  red: "#ef4444", redLight: "#fef2f2",
-  yellow: "#eab308", accent: "#0ea5e9",
+  green: "#1F4D3A", greenLight: "#2F6B4F", greenPale: "#EAF0EA",
+  greenDark: "#163B2C", greenMid: "#DCE7DE",
+  orange: "#9A6324", orangeLight: "#FBF3E7",
+  cream: "#ffffff", dark: "#171717",
+  gray: "#6B6963", grayLight: "#FAFAF9", grayMid: "#E4E2DD",
+  red: "#B3261E", redLight: "#FBECEB",
+  yellow: "#B8860B", accent: "#1F4D3A",
 };
+
+const FONT_DISPLAY = "'Space Grotesk', 'Segoe UI', sans-serif";
+const FONT_MONO = "'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace";
 
 // Category icons
 const CAT_ICONS = {
@@ -313,109 +317,109 @@ const CAT_ICONS = {
 };
 
 const S = {
-  app: { fontFamily: "'Inter', 'Segoe UI', -apple-system, sans-serif", minHeight: "100vh", background: "#f8fafc", color: C.dark },
+  app: { fontFamily: "'Inter', 'Segoe UI', -apple-system, sans-serif", minHeight: "100vh", background: C.grayLight, color: C.dark },
 
   // HEADER - čistý, profesionálny
-  header: { background: "#fff", borderBottom: "1px solid #e2e8f0", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 1px 3px rgba(0,0,0,0.06)" },
+  header: { background: "#fff", borderBottom: "1px solid " + C.grayMid, position: "sticky", top: 0, zIndex: 100 },
   headerInner: { maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 },
   logo: { display: "flex", alignItems: "center" },
   logoEmoji: { fontSize: 26 },
-  logoText: { fontSize: 19, fontWeight: 800, color: C.green, letterSpacing: "-0.3px" },
-  logoSub: { fontSize: 10, color: C.gray, display: "block", marginTop: -1 },
+  logoText: { fontFamily: FONT_DISPLAY, fontSize: 19, fontWeight: 600, color: C.dark, letterSpacing: "-0.2px" },
+  logoSub: { fontSize: 10, color: C.gray, display: "block", marginTop: -1, letterSpacing: "0.2px" },
   nav: { display: "flex", gap: 4, alignItems: "center" },
-  navBtn: { background: "transparent", border: "none", color: "#64748b", padding: "8px 14px", borderRadius: 8, cursor: "pointer", fontSize: 14, fontWeight: 500, transition: "all 0.15s" },
-  navBtnActive: { background: "#f0fdf4", color: C.green, fontWeight: 600 },
-  cartBtn: { background: C.green, border: "none", color: "#fff", padding: "10px 20px", borderRadius: 10, cursor: "pointer", fontSize: 14, fontWeight: 600, display: "flex", alignItems: "center", gap: 8, transition: "all 0.15s" },
-  cartBadge: { background: "rgba(255,255,255,0.25)", color: "#fff", borderRadius: 8, padding: "2px 8px", fontSize: 13, fontWeight: 700 },
+  navBtn: { background: "transparent", border: "none", color: C.gray, padding: "8px 14px", borderRadius: 6, cursor: "pointer", fontSize: 14, fontWeight: 500, transition: "all 0.15s" },
+  navBtnActive: { background: C.greenPale, color: C.green, fontWeight: 600 },
+  cartBtn: { fontFamily: FONT_DISPLAY, background: C.green, border: "none", color: "#fff", padding: "10px 20px", borderRadius: 6, cursor: "pointer", fontSize: 14, fontWeight: 500, display: "flex", alignItems: "center", gap: 8, transition: "all 0.15s" },
+  cartBadge: { fontFamily: FONT_MONO, background: "rgba(255,255,255,0.25)", color: "#fff", borderRadius: 4, padding: "2px 7px", fontSize: 12, fontWeight: 600 },
 
-  // HERO - minimalistický tmavý
-  hero: { background: `linear-gradient(135deg, #15803d 0%, #16a34a 100%)`, color: "#fff", padding: "32px 24px 36px", position: "relative", overflow: "hidden" },
-  heroTitle: { fontSize: 34, fontWeight: 800, marginBottom: 8, letterSpacing: "-0.8px", lineHeight: 1.2 },
-  heroSub: { fontSize: 15, color: "rgba(255,255,255,0.8)", marginBottom: 20, fontWeight: 400, maxWidth: 480 },
-  heroNote: { display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "7px 14px", fontSize: 13, fontWeight: 500, color: "#cbd5e1" },
+  // HERO - plochý, tmavý, bez gradientu
+  hero: { background: C.dark, color: "#fff", padding: "34px 24px 30px", position: "relative", overflow: "hidden", borderBottom: `1px solid ${C.green}` },
+  heroTitle: { fontFamily: FONT_DISPLAY, fontSize: 30, fontWeight: 600, marginBottom: 8, letterSpacing: "-0.4px", lineHeight: 1.2 },
+  heroSub: { fontSize: 15, color: "rgba(255,255,255,0.65)", marginBottom: 18, fontWeight: 400, maxWidth: 480 },
+  heroNote: { fontFamily: FONT_MONO, display: "inline-flex", alignItems: "center", gap: 10, fontSize: 12, fontWeight: 400, color: "rgba(255,255,255,0.55)", letterSpacing: "0.2px" },
 
   // SEARCH - čistý
-  searchWrap: { background: "#fff", borderBottom: "1px solid #e2e8f0", padding: "12px 24px", position: "sticky", top: 64, zIndex: 90 },
+  searchWrap: { background: "#fff", borderBottom: "1px solid " + C.grayMid, padding: "12px 24px", position: "sticky", top: 64, zIndex: 90 },
   searchInner: { maxWidth: 1280, margin: "0 auto" },
   searchBox: { position: "relative", maxWidth: 600 },
-  searchInput: { width: "100%", padding: "11px 44px 11px 40px", borderRadius: 10, border: "1.5px solid #e2e8f0", fontSize: 14, outline: "none", boxSizing: "border-box", background: "#f8fafc", color: C.dark, transition: "all 0.15s" },
-  searchIcon: { position: "absolute", left: 13, top: "50%", transform: "translateY(-50%)", fontSize: 16, pointerEvents: "none", color: "#94a3b8" },
+  searchInput: { width: "100%", padding: "11px 44px 11px 40px", borderRadius: 6, border: "1.5px solid " + C.grayMid, fontSize: 14, outline: "none", boxSizing: "border-box", background: C.grayLight, color: C.dark, transition: "all 0.15s" },
+  searchIcon: { position: "absolute", left: 13, top: "50%", transform: "translateY(-50%)", fontSize: 16, pointerEvents: "none", color: "#9A978F" },
   searchResults: { marginTop: 6, fontSize: 12, color: C.gray },
 
   // CATEGORY BAR - tabs štýl
-  catBar: { background: "#fff", borderBottom: "1px solid #e2e8f0", padding: "0 24px", overflowX: "auto", whiteSpace: "nowrap", scrollbarWidth: "none", position: "sticky", top: 113, zIndex: 89 },
+  catBar: { background: "#fff", borderBottom: "1px solid " + C.grayMid, padding: "0 24px", overflowX: "auto", whiteSpace: "nowrap", scrollbarWidth: "none", position: "sticky", top: 113, zIndex: 89 },
   catBarInner: { maxWidth: 1280, margin: "0 auto", display: "flex", gap: 0 },
-  catBtn: { display: "inline-flex", alignItems: "center", gap: 6, padding: "13px 16px", border: "none", background: "transparent", cursor: "pointer", fontSize: 13, fontWeight: 500, color: "#64748b", borderBottom: "2px solid transparent", whiteSpace: "nowrap", transition: "all 0.15s" },
+  catBtn: { display: "inline-flex", alignItems: "center", gap: 6, padding: "13px 16px", border: "none", background: "transparent", cursor: "pointer", fontSize: 13, fontWeight: 500, color: C.gray, borderBottom: "2px solid transparent", whiteSpace: "nowrap", transition: "all 0.15s" },
   catBtnActive: { color: C.dark, borderBottom: `2px solid ${C.green}`, fontWeight: 600 },
 
   // MAIN
   main: { maxWidth: 1280, margin: "0 auto", padding: "24px 24px 48px" },
   filterRow: { display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" },
-  filterBtn: { padding: "6px 14px", borderRadius: 20, border: "1.5px solid #e2e8f0", background: "#fff", color: C.gray, cursor: "pointer", fontSize: 13, fontWeight: 500 },
+  filterBtn: { padding: "6px 14px", borderRadius: 6, border: "1.5px solid " + C.grayMid, background: "#fff", color: C.gray, cursor: "pointer", fontSize: 13, fontWeight: 500 },
   filterBtnActive: { background: C.green, color: "#fff", borderColor: C.green },
 
-  // PRODUCT GRID - moderné karty
+  // PRODUCT GRID - čisté karty, ostrejšie hrany
   grid: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(210px, 1fr))", gap: 16 },
-  card: { background: "#fff", borderRadius: 12, overflow: "hidden", display: "flex", flexDirection: "column", border: "1px solid #e2e8f0", transition: "all 0.2s", cursor: "pointer" },
+  card: { background: "#fff", borderRadius: 6, overflow: "hidden", display: "flex", flexDirection: "column", border: "1px solid " + C.grayMid, transition: "all 0.2s", cursor: "pointer" },
   cardUnavailable: { opacity: 0.4 },
-  cardImgWrap: { position: "relative", width: "100%", height: 160, background: "#f1f5f9", overflow: "hidden" },
+  cardImgWrap: { position: "relative", width: "100%", height: 160, background: C.grayLight, overflow: "hidden" },
   cardImg: { width: "100%", height: 160, objectFit: "cover", transition: "transform 0.3s" },
-  cardImgPlaceholder: { width: "100%", height: 160, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 52, background: "#f8fafc" },
+  cardImgPlaceholder: { width: "100%", height: 160, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 52, background: C.grayLight },
   cardBody: { padding: "12px 14px 14px", display: "flex", flexDirection: "column", gap: 4, flex: 1 },
-  cardCat: { fontSize: 11, color: "#94a3b8", fontWeight: 500, letterSpacing: "0.3px", textTransform: "uppercase" },
-  cardName: { fontWeight: 600, fontSize: 14, color: C.dark, lineHeight: 1.35, marginBottom: 4 },
-  cardPrice: { fontSize: 22, fontWeight: 700, color: C.dark, letterSpacing: "-0.5px" },
-  cardUnit: { fontSize: 12, color: "#94a3b8", fontWeight: 400 },
-  cardDph: { fontSize: 11, color: "#94a3b8", marginTop: -2 },
-  unavailableBadge: { background: "#f1f5f9", color: "#94a3b8", borderRadius: 6, padding: "5px 8px", fontSize: 12, textAlign: "center" },
-  addBtn: { background: C.green, color: "#fff", border: "none", borderRadius: 8, padding: "10px 0", cursor: "pointer", fontSize: 13, fontWeight: 600, width: "100%", marginTop: "auto", transition: "background 0.15s" },
+  cardCat: { fontFamily: FONT_MONO, fontSize: 10, color: "#9A978F", fontWeight: 500, letterSpacing: "0.4px", textTransform: "uppercase" },
+  cardName: { fontFamily: FONT_DISPLAY, fontWeight: 500, fontSize: 14, color: C.dark, lineHeight: 1.35, marginBottom: 4 },
+  cardPrice: { fontFamily: FONT_MONO, fontSize: 20, fontWeight: 500, color: C.dark, letterSpacing: "0" },
+  cardUnit: { fontFamily: FONT_MONO, fontSize: 12, color: "#9A978F", fontWeight: 400 },
+  cardDph: { fontSize: 11, color: "#9A978F", marginTop: -2 },
+  unavailableBadge: { background: C.grayLight, color: "#9A978F", borderRadius: 4, padding: "5px 8px", fontSize: 12, textAlign: "center" },
+  addBtn: { fontFamily: FONT_DISPLAY, background: C.green, color: "#fff", border: "none", borderRadius: 6, padding: "10px 0", cursor: "pointer", fontSize: 13, fontWeight: 500, width: "100%", marginTop: "auto", transition: "background 0.15s" },
   qtyRow: { display: "flex", alignItems: "center", gap: 8 },
-  qtyBtn: { width: 30, height: 30, borderRadius: 7, border: "1.5px solid #e2e8f0", background: "#fff", color: C.dark, cursor: "pointer", fontSize: 18, fontWeight: 600, display: "flex", alignItems: "center", justifyContent: "center" },
-  qtyNum: { minWidth: 28, textAlign: "center", fontWeight: 700, fontSize: 15 },
+  qtyBtn: { width: 30, height: 30, borderRadius: 6, border: "1.5px solid " + C.grayMid, background: "#fff", color: C.dark, cursor: "pointer", fontSize: 18, fontWeight: 600, display: "flex", alignItems: "center", justifyContent: "center" },
+  qtyNum: { fontFamily: FONT_MONO, minWidth: 28, textAlign: "center", fontWeight: 600, fontSize: 15 },
   noResults: { textAlign: "center", padding: "80px 20px", color: C.gray },
 
   // CART & FORMS
   panel: { maxWidth: 900, margin: "0 auto", padding: "32px 24px" },
-  sectionTitle: { fontSize: 22, fontWeight: 700, marginBottom: 20, color: C.dark, letterSpacing: "-0.3px" },
-  cartItem: { background: "#fff", borderRadius: 10, padding: "14px 16px", display: "flex", alignItems: "center", gap: 14, marginBottom: 8, border: "1px solid #e2e8f0" },
-  cartItemImg: { width: 52, height: 52, borderRadius: 8, objectFit: "cover", background: "#f1f5f9", flexShrink: 0 },
+  sectionTitle: { fontFamily: FONT_DISPLAY, fontSize: 21, fontWeight: 600, marginBottom: 20, color: C.dark, letterSpacing: "-0.2px" },
+  cartItem: { background: "#fff", borderRadius: 6, padding: "14px 16px", display: "flex", alignItems: "center", gap: 14, marginBottom: 8, border: "1px solid " + C.grayMid },
+  cartItemImg: { width: 52, height: 52, borderRadius: 6, objectFit: "cover", background: C.grayLight, flexShrink: 0 },
   cartItemInfo: { flex: 1, minWidth: 0 },
   cartItemName: { fontWeight: 600, fontSize: 14, color: C.dark },
-  cartItemPrice: { color: "#64748b", fontSize: 12, marginTop: 2 },
-  cartItemTotal: { fontWeight: 700, fontSize: 16, color: C.dark, minWidth: 70, textAlign: "right" },
-  removeBtn: { background: "#fef2f2", color: "#ef4444", border: "none", borderRadius: 6, padding: "5px 10px", cursor: "pointer", fontSize: 12, fontWeight: 600 },
-  orderSummary: { background: "#fff", borderRadius: 12, padding: 24, marginTop: 20, border: "1px solid #e2e8f0" },
-  totalRow: { display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 20, fontWeight: 700, marginBottom: 20, paddingBottom: 16, borderBottom: "1px solid #e2e8f0" },
+  cartItemPrice: { fontFamily: FONT_MONO, color: C.gray, fontSize: 12, marginTop: 2 },
+  cartItemTotal: { fontFamily: FONT_MONO, fontWeight: 600, fontSize: 16, color: C.dark, minWidth: 70, textAlign: "right" },
+  removeBtn: { background: C.redLight, color: C.red, border: "none", borderRadius: 4, padding: "5px 10px", cursor: "pointer", fontSize: 12, fontWeight: 600 },
+  orderSummary: { background: "#fff", borderRadius: 6, padding: 24, marginTop: 20, border: "1px solid " + C.grayMid },
+  totalRow: { fontFamily: FONT_MONO, display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 19, fontWeight: 600, marginBottom: 20, paddingBottom: 16, borderBottom: "1px solid " + C.grayMid },
   form: { display: "flex", flexDirection: "column", gap: 16 },
   formRow: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 },
-  label: { fontSize: 12, fontWeight: 600, color: "#64748b", marginBottom: 6, display: "block", letterSpacing: "0.3px" },
-  input: { width: "100%", padding: "11px 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, outline: "none", boxSizing: "border-box", background: "#fff", color: C.dark, transition: "border-color 0.15s" },
-  textarea: { width: "100%", padding: "11px 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, minHeight: 80, outline: "none", resize: "vertical", boxSizing: "border-box", background: "#fff" },
-  select: { width: "100%", padding: "11px 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, outline: "none", background: "#fff", boxSizing: "border-box" },
-  submitBtn: { background: C.green, color: "#fff", border: "none", borderRadius: 10, padding: "14px 0", fontSize: 15, fontWeight: 600, cursor: "pointer", marginTop: 8, width: "100%", letterSpacing: "0.2px" },
-  successBox: { background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 12, padding: 36, textAlign: "center" },
-  successTitle: { fontSize: 22, fontWeight: 700, color: C.green, marginBottom: 8 },
-  successText: { color: "#64748b", fontSize: 15 },
+  label: { fontSize: 12, fontWeight: 600, color: C.gray, marginBottom: 6, display: "block", letterSpacing: "0.3px" },
+  input: { width: "100%", padding: "11px 14px", borderRadius: 6, border: "1.5px solid " + C.grayMid, fontSize: 14, outline: "none", boxSizing: "border-box", background: "#fff", color: C.dark, transition: "border-color 0.15s" },
+  textarea: { width: "100%", padding: "11px 14px", borderRadius: 6, border: "1.5px solid " + C.grayMid, fontSize: 14, minHeight: 80, outline: "none", resize: "vertical", boxSizing: "border-box", background: "#fff" },
+  select: { width: "100%", padding: "11px 14px", borderRadius: 6, border: "1.5px solid " + C.grayMid, fontSize: 14, outline: "none", background: "#fff", boxSizing: "border-box" },
+  submitBtn: { fontFamily: FONT_DISPLAY, background: C.green, color: "#fff", border: "none", borderRadius: 6, padding: "14px 0", fontSize: 15, fontWeight: 500, cursor: "pointer", marginTop: 8, width: "100%", letterSpacing: "0.1px" },
+  successBox: { background: C.greenPale, border: "1px solid " + C.greenMid, borderRadius: 6, padding: 36, textAlign: "center" },
+  successTitle: { fontFamily: FONT_DISPLAY, fontSize: 21, fontWeight: 600, color: C.green, marginBottom: 8 },
+  successText: { color: C.gray, fontSize: 15 },
   deliveryOptions: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 4 },
-  deliveryCard: { border: "1.5px solid #e2e8f0", borderRadius: 10, padding: "16px", cursor: "pointer", background: "#fff", transition: "all 0.15s" },
-  deliveryCardActive: { border: `2px solid ${C.green}`, background: "#f0fdf4" },
-  deliveryCardTitle: { fontWeight: 600, fontSize: 14, marginBottom: 3, color: C.dark },
-  deliveryCardSub: { fontSize: 12, color: "#64748b" },
+  deliveryCard: { border: "1.5px solid " + C.grayMid, borderRadius: 6, padding: "16px", cursor: "pointer", background: "#fff", transition: "all 0.15s" },
+  deliveryCardActive: { border: `2px solid ${C.green}`, background: C.greenPale },
+  deliveryCardTitle: { fontFamily: FONT_DISPLAY, fontWeight: 500, fontSize: 14, marginBottom: 3, color: C.dark },
+  deliveryCardSub: { fontSize: 12, color: C.gray },
   slotGrid: { display: "flex", gap: 8, flexWrap: "wrap", marginTop: 8 },
-  slotBtn: { padding: "8px 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", background: "#fff", cursor: "pointer", fontSize: 13, fontWeight: 500, color: C.dark, transition: "all 0.15s" },
-  slotBtnActive: { border: `2px solid ${C.green}`, background: "#f0fdf4", color: C.green, fontWeight: 600 },
-  infoBox: { background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 8, padding: "10px 14px", fontSize: 13, color: "#92400e", marginTop: 8 },
-  adminSection: { background: "#fff", borderRadius: 10, padding: 24, marginBottom: 20, border: "1px solid #e2e8f0" },
-  adminLogin: { maxWidth: 380, margin: "80px auto", background: "#fff", borderRadius: 16, padding: 36, boxShadow: "0 4px 24px rgba(0,0,0,0.08)", textAlign: "center", border: "1px solid #e2e8f0" },
+  slotBtn: { fontFamily: FONT_MONO, padding: "8px 14px", borderRadius: 6, border: "1.5px solid " + C.grayMid, background: "#fff", cursor: "pointer", fontSize: 13, fontWeight: 500, color: C.dark, transition: "all 0.15s" },
+  slotBtnActive: { border: `2px solid ${C.green}`, background: C.greenPale, color: C.green, fontWeight: 600 },
+  infoBox: { background: C.orangeLight, border: "1px solid #E8CFA0", borderRadius: 6, padding: "10px 14px", fontSize: 13, color: "#7A5220", marginTop: 8 },
+  adminSection: { background: "#fff", borderRadius: 6, padding: 24, marginBottom: 20, border: "1px solid " + C.grayMid },
+  adminLogin: { maxWidth: 380, margin: "80px auto", background: "#fff", borderRadius: 6, padding: 36, textAlign: "center", border: "1px solid " + C.grayMid },
   adminTable: { width: "100%", borderCollapse: "collapse", marginTop: 12, display: "block", overflowX: "auto" },
-  th: { background: "#f8fafc", padding: "10px 14px", textAlign: "left", fontSize: 12, fontWeight: 600, color: "#64748b", whiteSpace: "nowrap", borderBottom: "1px solid #e2e8f0" },
-  td: { padding: "12px 14px", borderBottom: "1px solid #f1f5f9", fontSize: 13, verticalAlign: "middle", whiteSpace: "nowrap", color: C.dark },
-  badge: { display: "inline-block", padding: "3px 10px", borderRadius: 6, fontSize: 11, fontWeight: 600 },
-  badgeGreen: { background: "#f0fdf4", color: C.green },
-  badgeGray: { background: "#f1f5f9", color: "#64748b" },
-  badgeOrange: { background: "#fff7ed", color: "#c2410c" },
-  actionBtn: { padding: "6px 12px", borderRadius: 6, border: "none", cursor: "pointer", fontSize: 12, fontWeight: 600, marginRight: 4 },
-  emptyCart: { textAlign: "center", padding: "80px 20px", color: "#94a3b8" },
+  th: { background: C.grayLight, padding: "10px 14px", textAlign: "left", fontSize: 12, fontWeight: 600, color: C.gray, whiteSpace: "nowrap", borderBottom: "1px solid " + C.grayMid },
+  td: { padding: "12px 14px", borderBottom: "1px solid #F0EFEA", fontSize: 13, verticalAlign: "middle", whiteSpace: "nowrap", color: C.dark },
+  badge: { display: "inline-block", padding: "3px 10px", borderRadius: 4, fontSize: 11, fontWeight: 600 },
+  badgeGreen: { background: C.greenPale, color: C.green },
+  badgeGray: { background: "#F0EFEA", color: C.gray },
+  badgeOrange: { background: C.orangeLight, color: "#7A5220" },
+  actionBtn: { padding: "6px 12px", borderRadius: 4, border: "none", cursor: "pointer", fontSize: 12, fontWeight: 600, marginRight: 4 },
+  emptyCart: { textAlign: "center", padding: "80px 20px", color: "#9A978F" },
 };
 
 function App() {
@@ -539,6 +543,7 @@ function App() {
       : firmType === "existujuci" ? "B2B — existujúci zákazník" : "B2B — nový zákazník";
 
     // Odoslanie emailu cez EmailJS
+    const orderPdf = buildOrderPdf(custName, custType, orderForm.phone, orderForm.email, terminText, adresaText, orderForm.note, cart);
     emailjs.send("service_1ru9fi8", "template_xejeb4d", {
       customer_name: custName,
       customer_type: custType,
@@ -547,6 +552,7 @@ function App() {
       delivery_address: adresaText,
       order_items: itemsText,
       note: orderForm.note || "—",
+      order_pdf: orderPdf,
     }).then(
       () => { console.log("Email odoslaný"); },
       (err) => { console.error("Email zlyhal:", err); }
@@ -627,6 +633,72 @@ function App() {
     setAdminEmail("");
   };
 
+  const buildOrderPdf = (custName, custType, phone, email, terminText, adresaText, noteText, items) => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    let y = 20;
+    doc.setFontSize(16);
+    doc.setFont(undefined, "bold");
+    doc.text("Obim s.r.o. — Vychystávací list", 14, y);
+    y += 10;
+    doc.setFontSize(11);
+    doc.setFont(undefined, "normal");
+    doc.text(`Zákazník: ${custName}`, 14, y); y += 7;
+    doc.text(`Typ: ${custType}`, 14, y); y += 7;
+    doc.text(`Kontakt: ${phone}${email ? " / " + email : ""}`, 14, y); y += 7;
+    doc.text(`Termín: ${terminText}`, 14, y); y += 7;
+    doc.text(`Adresa: ${adresaText}`, 14, y); y += 7;
+    if (noteText) { doc.text(`Poznámka: ${noteText}`, 14, y); y += 7; }
+    y += 4;
+    doc.setFont(undefined, "bold");
+    doc.text("Produkt", 14, y);
+    doc.text("Objednané", 120, y);
+    doc.text("Reálna váha", 165, y);
+    y += 2;
+    doc.line(14, y, 196, y);
+    y += 7;
+    doc.setFont(undefined, "normal");
+    items.forEach(i => {
+      if (y > 280) { doc.addPage(); y = 20; }
+      let label = i.name;
+      if (i.pieceNote) label += `  (CHCE: ${i.pieceNote})`;
+      doc.text(label, 14, y, { maxWidth: 100 });
+      doc.text(`${i.qty} ${i.unit}`, 120, y);
+      doc.text("_____________", 165, y);
+      y += 9;
+    });
+    return doc.output("datauristring");
+  };
+
+  const buildRegistrationPdf = (firm) => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    let y = 20;
+    doc.setFontSize(16);
+    doc.setFont(undefined, "bold");
+    doc.text("Obim s.r.o. — Registrácia nového B2B zákazníka", 14, y);
+    y += 12;
+    doc.setFontSize(11);
+    doc.setFont(undefined, "normal");
+    const rows = [
+      ["Názov firmy", firm.nazov],
+      ["IČO", firm.ico],
+      ["DIČ", firm.dic || "—"],
+      ["Adresa", `${firm.adresa}, ${firm.mesto} ${firm.psc}`],
+      ["Kontaktná osoba", firm.kontakt],
+      ["Email", firm.email],
+      ["Telefón", firm.telefon],
+    ];
+    rows.forEach(([label, val]) => {
+      doc.setFont(undefined, "bold");
+      doc.text(`${label}:`, 14, y);
+      doc.setFont(undefined, "normal");
+      doc.text(String(val), 70, y);
+      y += 9;
+    });
+    return doc.output("datauristring");
+  };
+
   const removeDiacritics = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   };
@@ -683,13 +755,13 @@ function App() {
       {/* SHOP */}
       {/* CUSTOMER TYPE SELECTOR */}
       {!customerType && view === "shop" && (
-        <div style={{height:"calc(100vh - 64px)",background:"#f8fafc",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",padding:"0 24px"}}>
+        <div style={{height:"calc(100vh - 64px)",background:"#FAFAF9",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",padding:"0 24px"}}>
           <div style={{width:"100%",maxWidth:780}}>
 
             {/* INFO BANNER */}
-            <div style={{background:"linear-gradient(135deg, #15803d 0%, #16a34a 100%)",borderRadius:16,padding:"24px 28px",marginBottom:20,position:"relative",overflow:"hidden"}}>
+            <div style={{background:"linear-gradient(135deg, #163B2C 0%, #1F4D3A 100%)",borderRadius:16,padding:"24px 28px",marginBottom:20,position:"relative",overflow:"hidden"}}>
               <div style={{position:"absolute",top:-40,right:-40,width:180,height:180,borderRadius:"50%",background:"rgba(255,255,255,0.05)"}}></div>
-              <div style={{fontSize:13,fontWeight:700,letterSpacing:"2px",textTransform:"uppercase",color:"#bbf7d0",marginBottom:10}}>🎉 Váš partner od roku 1999</div>
+              <div style={{fontSize:13,fontWeight:700,letterSpacing:"2px",textTransform:"uppercase",color:"#C7D9CC",marginBottom:10}}>🎉 Váš partner od roku 1999</div>
               <div style={{fontSize:30,fontWeight:800,color:"#fff",letterSpacing:"-0.5px",marginBottom:8,lineHeight:1.25}}>Vitajte v našom novom e-shope!</div>
               <div style={{fontSize:15,color:"rgba(255,255,255,0.9)",marginBottom:20,fontWeight:500,lineHeight:1.6,maxWidth:520}}>Teraz si môžete tovar objednať jednoduchšie a prehľadnejšie — kedykoľvek a odkiaľkoľvek.</div>
 
@@ -721,35 +793,35 @@ function App() {
             </div>
 
             {/* VÝBER ZÁKAZNÍKA */}
-            <div style={{fontSize:12,fontWeight:600,color:"#94a3b8",letterSpacing:"1px",textTransform:"uppercase",marginBottom:14,textAlign:"center"}}>Vyberte typ zákazníka</div>
+            <div style={{fontSize:12,fontWeight:600,color:"#9A978F",letterSpacing:"1px",textTransform:"uppercase",marginBottom:14,textAlign:"center"}}>Vyberte typ zákazníka</div>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14,alignItems:"stretch"}}>
 
               {/* Domácnosť */}
               <div onClick={() => { setCustomerType("domacnost"); setFirmReady(true); window.scrollTo(0,0); }}
-                style={{border:"1.5px solid #e2e8f0",borderRadius:14,padding:"24px 22px",cursor:"pointer",background:"#fff",boxShadow:"0 2px 8px rgba(0,0,0,0.04)",display:"flex",flexDirection:"column"}}>
+                style={{border:"1.5px solid #E4E2DD",borderRadius:14,padding:"24px 22px",cursor:"pointer",background:"#fff",boxShadow:"0 2px 8px rgba(0,0,0,0.04)",display:"flex",flexDirection:"column"}}>
                 <div style={{fontSize:32,marginBottom:12}}>🏠</div>
-                <div style={{fontWeight:700,fontSize:18,color:"#0f172a",marginBottom:6}}>Som domácnosť</div>
-                <div style={{fontSize:13,color:"#64748b",lineHeight:1.6,marginBottom:14}}>Fyzická osoba · súkromná spotreba</div>
-                <div style={{background:"#fffbeb",borderRadius:8,padding:"10px 12px",fontSize:12,color:"#92400e",lineHeight:1.7,marginBottom:16,flex:1}}>
+                <div style={{fontWeight:700,fontSize:18,color:"#171717",marginBottom:6}}>Som domácnosť</div>
+                <div style={{fontSize:13,color:"#6B6963",lineHeight:1.6,marginBottom:14}}>Fyzická osoba · súkromná spotreba</div>
+                <div style={{background:"#FBF3E7",borderRadius:8,padding:"10px 12px",fontSize:12,color:"#7A5220",lineHeight:1.7,marginBottom:16,flex:1}}>
                   ⚠️ Momentálne len <strong>osobný odber v sklade</strong><br/>
                   📍 Malý Kolačín 342, 018 51 Nová Dubnica<br/>
                   🕘 Po–Pi · 9:00 – 13:00
                 </div>
-                <div style={{background:"#16a34a",color:"#fff",borderRadius:8,padding:"12px 0",fontWeight:600,fontSize:14,textAlign:"center"}}>Pokračovať →</div>
+                <div style={{background:"#1F4D3A",color:"#fff",borderRadius:8,padding:"12px 0",fontWeight:600,fontSize:14,textAlign:"center"}}>Pokračovať →</div>
               </div>
 
               {/* B2B */}
               <div onClick={() => setCustomerType("firma")}
-                style={{border:"1.5px solid #e2e8f0",borderRadius:14,padding:"24px 22px",cursor:"pointer",background:"#fff",boxShadow:"0 2px 8px rgba(0,0,0,0.04)",display:"flex",flexDirection:"column"}}>
+                style={{border:"1.5px solid #E4E2DD",borderRadius:14,padding:"24px 22px",cursor:"pointer",background:"#fff",boxShadow:"0 2px 8px rgba(0,0,0,0.04)",display:"flex",flexDirection:"column"}}>
                 <div style={{fontSize:32,marginBottom:12}}>🏢</div>
-                <div style={{fontWeight:700,fontSize:18,color:"#0f172a",marginBottom:6}}>B2B / Firemný odber</div>
-                <div style={{fontSize:13,color:"#64748b",lineHeight:1.6,marginBottom:14}}>
+                <div style={{fontWeight:700,fontSize:18,color:"#171717",marginBottom:6}}>B2B / Firemný odber</div>
+                <div style={{fontSize:13,color:"#6B6963",lineHeight:1.6,marginBottom:14}}>
                   HORECA · Maloobchod · Školy · Iný platca DPH
                 </div>
-                <div style={{background:"#f0fdf4",border:"1px solid #bbf7d0",borderRadius:8,padding:"10px 12px",fontSize:12,color:"#16a34a",fontWeight:600,marginBottom:16,flex:1,display:"flex",alignItems:"center"}}>
+                <div style={{background:"#EAF0EA",border:"1px solid #C7D9CC",borderRadius:8,padding:"10px 12px",fontSize:12,color:"#1F4D3A",fontWeight:600,marginBottom:16,flex:1,display:"flex",alignItems:"center"}}>
                   🚚 Rozvoz priamo do vašej prevádzky · Po–Pi
                 </div>
-                <div style={{background:"#16a34a",color:"#fff",borderRadius:8,padding:"12px 0",fontWeight:600,fontSize:14,textAlign:"center"}}>Pokračovať →</div>
+                <div style={{background:"#1F4D3A",color:"#fff",borderRadius:8,padding:"12px 0",fontWeight:600,fontSize:14,textAlign:"center"}}>Pokračovať →</div>
               </div>
 
             </div>
@@ -759,23 +831,23 @@ function App() {
 
       {/* ĎAKOVNÁ OBRAZOVKA PO REGISTRÁCII */}
       {customerType === "firma" && firmType === "novy" && regDone && view === "shop" && (
-        <div style={{minHeight:"calc(100vh - 64px)",background:"#f8fafc",display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+        <div style={{minHeight:"calc(100vh - 64px)",background:"#FAFAF9",display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
           <div style={{maxWidth:520,width:"100%",background:"#fff",borderRadius:16,padding:"40px 36px",boxShadow:"0 4px 24px rgba(0,0,0,0.08)",textAlign:"center"}}>
-            <div style={{width:72,height:72,background:"#f0fdf4",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:36,margin:"0 auto 20px"}}>✅</div>
-            <div style={{fontSize:24,fontWeight:800,color:"#0f172a",marginBottom:12}}>Ďakujeme za prejavený záujem!</div>
+            <div style={{width:72,height:72,background:"#EAF0EA",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:36,margin:"0 auto 20px"}}>✅</div>
+            <div style={{fontSize:24,fontWeight:800,color:"#171717",marginBottom:12}}>Ďakujeme za prejavený záujem!</div>
             <div style={{fontSize:15,color:"#475569",lineHeight:1.7,marginBottom:24}}>
               Vašu registráciu sme úspešne prijali. Náš tím vás bude <strong>obratom kontaktovať</strong> ohľadom vašich prihlasovacích údajov a hesla, aby sme vám umožnili vstup do e-shopu.
             </div>
-            <div style={{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:10,padding:"16px 20px",marginBottom:24,textAlign:"left"}}>
-              <div style={{fontSize:12,fontWeight:600,color:"#94a3b8",textTransform:"uppercase",letterSpacing:"0.5px",marginBottom:8}}>Registrovaná prevádzka</div>
-              <div style={{fontSize:15,fontWeight:700,color:"#0f172a"}}>{firmData.nazov}</div>
-              <div style={{fontSize:13,color:"#64748b",marginTop:2}}>{firmData.mesto} · {firmData.email}</div>
+            <div style={{background:"#FAFAF9",border:"1px solid #E4E2DD",borderRadius:10,padding:"16px 20px",marginBottom:24,textAlign:"left"}}>
+              <div style={{fontSize:12,fontWeight:600,color:"#9A978F",textTransform:"uppercase",letterSpacing:"0.5px",marginBottom:8}}>Registrovaná prevádzka</div>
+              <div style={{fontSize:15,fontWeight:700,color:"#171717"}}>{firmData.nazov}</div>
+              <div style={{fontSize:13,color:"#6B6963",marginTop:2}}>{firmData.mesto} · {firmData.email}</div>
             </div>
-            <div style={{fontSize:13,color:"#94a3b8",marginBottom:20}}>
-              Máte otázky? Kontaktujte nás na <a href="mailto:obim@obim.sk" style={{color:"#16a34a"}}>obim@obim.sk</a> alebo +421 915 497 010
+            <div style={{fontSize:13,color:"#9A978F",marginBottom:20}}>
+              Máte otázky? Kontaktujte nás na <a href="mailto:obim@obim.sk" style={{color:"#1F4D3A"}}>obim@obim.sk</a> alebo +421 915 497 010
             </div>
             <button onClick={() => { setCustomerType(null); setFirmType(null); setRegDone(false); setFirmData({ nazov: "", mesto: "", ico: "", dic: "", adresa: "", psc: "", kontakt: "", email: "", telefon: "" }); }}
-              style={{background:"#16a34a",color:"#fff",border:"none",borderRadius:10,padding:"12px 32px",fontSize:14,fontWeight:600,cursor:"pointer"}}>
+              style={{background:"#1F4D3A",color:"#fff",border:"none",borderRadius:10,padding:"12px 32px",fontSize:14,fontWeight:600,cursor:"pointer"}}>
               Späť na úvod
             </button>
           </div>
@@ -783,29 +855,29 @@ function App() {
       )}
 
       {customerType === "firma" && !firmReady && !regDone && view === "shop" && (
-        <div style={{minHeight:"100vh",background:"#f8fafc",display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
+        <div style={{minHeight:"100vh",background:"#FAFAF9",display:"flex",alignItems:"center",justifyContent:"center",padding:20}}>
           <div style={{maxWidth:480,width:"100%",background:"#fff",borderRadius:16,padding:32,boxShadow:"0 4px 24px rgba(0,0,0,0.08)"}}>
             <div style={{marginBottom:24}}>
               <img src="https://obim.sk/wp-content/uploads/2025/11/Obim_LOGO.png" alt="Obim" style={{height:32,marginBottom:20}} />
-              <div style={{fontSize:22,fontWeight:800,color:"#0f172a",marginBottom:6}}>B2B / Firemný odber</div>
-              <div style={{fontSize:14,color:"#64748b"}}>Ste u nás už registrovaný zákazník?</div>
+              <div style={{fontSize:22,fontWeight:800,color:"#171717",marginBottom:6}}>B2B / Firemný odber</div>
+              <div style={{fontSize:14,color:"#6B6963"}}>Ste u nás už registrovaný zákazník?</div>
             </div>
 
             {!firmType && (
               <div style={{display:"flex",flexDirection:"column",gap:10}}>
-                <div onClick={() => setFirmType("existujuci")} style={{background:"#fff",border:"1.5px solid #e2e8f0",borderRadius:12,padding:16,cursor:"pointer",display:"flex",alignItems:"center",gap:14}}>
+                <div onClick={() => setFirmType("existujuci")} style={{background:"#fff",border:"1.5px solid #E4E2DD",borderRadius:12,padding:16,cursor:"pointer",display:"flex",alignItems:"center",gap:14}}>
                   <div style={{width:42,height:42,background:"rgba(22,163,74,0.15)",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>✅</div>
                   <div style={{flex:1}}>
-                    <div style={{fontWeight:700,fontSize:14,color:"#0f172a",marginBottom:2}}>Som existujúci zákazník</div>
-                    <div style={{fontSize:12,color:"#64748b"}}>Zadáte názov prevádzky, mesto a heslo</div>
+                    <div style={{fontWeight:700,fontSize:14,color:"#171717",marginBottom:2}}>Som existujúci zákazník</div>
+                    <div style={{fontSize:12,color:"#6B6963"}}>Zadáte názov prevádzky, mesto a heslo</div>
                   </div>
                   <div style={{color:"#475569",fontSize:18}}>→</div>
                 </div>
-                <div onClick={() => setFirmType("novy")} style={{background:"#fff",border:"1.5px solid #e2e8f0",borderRadius:12,padding:16,cursor:"pointer",display:"flex",alignItems:"center",gap:14}}>
+                <div onClick={() => setFirmType("novy")} style={{background:"#fff",border:"1.5px solid #E4E2DD",borderRadius:12,padding:16,cursor:"pointer",display:"flex",alignItems:"center",gap:14}}>
                   <div style={{width:42,height:42,background:"rgba(14,165,233,0.1)",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>🆕</div>
                   <div style={{flex:1}}>
-                    <div style={{fontWeight:700,fontSize:14,color:"#0f172a",marginBottom:2}}>Chcem sa registrovať</div>
-                    <div style={{fontSize:12,color:"#64748b"}}>Vyplníte fakturačné údaje</div>
+                    <div style={{fontWeight:700,fontSize:14,color:"#171717",marginBottom:2}}>Chcem sa registrovať</div>
+                    <div style={{fontSize:12,color:"#6B6963"}}>Vyplníte fakturačné údaje</div>
                   </div>
                   <div style={{color:"#475569",fontSize:18}}>→</div>
                 </div>
@@ -814,28 +886,28 @@ function App() {
 
             {/* EXISTUJÚCI ZÁKAZNÍK */}
             {firmType === "existujuci" && (
-              <div style={{background:"#fff",borderRadius:12,padding:24,border:"1px solid #e2e8f0"}}>
+              <div style={{background:"#fff",borderRadius:12,padding:24,border:"1px solid #E4E2DD"}}>
                 <div style={{fontWeight:700,fontSize:16,marginBottom:16,color:C.dark}}>Existujúci zákazník</div>
                 <div style={{display:"grid",gap:12,marginBottom:16}}>
                   <div>
-                    <label style={{fontSize:12,fontWeight:600,color:"#64748b",marginBottom:4,display:"block"}}>NÁZOV PREVÁDZKY *</label>
-                    <input style={{width:"100%",padding:"10px 12px",borderRadius:8,border:"1.5px solid #e2e8f0",fontSize:14,outline:"none",boxSizing:"border-box"}}
+                    <label style={{fontSize:12,fontWeight:600,color:"#6B6963",marginBottom:4,display:"block"}}>NÁZOV PREVÁDZKY *</label>
+                    <input style={{width:"100%",padding:"10px 12px",borderRadius:8,border:"1.5px solid #E4E2DD",fontSize:14,outline:"none",boxSizing:"border-box"}}
                       placeholder="napr. Reštaurácia U Jána"
                       value={firmData.nazov}
                       onChange={e => setFirmData(f => ({...f, nazov: e.target.value}))} />
                   </div>
                   <div>
-                    <label style={{fontSize:12,fontWeight:600,color:"#64748b",marginBottom:4,display:"block"}}>MESTO *</label>
-                    <input style={{width:"100%",padding:"10px 12px",borderRadius:8,border:"1.5px solid #e2e8f0",fontSize:14,outline:"none",boxSizing:"border-box"}}
+                    <label style={{fontSize:12,fontWeight:600,color:"#6B6963",marginBottom:4,display:"block"}}>MESTO *</label>
+                    <input style={{width:"100%",padding:"10px 12px",borderRadius:8,border:"1.5px solid #E4E2DD",fontSize:14,outline:"none",boxSizing:"border-box"}}
                       placeholder="napr. Trenčín"
                       value={firmData.mesto}
                       onChange={e => setFirmData(f => ({...f, mesto: e.target.value}))} />
                   </div>
                   <div>
-                    <label style={{fontSize:12,fontWeight:600,color:"#64748b",marginBottom:4,display:"block"}}>PRÍSTUPOVÉ HESLO *</label>
+                    <label style={{fontSize:12,fontWeight:600,color:"#6B6963",marginBottom:4,display:"block"}}>PRÍSTUPOVÉ HESLO *</label>
                     <input
                       type="password"
-                      style={{width:"100%",padding:"10px 12px",borderRadius:8,border:`1.5px solid ${b2bError ? "#ef4444" : "#e2e8f0"}`,fontSize:14,outline:"none",boxSizing:"border-box"}}
+                      style={{width:"100%",padding:"10px 12px",borderRadius:8,border:`1.5px solid ${b2bError ? "#B3261E" : "#E4E2DD"}`,fontSize:14,outline:"none",boxSizing:"border-box"}}
                       placeholder="Heslo od Obim s.r.o."
                       value={b2bPass}
                       onChange={e => { setB2bPass(e.target.value); setB2bError(""); }}
@@ -844,12 +916,12 @@ function App() {
                         else setB2bError("Nesprávne heslo. Kontaktujte Obim s.r.o.");
                       }}}
                     />
-                    {b2bError && <div style={{color:"#ef4444",fontSize:12,marginTop:4}}>{b2bError}</div>}
-                    <div style={{fontSize:11,color:"#94a3b8",marginTop:5}}>Heslo ste dostali od nás pri registrácii. Kontakt: +421 915 497 010 · +421 948 358 899</div>
+                    {b2bError && <div style={{color:"#B3261E",fontSize:12,marginTop:4}}>{b2bError}</div>}
+                    <div style={{fontSize:11,color:"#9A978F",marginTop:5}}>Heslo ste dostali od nás pri registrácii. Kontakt: +421 915 497 010 · +421 948 358 899</div>
                   </div>
                 </div>
                 <button
-                  style={{width:"100%",background:(firmData.nazov && firmData.mesto && b2bPass) ? C.green : "#e2e8f0",color:(firmData.nazov && firmData.mesto && b2bPass) ? "#fff" : "#94a3b8",border:"none",borderRadius:10,padding:"12px 0",fontSize:15,fontWeight:600,cursor:(firmData.nazov && firmData.mesto && b2bPass) ? "pointer" : "default"}}
+                  style={{width:"100%",background:(firmData.nazov && firmData.mesto && b2bPass) ? C.green : "#E4E2DD",color:(firmData.nazov && firmData.mesto && b2bPass) ? "#fff" : "#9A978F",border:"none",borderRadius:10,padding:"12px 0",fontSize:15,fontWeight:600,cursor:(firmData.nazov && firmData.mesto && b2bPass) ? "pointer" : "default"}}
                   disabled={!firmData.nazov || !firmData.mesto || !b2bPass}
                   onClick={() => {
                     if (b2bPass === B2B_PASSWORD) { setFirmReady(true); window.scrollTo(0,0); }
@@ -857,7 +929,7 @@ function App() {
                   }}>
                   Pokračovať do e-shopu →
                 </button>
-                <button onClick={() => { setFirmType(null); setB2bPass(""); setB2bError(""); }} style={{width:"100%",background:"none",border:"none",color:"#64748b",fontSize:13,cursor:"pointer",marginTop:8,padding:"6px 0"}}>← Späť</button>
+                <button onClick={() => { setFirmType(null); setB2bPass(""); setB2bError(""); }} style={{width:"100%",background:"none",border:"none",color:"#6B6963",fontSize:13,cursor:"pointer",marginTop:8,padding:"6px 0"}}>← Späť</button>
               </div>
             )}
 
@@ -928,10 +1000,11 @@ function App() {
                   </div>
                 </div>
                 <button
-                  style={{width:"100%",background: (firmData.nazov && firmData.ico && firmData.adresa && firmData.mesto && firmData.kontakt && firmData.email && firmData.telefon) ? "#16a34a" : "#ccc",color:"#fff",border:"none",borderRadius:10,padding:"13px 0",fontSize:16,fontWeight:700,cursor:"pointer",marginTop:16}}
+                  style={{width:"100%",background: (firmData.nazov && firmData.ico && firmData.adresa && firmData.mesto && firmData.kontakt && firmData.email && firmData.telefon) ? "#1F4D3A" : "#ccc",color:"#fff",border:"none",borderRadius:10,padding:"13px 0",fontSize:16,fontWeight:700,cursor:"pointer",marginTop:16}}
                   disabled={!(firmData.nazov && firmData.ico && firmData.adresa && firmData.mesto && firmData.kontakt && firmData.email && firmData.telefon)}
                   onClick={() => {
                     // Odoslanie registrácie na email - samostatná šablóna pre registrácie
+                    const regPdf = buildRegistrationPdf(firmData);
                     emailjs.send("service_1ru9fi8", "template_2lve18l", {
                       firm_name: firmData.nazov,
                       ico: firmData.ico,
@@ -940,6 +1013,7 @@ function App() {
                       contact_person: firmData.kontakt,
                       email: firmData.email,
                       phone: firmData.telefon,
+                      registration_pdf: regPdf,
                     }).then(() => {}, (err) => console.error(err));
                     setRegDone(true);
                     window.scrollTo(0,0);
@@ -951,7 +1025,7 @@ function App() {
               </div>
             )}
 
-            <button onClick={() => { setCustomerType(null); setFirmType(null); setFirmReady(false); }} style={{width:"100%",background:"none",border:"none",color:"#64748b",fontSize:13,cursor:"pointer",marginTop:16,padding:"6px 0"}}>← Späť na výber zákazníka</button>
+            <button onClick={() => { setCustomerType(null); setFirmType(null); setFirmReady(false); }} style={{width:"100%",background:"none",border:"none",color:"#6B6963",fontSize:13,cursor:"pointer",marginTop:16,padding:"6px 0"}}>← Späť na výber zákazníka</button>
           </div>
         </div>
       )}
@@ -1002,7 +1076,7 @@ function App() {
                 {filtered.map(p => {
                   const qty = quantities[p.id] || 1;
                   return (
-                    <div key={p.id} style={{ ...S.card, ...(p.available ? {} : S.cardUnavailable), ...(cart.find(i => i.id === p.id) ? {border:"2px solid #16a34a", boxShadow:"0 0 0 1px #16a34a"} : {}) }}>
+                    <div key={p.id} style={{ ...S.card, ...(p.available ? {} : S.cardUnavailable), ...(cart.find(i => i.id === p.id) ? {border:"2px solid #1F4D3A", boxShadow:"0 0 0 1px #1F4D3A"} : {}) }}>
                       {p.img ? (
                         <img src={p.img} alt={p.name} style={S.cardImg} onError={e => { e.target.style.display="none"; e.target.nextSibling.style.display="flex"; }} />
                       ) : null}
@@ -1051,7 +1125,7 @@ function App() {
                               )}
                             </div>
                             <button 
-                            style={{...S.addBtn, background: cart.find(i => i.id === p.id) ? "#15803d" : C.green}}
+                            style={{...S.addBtn, background: cart.find(i => i.id === p.id) ? "#163B2C" : C.green}}
                             onClick={() => addToCart(p)}>
                             {cart.find(i => i.id === p.id) ? `✓ V košíku (${cart.find(i => i.id === p.id).qty} ${p.unit})` : "Pridať do košíka"}
                           </button>
@@ -1289,7 +1363,7 @@ function App() {
               <div style={S.adminSection}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
                   <div style={{ fontWeight: 700, fontSize: 17 }}>Objednávky ({orders.length})</div>
-                  <button style={{ ...S.actionBtn, background: "#f0fdf4", color: C.green }} onClick={fetchOrders}>🔄 Obnoviť</button>
+                  <button style={{ ...S.actionBtn, background: "#EAF0EA", color: C.green }} onClick={fetchOrders}>🔄 Obnoviť</button>
                 </div>
                 {ordersLoading ? (
                   <div style={{ color: C.gray, padding: "20px 0", textAlign: "center" }}>Načítavam objednávky...</div>
@@ -1298,37 +1372,37 @@ function App() {
                 ) : (
                   <div style={{display:"flex",flexDirection:"column",gap:16}}>
                     {orders.map(o => (
-                      <div key={o.id} style={{border:"1px solid #e2e8f0",borderRadius:12,overflow:"hidden"}}>
+                      <div key={o.id} style={{border:"1px solid #E4E2DD",borderRadius:12,overflow:"hidden"}}>
                         {/* Order header */}
-                        <div style={{background:"#f8fafc",padding:"12px 16px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:8}}>
+                        <div style={{background:"#FAFAF9",padding:"12px 16px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:8}}>
                           <div style={{display:"flex",gap:16,alignItems:"center",flexWrap:"wrap"}}>
-                            <div style={{fontSize:13,color:"#64748b"}}>{o.date}</div>
+                            <div style={{fontSize:13,color:"#6B6963"}}>{o.date}</div>
                             <div style={{fontWeight:700,fontSize:15}}>{o.name}</div>
-                            <div style={{fontSize:13,color:"#64748b"}}>{o.phone}</div>
-                            {o.email && <div style={{fontSize:13,color:"#64748b"}}>{o.email}</div>}
+                            <div style={{fontSize:13,color:"#6B6963"}}>{o.phone}</div>
+                            {o.email && <div style={{fontSize:13,color:"#6B6963"}}>{o.email}</div>}
                             <div style={{fontSize:13}}>{o.deliverySlotText || "—"}</div>
                             <div style={{fontSize:13}}>{o.payment}</div>
-                            {o.note && <div style={{fontSize:13,color:"#92400e",background:"#fffbeb",padding:"2px 8px",borderRadius:6}}>📝 {o.note}</div>}
+                            {o.note && <div style={{fontSize:13,color:"#7A5220",background:"#FBF3E7",padding:"2px 8px",borderRadius:6}}>📝 {o.note}</div>}
                           </div>
                           <div style={{display:"flex",gap:8,alignItems:"center"}}>
                             <div style={{fontWeight:700,fontSize:16,color:C.dark}}>{o.total.toFixed(2)} €</div>
                             <span style={{ ...S.badge, ...(o.status === "Nová" ? S.badgeOrange : o.status === "Vybavená" ? S.badgeGreen : S.badgeGray) }}>{o.status}</span>
-                            <button style={{ ...S.actionBtn, background:"#f0fdf4", color: C.green }} onClick={() => updateOrderStatus(o.id, "Vybavená")}>✓ Vybaviť</button>
-                            <button style={{ ...S.actionBtn, background:"#f1f5f9", color: "#64748b" }} onClick={() => updateOrderStatus(o.id, "Zrušená")}>✕ Zrušiť</button>
+                            <button style={{ ...S.actionBtn, background:"#EAF0EA", color: C.green }} onClick={() => updateOrderStatus(o.id, "Vybavená")}>✓ Vybaviť</button>
+                            <button style={{ ...S.actionBtn, background:"#F0EFEA", color: "#6B6963" }} onClick={() => updateOrderStatus(o.id, "Zrušená")}>✕ Zrušiť</button>
                           </div>
                         </div>
                         {/* Order items */}
                         <div style={{padding:"12px 16px"}}>
-                          <div style={{fontSize:12,fontWeight:600,color:"#64748b",marginBottom:8,textTransform:"uppercase",letterSpacing:"0.5px"}}>Objednané položky:</div>
+                          <div style={{fontSize:12,fontWeight:600,color:"#6B6963",marginBottom:8,textTransform:"uppercase",letterSpacing:"0.5px"}}>Objednané položky:</div>
                           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(220px,1fr))",gap:6}}>
                             {o.items.map((item,i) => (
-                              <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"6px 10px",background:"#f8fafc",borderRadius:8,fontSize:13}}>
+                              <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"6px 10px",background:"#FAFAF9",borderRadius:8,fontSize:13}}>
                                 <div>
                                   <span style={{fontWeight:600}}>{item.name}</span>
-                                  {item.pieceNote && <span style={{color:"#f97316",fontSize:11,marginLeft:4}}>({item.pieceNote})</span>}
+                                  {item.pieceNote && <span style={{color:"#9A6324",fontSize:11,marginLeft:4}}>({item.pieceNote})</span>}
                                 </div>
                                 <div style={{display:"flex",gap:8,alignItems:"center"}}>
-                                  <span style={{color:"#64748b"}}>{item.qty} {item.unit}</span>
+                                  <span style={{color:"#6B6963"}}>{item.qty} {item.unit}</span>
                                   <span style={{fontWeight:700}}>{(item.qty * item.price).toFixed(2)} €</span>
                                 </div>
                               </div>
@@ -1402,7 +1476,7 @@ function App() {
       {toast && (
         <div style={{
           position:"fixed", bottom:28, left:"50%", transform:"translateX(-50%)",
-          background:"#1a6b2f", color:"#fff", padding:"12px 24px",
+          background:"#163B2C", color:"#fff", padding:"12px 24px",
           borderRadius:12, fontSize:14, fontWeight:600,
           boxShadow:"0 4px 20px rgba(0,0,0,0.2)", zIndex:9999,
           display:"flex", alignItems:"center", gap:8,
