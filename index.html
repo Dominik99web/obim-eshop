@@ -855,16 +855,15 @@ function App() {
                   style={{width:"100%",background: (firmData.nazov && firmData.ico && firmData.adresa && firmData.mesto && firmData.kontakt && firmData.email && firmData.telefon) ? "#16a34a" : "#ccc",color:"#fff",border:"none",borderRadius:10,padding:"13px 0",fontSize:16,fontWeight:700,cursor:"pointer",marginTop:16}}
                   disabled={!(firmData.nazov && firmData.ico && firmData.adresa && firmData.mesto && firmData.kontakt && firmData.email && firmData.telefon)}
                   onClick={() => {
-                    // Odoslanie registrácie na email
-                    emailjs.send("service_1ru9fi8", "template_xejeb4d", {
-                      customer_name: "🆕 NOVÁ REGISTRÁCIA: " + firmData.nazov,
+                    // Odoslanie registrácie na email - samostatná šablóna pre registrácie
+                    emailjs.send("service_1ru9fi8", "template_2lve18l", {
+                      firm_name: firmData.nazov,
+                      ico: firmData.ico,
+                      dic: firmData.dic || "—",
+                      address: `${firmData.adresa}, ${firmData.mesto} ${firmData.psc}`,
                       contact_person: firmData.kontakt,
-                      customer_type: "Nový B2B zákazník — čaká na schválenie",
+                      email: firmData.email,
                       phone: firmData.telefon,
-                      delivery_time: "—",
-                      delivery_address: `${firmData.adresa}, ${firmData.mesto} ${firmData.psc}`,
-                      order_items: `<tr><td style="padding:10px;">IČO: ${firmData.ico}</td><td style="padding:10px;">DIČ: ${firmData.dic || "—"}</td><td style="padding:10px;">Email: ${firmData.email}</td></tr>`,
-                      note: "Nový zákazník žiada o prístup do e-shopu. Kontaktujte ho ohľadom prihlasovacích údajov.",
                     }).then(() => {}, (err) => console.error(err));
                     setRegDone(true);
                     window.scrollTo(0,0);
