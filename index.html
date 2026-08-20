@@ -812,9 +812,9 @@ function App() {
 
       const poznamkaText = [o.deliverySlotText, o.note].filter(Boolean).join(" | ");
 
-      return `    <objednavka puvodniCislo="${escXml(String(o.id).slice(0, 8))}" datum="${datum}" cenySDPH="N">
+      return `    <objednavka puvodniCislo="${escXml(String(o.id).slice(0, 8))}" datum="${datum}" cenySDPH="false">
       <mena kod="EUR" mnozstvi="1" kurz="1"/>
-      <adresa id="1" ulice="${escXml(o.address || "")}" mesto="" psc="" kodStatu="SK" fyzickaOsoba="${isFirma ? "N" : "T"}">
+      <adresa id="1" ulice="${escXml(o.address || "")}" mesto="" psc="" kodStatu="SK" fyzickaOsoba="${isFirma ? "false" : "true"}">
         <firma nazev="${escXml(o.companyName || "")}" ico="${escXml(o.ico || "")}" dic="${escXml(o.dic || "")}"/>
         <osoba jmeno="${escXml(jmeno)}" prijmeni="${escXml(priezvisko)}"/>
         <email>${escXml(o.email || "")}</email>
