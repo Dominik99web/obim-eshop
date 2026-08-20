@@ -30,7 +30,7 @@
 const { useState, useEffect } = React;
 
 
-const B2B_PASSWORD = "obim2025"; // Heslo pre existujucich B2B zakaznikov
+// (B2B_PASSWORD removed — replaced by individual Supabase Auth accounts in Stage 3)
 
 const DELIVERY_CITIES = [
   {
@@ -446,6 +446,12 @@ function App() {
   const [b2bError, setB2bError] = useState("");
   const [regDone, setRegDone] = useState(false);
   const [firmReady, setFirmReady] = useState(false);
+  const [b2bLoginEmail, setB2bLoginEmail] = useState("");
+  const [b2bUserId, setB2bUserId] = useState(null);
+  const [b2bLoading, setB2bLoading] = useState(false);
+  const [myOrders, setMyOrders] = useState([]);
+  const [myOrdersLoading, setMyOrdersLoading] = useState(false);
+  const [showMyOrders, setShowMyOrders] = useState(false);
 
   const [pickupSlot, setPickupSlot] = useState("");
   const [pieceNotes, setPieceNotes] = useState({});
@@ -574,6 +580,7 @@ function App() {
       status: "Nová",
       notes: orderForm.note || null,
       payment: paymentLabel,
+      user_id: b2bUserId || null,
     }).then(({ error }) => {
       if (error) console.error("Chyba pri ukladaní objednávky do databázy:", error);
     });
@@ -699,6 +706,71 @@ function App() {
     return doc.output("datauristring");
   };
 
+  const handleB2bLogin = async () => {
+    setB2bLoading(true);
+    setB2bError("");
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email: b2bLoginEmail, password: b2bPass });
+    if (error) {
+      setB2bError("Nesprávny email alebo heslo. Kontaktujte Obim s.r.o.");
+      setB2bLoading(false);
+      return;
+    }
+    const uid = data.user.id;
+    const { data: profile, error: profileErr } = await supabaseClient
+      .from("b2b_profiles")
+      .select("*")
+      .eq("user_id", uid)
+      .maybeSingle();
+    if (profileErr || !profile) {
+      setB2bError("Tento účet nemá priradený firemný profil. Kontaktujte Obim s.r.o.");
+      await supabaseClient.auth.signOut();
+      setB2bLoading(false);
+      return;
+    }
+    setFirmData({
+      nazov: profile.company_name || "", mesto: profile.mesto || "", ico: profile.ico || "",
+      dic: profile.dic || "", adresa: profile.address || "", psc: profile.psc || "",
+      kontakt: profile.contact_person || "", email: profile.email || "", telefon: profile.phone || "",
+    });
+    setB2bUserId(uid);
+    setFirmReady(true);
+    setB2bLoading(false);
+    window.scrollTo(0, 0);
+  };
+
+  const handleB2bLogout = async () => {
+    await supabaseClient.auth.signOut();
+    setB2bUserId(null);
+    setFirmReady(false);
+    setFirmType(null);
+    setCustomerType(null);
+    setB2bLoginEmail("");
+    setB2bPass("");
+    setMyOrders([]);
+    setShowMyOrders(false);
+  };
+
+  const fetchMyOrders = async () => {
+    if (!b2bUserId) return;
+    setMyOrdersLoading(true);
+    const { data, error } = await supabaseClient
+      .from("orders")
+      .select("*")
+      .eq("user_id", b2bUserId)
+      .order("created_at", { ascending: false })
+      .limit(20);
+    if (!error && data) setMyOrders(data);
+    setMyOrdersLoading(false);
+  };
+
+  const repeatOrder = (order) => {
+    const items = (order.items || []).map(i => ({ ...i }));
+    setCart(items);
+    setShowMyOrders(false);
+    setView("cart");
+    window.scrollTo(0, 0);
+  };
+
   const removeDiacritics = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   };
@@ -743,6 +815,12 @@ function App() {
           <div style={S.nav}>
             <button style={{ ...S.navBtn, ...(view === "shop" ? S.navBtnActive : {}) }} onClick={goShop}>Tovar</button>
             <button style={{ ...S.navBtn, ...(view === "admin" ? S.navBtnActive : {}) }} onClick={() => { setView("admin"); window.scrollTo(0,0); }}>Admin</button>
+            {customerType === "firma" && firmReady && b2bUserId && (
+              <>
+                <button style={S.navBtn} onClick={() => { setShowMyOrders(true); fetchMyOrders(); }}>📋 Moje objednávky</button>
+                <button style={{ ...S.navBtn, color: "#B3261E" }} onClick={handleB2bLogout}>Odhlásiť</button>
+              </>
+            )}
             {view !== "cart" && (
               <button style={S.cartBtn} onClick={() => { setView("cart"); setOrderDone(false); window.scrollTo(0,0); }}>
                 🛒 Košík {cartCount > 0 && <span style={{...S.cartBadge, width:"auto", padding:"0 6px", borderRadius:10, fontSize:11}}>{cartTotal.toFixed(2)} €</span>}
@@ -887,49 +965,37 @@ function App() {
             {/* EXISTUJÚCI ZÁKAZNÍK */}
             {firmType === "existujuci" && (
               <div style={{background:"#fff",borderRadius:12,padding:24,border:"1px solid #E4E2DD"}}>
-                <div style={{fontWeight:700,fontSize:16,marginBottom:16,color:C.dark}}>Existujúci zákazník</div>
+                <div style={{fontWeight:700,fontSize:16,marginBottom:16,color:C.dark}}>Prihlásenie existujúceho zákazníka</div>
                 <div style={{display:"grid",gap:12,marginBottom:16}}>
                   <div>
-                    <label style={{fontSize:12,fontWeight:600,color:"#6B6963",marginBottom:4,display:"block"}}>NÁZOV PREVÁDZKY *</label>
-                    <input style={{width:"100%",padding:"10px 12px",borderRadius:8,border:"1.5px solid #E4E2DD",fontSize:14,outline:"none",boxSizing:"border-box"}}
-                      placeholder="napr. Reštaurácia U Jána"
-                      value={firmData.nazov}
-                      onChange={e => setFirmData(f => ({...f, nazov: e.target.value}))} />
+                    <label style={{fontSize:12,fontWeight:600,color:"#6B6963",marginBottom:4,display:"block"}}>EMAIL *</label>
+                    <input
+                      style={{width:"100%",padding:"10px 12px",borderRadius:8,border:"1.5px solid #E4E2DD",fontSize:14,outline:"none",boxSizing:"border-box"}}
+                      placeholder="firma@email.sk"
+                      value={b2bLoginEmail}
+                      onChange={e => { setB2bLoginEmail(e.target.value); setB2bError(""); }} />
                   </div>
                   <div>
-                    <label style={{fontSize:12,fontWeight:600,color:"#6B6963",marginBottom:4,display:"block"}}>MESTO *</label>
-                    <input style={{width:"100%",padding:"10px 12px",borderRadius:8,border:"1.5px solid #E4E2DD",fontSize:14,outline:"none",boxSizing:"border-box"}}
-                      placeholder="napr. Trenčín"
-                      value={firmData.mesto}
-                      onChange={e => setFirmData(f => ({...f, mesto: e.target.value}))} />
-                  </div>
-                  <div>
-                    <label style={{fontSize:12,fontWeight:600,color:"#6B6963",marginBottom:4,display:"block"}}>PRÍSTUPOVÉ HESLO *</label>
+                    <label style={{fontSize:12,fontWeight:600,color:"#6B6963",marginBottom:4,display:"block"}}>HESLO *</label>
                     <input
                       type="password"
                       style={{width:"100%",padding:"10px 12px",borderRadius:8,border:`1.5px solid ${b2bError ? "#B3261E" : "#E4E2DD"}`,fontSize:14,outline:"none",boxSizing:"border-box"}}
                       placeholder="Heslo od Obim s.r.o."
                       value={b2bPass}
                       onChange={e => { setB2bPass(e.target.value); setB2bError(""); }}
-                      onKeyDown={e => { if (e.key === "Enter" && firmData.nazov && firmData.mesto && b2bPass) {
-                        if (b2bPass === B2B_PASSWORD) { setFirmReady(true); window.scrollTo(0,0); }
-                        else setB2bError("Nesprávne heslo. Kontaktujte Obim s.r.o.");
-                      }}}
+                      onKeyDown={e => { if (e.key === "Enter" && b2bLoginEmail && b2bPass && !b2bLoading) handleB2bLogin(); }}
                     />
                     {b2bError && <div style={{color:"#B3261E",fontSize:12,marginTop:4}}>{b2bError}</div>}
-                    <div style={{fontSize:11,color:"#9A978F",marginTop:5}}>Heslo ste dostali od nás pri registrácii. Kontakt: +421 915 497 010 · +421 948 358 899</div>
+                    <div style={{fontSize:11,color:"#9A978F",marginTop:5}}>Prihlasovacie údaje ste dostali od nás. Kontakt: +421 915 497 010 · +421 948 358 899</div>
                   </div>
                 </div>
                 <button
-                  style={{width:"100%",background:(firmData.nazov && firmData.mesto && b2bPass) ? C.green : "#E4E2DD",color:(firmData.nazov && firmData.mesto && b2bPass) ? "#fff" : "#9A978F",border:"none",borderRadius:10,padding:"12px 0",fontSize:15,fontWeight:600,cursor:(firmData.nazov && firmData.mesto && b2bPass) ? "pointer" : "default"}}
-                  disabled={!firmData.nazov || !firmData.mesto || !b2bPass}
-                  onClick={() => {
-                    if (b2bPass === B2B_PASSWORD) { setFirmReady(true); window.scrollTo(0,0); }
-                    else setB2bError("Nesprávne heslo. Kontaktujte Obim s.r.o.");
-                  }}>
-                  Pokračovať do e-shopu →
+                  style={{width:"100%",background:(b2bLoginEmail && b2bPass && !b2bLoading) ? C.green : "#E4E2DD",color:(b2bLoginEmail && b2bPass && !b2bLoading) ? "#fff" : "#9A978F",border:"none",borderRadius:10,padding:"12px 0",fontSize:15,fontWeight:600,cursor:(b2bLoginEmail && b2bPass && !b2bLoading) ? "pointer" : "default"}}
+                  disabled={!b2bLoginEmail || !b2bPass || b2bLoading}
+                  onClick={handleB2bLogin}>
+                  {b2bLoading ? "Prihlasujem..." : "Prihlásiť sa →"}
                 </button>
-                <button onClick={() => { setFirmType(null); setB2bPass(""); setB2bError(""); }} style={{width:"100%",background:"none",border:"none",color:"#6B6963",fontSize:13,cursor:"pointer",marginTop:8,padding:"6px 0"}}>← Späť</button>
+                <button onClick={() => { setFirmType(null); setB2bPass(""); setB2bLoginEmail(""); setB2bError(""); }} style={{width:"100%",background:"none",border:"none",color:"#6B6963",fontSize:13,cursor:"pointer",marginTop:8,padding:"6px 0"}}>← Späť</button>
               </div>
             )}
 
@@ -1471,6 +1537,33 @@ function App() {
             )}
           </div>
         )
+      )}
+    {/* MOJE OBJEDNÁVKY */}
+      {showMyOrders && (
+        <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.4)",zIndex:200,display:"flex",alignItems:"center",justifyContent:"center",padding:20}} onClick={() => setShowMyOrders(false)}>
+          <div style={{background:"#fff",borderRadius:12,padding:24,maxWidth:640,width:"100%",maxHeight:"80vh",overflowY:"auto"}} onClick={e => e.stopPropagation()}>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}}>
+              <div style={{fontFamily:FONT_DISPLAY,fontWeight:600,fontSize:18,color:C.dark}}>Moje objednávky</div>
+              <button onClick={() => setShowMyOrders(false)} style={{background:"none",border:"none",fontSize:20,cursor:"pointer",color:C.gray}}>✕</button>
+            </div>
+            {myOrdersLoading ? (
+              <div style={{textAlign:"center",padding:"30px 0",color:C.gray}}>Načítavam...</div>
+            ) : myOrders.length === 0 ? (
+              <div style={{textAlign:"center",padding:"30px 0",color:C.gray}}>Zatiaľ žiadne objednávky.</div>
+            ) : (
+              myOrders.map(o => (
+                <div key={o.id} style={{border:"1px solid #E4E2DD",borderRadius:8,padding:14,marginBottom:10}}>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+                    <div style={{fontSize:13,color:C.gray}}>{new Date(o.created_at).toLocaleDateString("sk-SK")} · <span style={{...S.badge, ...(o.status === "Nová" ? S.badgeOrange : o.status === "Vybavená" ? S.badgeGreen : S.badgeGray)}}>{o.status}</span></div>
+                    <div style={{fontFamily:FONT_MONO,fontWeight:600,fontSize:15,color:C.dark}}>{(o.total_price||0).toFixed(2)} €</div>
+                  </div>
+                  <div style={{fontSize:13,color:C.dark,marginBottom:10}}>{(o.items||[]).map(i=>i.name).join(", ")}</div>
+                  <button onClick={() => repeatOrder(o)} style={{background:C.green,color:"#fff",border:"none",borderRadius:6,padding:"8px 16px",fontSize:13,fontWeight:600,cursor:"pointer",fontFamily:FONT_DISPLAY}}>↻ Objednať znova</button>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
       )}
     {/* TOAST NOTIFICATION */}
       {toast && (
