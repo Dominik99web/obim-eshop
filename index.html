@@ -616,7 +616,13 @@ function App() {
       setOrders(data.map(row => ({
         id: row.id,
         date: new Date(row.created_at).toLocaleString("sk-SK"),
+        createdAtRaw: row.created_at,
         name: row.contact_person,
+        companyName: row.company_name,
+        ico: row.ico,
+        dic: row.dic,
+        address: row.address,
+        customerType: row.customer_type,
         phone: row.phone,
         email: row.email,
         deliverySlotText: row.delivery_slot,
@@ -785,6 +791,74 @@ function App() {
     setShowMyOrders(false);
     setView("cart");
     window.scrollTo(0, 0);
+  };
+
+  const escXml = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+  const generateMrpXml = (ordersToExport) => {
+    const objednavky = ordersToExport.map(o => {
+      const isFirma = o.customerType && o.customerType.toLowerCase().includes("firma") || o.ico;
+      const datum = (o.createdAtRaw || new Date().toISOString()).slice(0, 10);
+      const fullName = (o.name || "").trim();
+      const spaceIdx = fullName.lastIndexOf(" ");
+      const jmeno = spaceIdx > -1 ? fullName.slice(0, spaceIdx) : "";
+      const priezvisko = spaceIdx > -1 ? fullName.slice(spaceIdx + 1) : fullName;
+
+      const polozky = (o.items || []).map(it => {
+        const sazba = Math.round((it.dph || 0) * 100);
+        const text = it.pieceNote ? `${it.name} (${it.pieceNote})` : it.name;
+        return `      <polozka cisloKarty="${escXml(it.card || "")}" text="${escXml(text)}" cenaMJ="${it.price}" pocetMJ="${it.qty}" sazbaDPH="${sazba}"/>`;
+      }).join("\n");
+
+      const poznamkaText = [o.deliverySlotText, o.note].filter(Boolean).join(" | ");
+
+      return `    <objednavka puvodniCislo="${escXml(String(o.id).slice(0, 8))}" datum="${datum}" cenySDPH="N">
+      <mena kod="EUR" mnozstvi="1" kurz="1"/>
+      <adresa id="1" ulice="${escXml(o.address || "")}" mesto="" psc="" kodStatu="SK" fyzickaOsoba="${isFirma ? "N" : "T"}">
+        <firma nazev="${escXml(o.companyName || "")}" ico="${escXml(o.ico || "")}" dic="${escXml(o.dic || "")}"/>
+        <osoba jmeno="${escXml(jmeno)}" prijmeni="${escXml(priezvisko)}"/>
+        <email>${escXml(o.email || "")}</email>
+        <tel>${escXml(o.phone || "")}</tel>
+      </adresa>
+      <polozky>
+${polozky}
+      </polozky>
+      <poznamka>${escXml(poznamkaText)}</poznamka>
+    </objednavka>`;
+    }).join("\n");
+
+    return `<?xml version="1.0" encoding="UTF-8"?>
+<mrpEnvelope>
+  <body>
+    <mrpRequest>
+      <request command="IMPEO0" requestId="${Date.now()}"/>
+      <data>
+        <params>
+          <paramvalue name="cisloSkladu">1</paramvalue>
+        </params>
+${objednavky}
+      </data>
+    </mrpRequest>
+  </body>
+</mrpEnvelope>`;
+  };
+
+  const exportOrdersForMrp = () => {
+    const toExport = orders.filter(o => o.status === "Nová");
+    if (toExport.length === 0) {
+      alert("Žiadne nové objednávky na export.");
+      return;
+    }
+    const xml = generateMrpXml(toExport);
+    const blob = new Blob([xml], { type: "application/xml;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `objednavky_mrp_${new Date().toISOString().slice(0,10)}.xml`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const removeDiacritics = (str) => {
@@ -1445,7 +1519,10 @@ function App() {
               <div style={S.adminSection}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
                   <div style={{ fontWeight: 700, fontSize: 17 }}>Objednávky ({orders.length})</div>
-                  <button style={{ ...S.actionBtn, background: "#EAF0EA", color: C.green }} onClick={fetchOrders}>🔄 Obnoviť</button>
+                  <div style={{ display: "flex", gap: 8 }}>
+                    <button style={{ ...S.actionBtn, background: "#EAF0EA", color: C.green }} onClick={exportOrdersForMrp}>📤 Export pre MRP (XML)</button>
+                    <button style={{ ...S.actionBtn, background: "#EAF0EA", color: C.green }} onClick={fetchOrders}>🔄 Obnoviť</button>
+                  </div>
                 </div>
                 {ordersLoading ? (
                   <div style={{ color: C.gray, padding: "20px 0", textAlign: "center" }}>Načítavam objednávky...</div>
