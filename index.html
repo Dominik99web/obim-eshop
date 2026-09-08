@@ -806,10 +806,10 @@ function App() {
         return `      <polozka cisloKarty="${escXml(it.card || "")}" text="${escXml(text)}" cenaMJ="${it.price}" pocetMJ="${it.qty}" sazbaDPH="${sazba}"/>`;
       }).join("\n");
 
-      // Meno, kontakt a adresa zákazníka idú len ako čitateľný text do poznámky —
-      // NIE do <firma>/<osoba>, aby MRP automaticky nevytváralo/neduplikovalo záznamy v adresári.
+      // Meno zákazníka ide do osoba/priezvisko (zobrazí sa v poli "Odberateľ" na tlačive).
+      // Firma/IČO nechávame prázdne zámerne, aby MRP nezakladalo/neduplikovalo záznamy vo firemnom adresári.
+      // Zvyšné kontaktné údaje idú navyše aj do poznámky pre úplnosť.
       const zakaznikInfo = [
-        `Zákazník: ${o.name || "—"}`,
         o.companyName ? `Firma: ${o.companyName}` : null,
         o.ico ? `IČO: ${o.ico}` : null,
         o.dic ? `DIČ: ${o.dic}` : null,
@@ -823,7 +823,7 @@ function App() {
       <mena kod="EUR" mnozstvi="1" kurz="1"/>
       <adresa ulice="" mesto="" psc="" kodStatu="SK" fyzickaOsoba="True">
         <firma nazev="" ico="" dic=""/>
-        <osoba jmeno="" prijmeni=""/>
+        <osoba jmeno="" prijmeni="${escXml(o.name || "Zákazník z eshopu")}"/>
       </adresa>
       <polozky>
 ${polozky}
