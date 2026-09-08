@@ -631,6 +631,7 @@ function App() {
         total: row.total_price || 0,
         status: row.status,
         items: row.items || [],
+        exportedToMrp: row.exported_to_mrp || false,
       })));
     } else if (error) {
       console.error("Chyba pri načítaní objednávok:", error);
@@ -843,10 +844,10 @@ ${objednavky}
 </mrpEnvelope>`;
   };
 
-  const exportOrdersForMrp = () => {
-    const toExport = orders.filter(o => o.status === "Nová");
+  const exportOrdersForMrp = async () => {
+    const toExport = orders.filter(o => !o.exportedToMrp);
     if (toExport.length === 0) {
-      alert("Žiadne nové objednávky na export.");
+      alert("Žiadne nové (ešte neexportované) objednávky na export.");
       return;
     }
     const xml = generateMrpXml(toExport);
@@ -859,6 +860,14 @@ ${objednavky}
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+
+    const idsToMark = toExport.map(o => o.id);
+    const { error } = await supabaseClient.from("orders").update({ exported_to_mrp: true }).in("id", idsToMark);
+    if (error) {
+      console.error("Chyba pri označovaní objednávok ako exportovaných:", error);
+    } else {
+      setOrders(os => os.map(o => idsToMark.includes(o.id) ? { ...o, exportedToMrp: true } : o));
+    }
   };
 
   const removeDiacritics = (str) => {
@@ -1520,7 +1529,7 @@ ${objednavky}
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
                   <div style={{ fontWeight: 700, fontSize: 17 }}>Objednávky ({orders.length})</div>
                   <div style={{ display: "flex", gap: 8 }}>
-                    <button style={{ ...S.actionBtn, background: "#EAF0EA", color: C.green }} onClick={exportOrdersForMrp}>📤 Export pre MRP (XML)</button>
+                    <button style={{ ...S.actionBtn, background: "#EAF0EA", color: C.green }} onClick={exportOrdersForMrp}>📤 Export pre MRP ({orders.filter(o => !o.exportedToMrp).length} nové)</button>
                     <button style={{ ...S.actionBtn, background: "#EAF0EA", color: C.green }} onClick={fetchOrders}>🔄 Obnoviť</button>
                   </div>
                 </div>
@@ -1546,6 +1555,7 @@ ${objednavky}
                           <div style={{display:"flex",gap:8,alignItems:"center"}}>
                             <div style={{fontWeight:700,fontSize:16,color:C.dark}}>{o.total.toFixed(2)} €</div>
                             <span style={{ ...S.badge, ...(o.status === "Nová" ? S.badgeOrange : o.status === "Vybavená" ? S.badgeGreen : S.badgeGray) }}>{o.status}</span>
+                            {o.exportedToMrp && <span style={{...S.badge, background:"#F0EFEA", color:"#6B6963"}} title="Táto objednávka už bola exportovaná do MRP">📤 v MRP</span>}
                             <button style={{ ...S.actionBtn, background:"#EAF0EA", color: C.green }} onClick={() => updateOrderStatus(o.id, "Vybavená")}>✓ Vybaviť</button>
                             <button style={{ ...S.actionBtn, background:"#F0EFEA", color: "#6B6963" }} onClick={() => updateOrderStatus(o.id, "Zrušená")}>✕ Zrušiť</button>
                           </div>
