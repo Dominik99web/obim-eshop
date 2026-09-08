@@ -798,12 +798,7 @@ function App() {
 
   const generateMrpXml = (ordersToExport) => {
     const objednavky = ordersToExport.map(o => {
-      const isFirma = o.customerType && o.customerType.toLowerCase().includes("firma") || o.ico;
       const datum = (o.createdAtRaw || new Date().toISOString()).slice(0, 10);
-      const fullName = (o.name || "").trim();
-      const spaceIdx = fullName.lastIndexOf(" ");
-      const jmeno = spaceIdx > -1 ? fullName.slice(0, spaceIdx) : "";
-      const priezvisko = spaceIdx > -1 ? fullName.slice(spaceIdx + 1) : fullName;
 
       const polozky = (o.items || []).map(it => {
         const sazba = Math.round((it.dph || 0) * 100);
@@ -811,15 +806,24 @@ function App() {
         return `      <polozka cisloKarty="${escXml(it.card || "")}" text="${escXml(text)}" cenaMJ="${it.price}" pocetMJ="${it.qty}" sazbaDPH="${sazba}"/>`;
       }).join("\n");
 
-      const poznamkaText = [o.deliverySlotText, o.note].filter(Boolean).join(" | ");
+      // Meno, kontakt a adresa zákazníka idú len ako čitateľný text do poznámky —
+      // NIE do <firma>/<osoba>, aby MRP automaticky nevytváralo/neduplikovalo záznamy v adresári.
+      const zakaznikInfo = [
+        `Zákazník: ${o.name || "—"}`,
+        o.companyName ? `Firma: ${o.companyName}` : null,
+        o.ico ? `IČO: ${o.ico}` : null,
+        o.dic ? `DIČ: ${o.dic}` : null,
+        o.address ? `Adresa: ${o.address}` : null,
+        o.phone ? `Tel: ${o.phone}` : null,
+        o.email ? `Email: ${o.email}` : null,
+      ].filter(Boolean).join(", ");
+      const poznamkaText = [zakaznikInfo, o.deliverySlotText, o.note].filter(Boolean).join(" | ");
 
       return `    <objednavka puvodniCislo="${escXml(String(o.id).slice(0, 8))}" datum="${datum}" cenySDPH="False">
       <mena kod="EUR" mnozstvi="1" kurz="1"/>
-      <adresa ulice="${escXml(o.address || "")}" mesto="" psc="" kodStatu="SK" fyzickaOsoba="${isFirma ? "False" : "True"}">
-        <firma nazev="${escXml(o.companyName || "")}" ico="${escXml(o.ico || "")}" dic="${escXml(o.dic || "")}"/>
-        <osoba jmeno="${escXml(jmeno)}" prijmeni="${escXml(priezvisko)}"/>
-        <email>${escXml(o.email || "")}</email>
-        <tel>${escXml(o.phone || "")}</tel>
+      <adresa ulice="" mesto="" psc="" kodStatu="SK" fyzickaOsoba="True">
+        <firma nazev="" ico="" dic=""/>
+        <osoba jmeno="" prijmeni=""/>
       </adresa>
       <polozky>
 ${polozky}
