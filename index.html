@@ -632,6 +632,7 @@ function App() {
         status: row.status,
         items: row.items || [],
         exportedToMrp: row.exported_to_mrp || false,
+        userId: row.user_id || null,
       })));
     } else if (error) {
       console.error("Chyba pri načítaní objednávok:", error);
@@ -806,24 +807,26 @@ function App() {
         return `      <polozka cisloKarty="${escXml(it.card || "")}" text="${escXml(text)}" cenaMJ="${it.price}" pocetMJ="${it.qty}" sazbaDPH="${sazba}"/>`;
       }).join("\n");
 
-      // Meno zákazníka ide do osoba/priezvisko (zobrazí sa v poli "Odberateľ" na tlačive).
-      // Firma/IČO nechávame prázdne zámerne, aby MRP nezakladalo/neduplikovalo záznamy vo firemnom adresári.
-      // Zvyšné kontaktné údaje idú navyše aj do poznámky pre úplnosť.
-      const zakaznikInfo = [
-        o.companyName ? `Firma: ${o.companyName}` : null,
-        o.ico ? `IČO: ${o.ico}` : null,
-        o.dic ? `DIČ: ${o.dic}` : null,
-        o.address ? `Adresa: ${o.address}` : null,
-        o.phone ? `Tel: ${o.phone}` : null,
-        o.email ? `Email: ${o.email}` : null,
-      ].filter(Boolean).join(", ");
-      const poznamkaText = [zakaznikInfo, o.deliverySlotText, o.note].filter(Boolean).join(" | ");
+      const isFirma = (o.customerType && o.customerType.toLowerCase().includes("firma")) || o.ico;
+      const fullName = (o.name || "").trim();
+      const spaceIdx = fullName.lastIndexOf(" ");
+      const jmeno = spaceIdx > -1 ? fullName.slice(0, spaceIdx) : "";
+      const priezvisko = spaceIdx > -1 ? fullName.slice(spaceIdx + 1) : fullName;
+
+      // Stabilné ID zákazníka (nie objednávky!) — kľúčové pre to, aby MRP spároval
+      // opakovanú objednávku s existujúcou adresou namiesto založenia novej.
+      // B2B: ID prihláseného účtu. Domácnosti bez účtu: telefónne číslo ako náhradný kľúč.
+      const stableId = o.userId ? `b2b-${o.userId}` : (o.phone ? `hh-${String(o.phone).replace(/\D/g, "")}` : `guest-${o.id}`);
+
+      const poznamkaText = [o.deliverySlotText, o.note].filter(Boolean).join(" | ");
 
       return `    <objednavka puvodniCislo="${escXml(String(o.id).slice(0, 8))}" datum="${datum}" cenySDPH="False">
       <mena kod="EUR" mnozstvi="1" kurz="1"/>
-      <adresa ulice="" mesto="" psc="" kodStatu="SK" fyzickaOsoba="True">
-        <firma nazev="" ico="" dic=""/>
-        <osoba jmeno="" prijmeni="${escXml(o.name || "Zákazník z eshopu")}"/>
+      <adresa id="${escXml(stableId)}" ulice="${escXml(o.address || "")}" mesto="" psc="" kodStatu="SK" fyzickaOsoba="${isFirma ? "False" : "True"}">
+        <firma nazev="${escXml(o.companyName || "")}" ico="${escXml(o.ico || "")}" dic="${escXml(o.dic || "")}"/>
+        <osoba jmeno="${escXml(jmeno)}" prijmeni="${escXml(priezvisko || "Zákazník z eshopu")}"/>
+        <email>${escXml(o.email || "")}</email>
+        <tel>${escXml(o.phone || "")}</tel>
       </adresa>
       <polozky>
 ${polozky}
