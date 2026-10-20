@@ -214,6 +214,7 @@ const initialProducts = [
   { id: 180, card: "204.05", name: "Výhonky repa červená 50g", unit: "ks", price: 2.19, dph: 0.19, category: "Ostatné", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
   { id: 181, card: "35.01", name: "Baklažán baby 200g", unit: "ks", price: 4.89, dph: 0.05, category: "Zelenina", img: "https://images.unsplash.com/photo-1615484477778-ca3b77940c25?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
   { id: 182, card: "33.10", name: "Brokolica baby 150g", unit: "ks", price: 2.99, dph: 0.05, category: "Zelenina", img: "https://images.unsplash.com/photo-1615484477778-ca3b77940c25?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
+  { id: 216, card: "33.20", name: "Brokolica voľná (kg)", unit: "kg", price: 2.79, dph: 0.05, category: "Zelenina", img: "https://images.unsplash.com/photo-1615484477778-ca3b77940c25?w=300&q=80", origin: "PL", grade: "1.tr.", available: true, hidden: true },
   { id: 183, card: "11.00", name: "Citrón Mayer", unit: "kg", price: 1.39, dph: 0.19, category: "Ovocie", img: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=300&q=80", origin: "ZA", grade: "1.tr.", available: true },
   { id: 184, card: "90.01", name: "Cuketa baby 200g", unit: "ks", price: 4.89, dph: 0.05, category: "Zelenina", img: "https://images.unsplash.com/photo-1615484477778-ca3b77940c25?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
   { id: 185, card: "309.00", name: "Grep biely", unit: "kg", price: 1.79, dph: 0.19, category: "Ovocie", img: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=300&q=80", origin: "ZA", grade: "1.tr.", available: true },
@@ -891,9 +892,10 @@ ${objednavky}
   // Auto-switch to Všetko when searching
   const effectiveCat = searchActive ? "Všetko" : filterCat;
 
-  const productsForDisplay = Object.keys(customPrices).length > 0
-    ? products.map(p => customPrices[p.card] !== undefined ? { ...p, price: customPrices[p.card] } : p)
-    : products;
+  // Produkty s hidden:true sa zobrazia len prihláseným zákazníkom, ktorí pre ne majú vlastnú (vysúťaženú) cenu.
+  const productsForDisplay = products
+    .filter(p => !p.hidden || customPrices[p.card] !== undefined)
+    .map(p => customPrices[p.card] !== undefined ? { ...p, price: customPrices[p.card] } : p);
 
   const filtered = productsForDisplay.filter(p => {
     const catMatch = effectiveCat === "Všetko" || p.category === effectiveCat;
