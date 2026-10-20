@@ -856,29 +856,44 @@ ${objednavky}
 </mrpEnvelope>`;
   };
 
+  const downloadMrpXml = (ordersToExport, filenameHint) => {
+    const xml = generateMrpXml(ordersToExport);
+    const blob = new Blob([xml], { type: "application/xml;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `objednavky_mrp_${filenameHint}_${new Date().toISOString().slice(0,10)}.xml`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const markExportedInDb = async (ids) => {
+    const { error } = await supabaseClient.from("orders").update({ exported_to_mrp: true }).in("id", ids);
+    if (error) {
+      console.error("Chyba pri označovaní objednávok ako exportovaných:", error);
+    } else {
+      setOrders(os => os.map(o => ids.includes(o.id) ? { ...o, exportedToMrp: true } : o));
+    }
+  };
+
   const exportOrdersForMrp = async () => {
     const toExport = orders.filter(o => !o.exportedToMrp);
     if (toExport.length === 0) {
       alert("Žiadne nové (ešte neexportované) objednávky na export.");
       return;
     }
-    const xml = generateMrpXml(toExport);
-    const blob = new Blob([xml], { type: "application/xml;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `objednavky_mrp_${new Date().toISOString().slice(0,10)}.xml`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    downloadMrpXml(toExport, "hromadne");
+    await markExportedInDb(toExport.map(o => o.id));
+  };
 
-    const idsToMark = toExport.map(o => o.id);
-    const { error } = await supabaseClient.from("orders").update({ exported_to_mrp: true }).in("id", idsToMark);
-    if (error) {
-      console.error("Chyba pri označovaní objednávok ako exportovaných:", error);
-    } else {
-      setOrders(os => os.map(o => idsToMark.includes(o.id) ? { ...o, exportedToMrp: true } : o));
+  // Export jednej konkrétnej objednávky - funguje aj opakovane (napr. import z iného počítača),
+  // bez ohľadu na to, či už bola exportovaná v hromadnom exporte.
+  const exportSingleOrder = async (order) => {
+    downloadMrpXml([order], `objednavka_${String(order.id).slice(0,8)}`);
+    if (!order.exportedToMrp) {
+      await markExportedInDb([order.id]);
     }
   };
 
@@ -1574,6 +1589,7 @@ ${objednavky}
                             <div style={{fontWeight:700,fontSize:16,color:C.dark}}>{o.total.toFixed(2)} €</div>
                             <span style={{ ...S.badge, ...(o.status === "Nová" ? S.badgeOrange : o.status === "Vybavená" ? S.badgeGreen : S.badgeGray) }}>{o.status}</span>
                             {o.exportedToMrp && <span style={{...S.badge, background:"#F0EFEA", color:"#6B6963"}} title="Táto objednávka už bola exportovaná do MRP">📤 v MRP</span>}
+                            <button style={{ ...S.actionBtn, background:"#EAF0EA", color: C.green }} title="Stiahne XML len pre túto objednávku - funguje aj keď už bola exportovaná" onClick={() => exportSingleOrder(o)}>📤 Export</button>
                             <button style={{ ...S.actionBtn, background:"#EAF0EA", color: C.green }} onClick={() => updateOrderStatus(o.id, "Vybavená")}>✓ Vybaviť</button>
                             <button style={{ ...S.actionBtn, background:"#F0EFEA", color: "#6B6963" }} onClick={() => updateOrderStatus(o.id, "Zrušená")}>✕ Zrušiť</button>
                           </div>
