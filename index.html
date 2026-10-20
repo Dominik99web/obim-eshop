@@ -464,6 +464,7 @@ function App() {
   const [firmReady, setFirmReady] = useState(false);
   const [b2bLoginEmail, setB2bLoginEmail] = useState("");
   const [b2bUserId, setB2bUserId] = useState(null);
+  const [customPrices, setCustomPrices] = useState({});
   const [b2bLoading, setB2bLoading] = useState(false);
   const [myOrders, setMyOrders] = useState([]);
   const [myOrdersLoading, setMyOrdersLoading] = useState(false);
@@ -758,6 +759,17 @@ function App() {
     });
     setB2bUserId(uid);
     setFirmReady(true);
+
+    const { data: priceRows } = await supabaseClient
+      .from("custom_prices")
+      .select("card, price")
+      .eq("user_id", uid);
+    if (priceRows) {
+      const priceMap = {};
+      priceRows.forEach(r => { priceMap[r.card] = r.price; });
+      setCustomPrices(priceMap);
+    }
+
     setB2bLoading(false);
     window.scrollTo(0, 0);
   };
@@ -772,6 +784,7 @@ function App() {
     setB2bPass("");
     setMyOrders([]);
     setShowMyOrders(false);
+    setCustomPrices({});
   };
 
   const fetchMyOrders = async () => {
@@ -887,7 +900,11 @@ ${objednavky}
   // Auto-switch to Všetko when searching
   const effectiveCat = searchActive ? "Všetko" : filterCat;
 
-  const filtered = products.filter(p => {
+  const productsForDisplay = Object.keys(customPrices).length > 0
+    ? products.map(p => customPrices[p.card] !== undefined ? { ...p, price: customPrices[p.card] } : p)
+    : products;
+
+  const filtered = productsForDisplay.filter(p => {
     const catMatch = effectiveCat === "Všetko" || p.category === effectiveCat;
     if (!searchActive) return catMatch;
     const nameNorm = removeDiacritics(p.name);
