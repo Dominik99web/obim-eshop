@@ -161,11 +161,12 @@ const initialProducts = [
   { id: 123, card: "96.00", name: "Šampiňón hnedý", unit: "kg", price: 3.49, dph: 0.05, category: "Huby", img: "https://images.unsplash.com/photo-1552825897-bb4e4b4afa01?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
   { id: 126, card: "350.00", name: "Šampiňóny Portobello", unit: "kg", price: 3.69, dph: 0.05, category: "Huby", img: "https://images.unsplash.com/photo-1552825897-bb4e4b4afa01?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
   { id: 127, card: "68.00", name: "Šampiňóny voľné", unit: "kg", price: 2.89, dph: 0.05, category: "Huby", img: "https://images.unsplash.com/photo-1552825897-bb4e4b4afa01?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
+  { id: 215, card: "202.00", name: "Zemiaky neskoré Wega vt.B", unit: "kg", price: 0.64, dph: 0.05, category: "Zemiaky", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "DE", grade: "1.tr.", available: true, bestseller: true },
+  { id: 132, card: "202.05", name: "Zemiaky PRANÉ neskoré Otolia", unit: "kg", price: 0.89, dph: 0.05, category: "Zemiaky", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
   { id: 128, card: "202.08", name: "Zemiaky AGRIA vt.C", unit: "kg", price: 1.09, dph: 0.05, category: "Zemiaky", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
   { id: 129, card: "61.03", name: "Zemiaky baby 25/35mm", unit: "kg", price: 0.69, dph: 0.05, category: "Zemiaky", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
   { id: 130, card: "327.00", name: "Zemiaky BATATY", unit: "kg", price: 1.39, dph: 0.19, category: "Zemiaky", img: "https://images.unsplash.com/photo-1596097634026-a0d6e68e2e2b?w=300&q=80", origin: "EG/US", grade: "1.tr.", available: true },
   { id: 131, card: "198.03", name: "Zemiaky Colomba 2KG", unit: "ks", price: 1.49, dph: 0.05, category: "Zemiaky", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
-  { id: 132, card: "202.05", name: "Zemiaky PRANÉ neskoré Otolia", unit: "kg", price: 0.89, dph: 0.05, category: "Zemiaky", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "CZ", grade: "1.tr.", available: true },
   { id: 134, card: "243.00", name: "Vajcia čerstvé L kartón 30ks", unit: "ks", price: 7.49, dph: 0.19, category: "Vajcia", img: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=300&q=80", origin: "SK", grade: "1.tr.", available: true },
   { id: 135, card: "518.01", name: "Vákuová cibuľa celá čistená 3KG", unit: "ks", price: 5.99, dph: 0.19, category: "Vakuové produkty", img: "https://images.pexels.com/photos/4197430/pexels-photo-4197430.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
   { id: 137, card: "535.00", name: "Vákuová cibuľa červená celá čistená 3KG", unit: "ks", price: 8.39, dph: 0.19, category: "Vakuové produkty", img: "https://images.pexels.com/photos/4197430/pexels-photo-4197430.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
@@ -202,15 +203,15 @@ const initialProducts = [
   { id: 168, card: "522.00", name: "Vákuový zeler celý čistený 3KG", unit: "ks", price: 6.39, dph: 0.19, category: "Vakuové produkty", img: "https://images.pexels.com/photos/1598080/pexels-photo-1598080.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
   { id: 169, card: "523.00", name: "Vákuový zeler kocky 3KG", unit: "ks", price: 6.49, dph: 0.19, category: "Vakuové produkty", img: "https://images.pexels.com/photos/1598080/pexels-photo-1598080.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
   { id: 170, card: "529.00", name: "Vákuový zeler rezance 3KG", unit: "ks", price: 6.99, dph: 0.19, category: "Vakuové produkty", img: "https://images.pexels.com/photos/1598080/pexels-photo-1598080.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
-  { id: 171, card: "184.00", name: "Jablková šťava 0,25l", unit: "ks", price: 0.33, dph: 0.05, category: "Sezónne produkty", img: "https://images.pexels.com/photos/1510392/pexels-photo-1510392.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
-  { id: 172, card: "357.00", name: "Mak modrý", unit: "kg", price: 5.49, dph: 0.19, category: "Sezónne produkty", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
-  { id: 173, card: "255.01", name: "MUNGO klíčky 500g", unit: "ks", price: 2.89, dph: 0.05, category: "Sezónne produkty", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
-  { id: 174, card: "72.00", name: "Orechy vlašské lúpané", unit: "kg", price: 11.9, dph: 0.19, category: "Sezónne produkty", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
-  { id: 175, card: "204.03", name: "Výhonky cesnak 50g", unit: "ks", price: 2.19, dph: 0.05, category: "Sezónne produkty", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
-  { id: 176, card: "204.00", name: "Výhonky hrášok zelený 100g", unit: "ks", price: 2.49, dph: 0.05, category: "Sezónne produkty", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
-  { id: 177, card: "204.02", name: "Výhonky china rose 100g", unit: "ks", price: 1.99, dph: 0.19, category: "Sezónne produkty", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
-  { id: 178, card: "206.10", name: "Výhonky poru 50g", unit: "ks", price: 2.09, dph: 0.05, category: "Sezónne produkty", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
-  { id: 180, card: "204.05", name: "Výhonky repa červená 50g", unit: "ks", price: 2.19, dph: 0.19, category: "Sezónne produkty", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
+  { id: 171, card: "184.00", name: "Jablková šťava 0,25l", unit: "ks", price: 0.33, dph: 0.05, category: "Ostatné", img: "https://images.pexels.com/photos/1510392/pexels-photo-1510392.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
+  { id: 172, card: "357.00", name: "Mak modrý", unit: "kg", price: 5.49, dph: 0.19, category: "Ostatné", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
+  { id: 173, card: "255.01", name: "MUNGO klíčky 500g", unit: "ks", price: 2.89, dph: 0.05, category: "Ostatné", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
+  { id: 174, card: "72.00", name: "Orechy vlašské lúpané", unit: "kg", price: 11.9, dph: 0.19, category: "Ostatné", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
+  { id: 175, card: "204.03", name: "Výhonky cesnak 50g", unit: "ks", price: 2.19, dph: 0.05, category: "Ostatné", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
+  { id: 176, card: "204.00", name: "Výhonky hrášok zelený 100g", unit: "ks", price: 2.49, dph: 0.05, category: "Ostatné", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
+  { id: 177, card: "204.02", name: "Výhonky china rose 100g", unit: "ks", price: 1.99, dph: 0.19, category: "Ostatné", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
+  { id: 178, card: "206.10", name: "Výhonky poru 50g", unit: "ks", price: 2.09, dph: 0.05, category: "Ostatné", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
+  { id: 180, card: "204.05", name: "Výhonky repa červená 50g", unit: "ks", price: 2.19, dph: 0.19, category: "Ostatné", img: "https://images.pexels.com/photos/906150/pexels-photo-906150.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
   { id: 181, card: "35.01", name: "Baklažán baby 200g", unit: "ks", price: 4.89, dph: 0.05, category: "Zelenina", img: "https://images.unsplash.com/photo-1615484477778-ca3b77940c25?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
   { id: 182, card: "33.10", name: "Brokolica baby 150g", unit: "ks", price: 2.99, dph: 0.05, category: "Zelenina", img: "https://images.unsplash.com/photo-1615484477778-ca3b77940c25?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
   { id: 183, card: "11.00", name: "Citrón Mayer", unit: "kg", price: 1.39, dph: 0.19, category: "Ovocie", img: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=300&q=80", origin: "ZA", grade: "1.tr.", available: true },
@@ -227,7 +228,7 @@ const initialProducts = [
   { id: 199, card: "505.00", name: "Vákuové zemiaky varené čistené guličky", unit: "kg", price: 1.09, dph: 0.19, category: "Vakuové produkty", img: "https://images.pexels.com/photos/4197430/pexels-photo-4197430.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
   { id: 200, card: "530.05", name: "Vákuový petržlen celý čistený 5KG", unit: "ks", price: 18.39, dph: 0.19, category: "Vakuové produkty", img: "https://images.pexels.com/photos/4197430/pexels-photo-4197430.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
   { id: 201, card: "29.00", name: "Hurmikaki cal. 20", unit: "ks", price: 0.89, dph: 0.19, category: "Ovocie", img: "https://images.unsplash.com/photo-1628689469838-524a4a973b8e?w=300&q=80", origin: "ES", grade: "1.tr.", available: true },
-  { id: 202, card: "184.01", name: "Jablkové pyré 100g", unit: "ks", price: 0.39, dph: 0.05, category: "Sezónne produkty", img: "https://images.pexels.com/photos/1510392/pexels-photo-1510392.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
+  { id: 202, card: "184.01", name: "Jablkové pyré 100g", unit: "ks", price: 0.39, dph: 0.05, category: "Ovocie", img: "https://images.pexels.com/photos/1510392/pexels-photo-1510392.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
   { id: 203, card: "37.00", name: "Kaleráb gigant", unit: "kg", price: 0.99, dph: 0.05, category: "Zelenina", img: "https://images.unsplash.com/photo-1615484477778-ca3b77940c25?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
   { id: 204, card: "78.01", name: "Kel kučeravý", unit: "kg", price: 10.79, dph: 0.05, category: "Zelenina", img: "https://images.unsplash.com/photo-1524179091875-bf99a9a6af57?w=300&q=80", origin: "IT", grade: "1.tr.", available: true },
   { id: 205, card: "78.00", name: "Kel ružičkový", unit: "kg", price: 2.99, dph: 0.05, category: "Zelenina", img: "https://images.unsplash.com/photo-1524179091875-bf99a9a6af57?w=300&q=80", origin: "NL", grade: "1.tr.", available: true },
@@ -239,7 +240,6 @@ const initialProducts = [
   { id: 212, card: "108.01", name: "Tekvica Halloween", unit: "kg", price: 1.19, dph: 0.05, category: "Zelenina", img: "https://images.unsplash.com/photo-1570586437263-ab629fccc818?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
   { id: 213, card: "108.02", name: "Tekvica ozdobná", unit: "ks", price: 1.29, dph: 0.05, category: "Zelenina", img: "https://images.unsplash.com/photo-1570586437263-ab629fccc818?w=300&q=80", origin: "PL", grade: "1.tr.", available: true },
   { id: 214, card: "519.15", name: "Vákuová cibuľa červená kocky/plátky 5KG", unit: "ks", price: 14.0, dph: 0.19, category: "Vakuové produkty", img: "https://images.pexels.com/photos/4197430/pexels-photo-4197430.jpeg?w=300", origin: "SK", grade: "1.tr.", available: true },
-  { id: 215, card: "202.00", name: "Zemiaky neskoré Wega vt.B", unit: "kg", price: 0.64, dph: 0.05, category: "Zemiaky", img: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&q=80", origin: "DE", grade: "1.tr.", available: true },
 ];
 
 // Krajiny pôvodu - plné názvy s vlajkami
@@ -294,7 +294,7 @@ const getPriceWithDPH = (product) => {
   return withMarkup * (1 + getDPH(product));
 };
 
-const CATEGORIES = ["Všetko", "Ovocie", "Zelenina", "Šaláty", "Bylinky a koreniny", "Huby", "Zemiaky", "Vakuové produkty", "Vajcia", "Sezónne produkty"];
+const CATEGORIES = ["Všetko", "Ovocie", "Zelenina", "Šaláty", "Bylinky a koreniny", "Huby", "Zemiaky", "Vakuové produkty", "Vajcia", "Ostatné"];
 
 const C = {
   green: "#1F4D3A", greenLight: "#2F6B4F", greenPale: "#EAF0EA",
@@ -320,7 +320,7 @@ const CAT_ICONS = {
   "Zemiaky": "🥔",
   "Vakuové produkty": "📦",
   "Vajcia": "🥚",
-  "Sezónne produkty": "🌱",
+  "Ostatné": "📦",
 };
 
 const S = {
@@ -1264,6 +1264,7 @@ ${objednavky}
                       <div style={S.cardBody}>
                         <div style={S.cardCat}>{p.category}</div>
                         <div style={S.cardName}>{p.name}</div>
+                        {p.bestseller && <span style={{...S.badge, ...S.badgeOrange, marginBottom:4}}>🔥 Najpredávanejšie</span>}
                         <div style={S.cardPrice}>
                           {customerType === "domacnost" ? getPriceWithDPH(p).toFixed(2) : p.price.toFixed(2)} €
                           <span style={S.cardUnit}>/{p.unit}</span>
