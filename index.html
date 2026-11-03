@@ -281,12 +281,15 @@ const getDPH = (product) => {
 };
 
 // Príplatok pre domácnosti (maloobchodná marža)
-const DOMACNOST_MARKUP = 0.20; // +20%
+// TEMP: dočasne vypnuté - domácnosť vidí úplne rovnaké ceny ako firma (napr. pri ukážke škole).
+// Pre návrat na bežný maloobchod (cena + 20% + DPH) vráť DOMACNOST_MARKUP na 0.20 a v getPriceWithDPH
+// zase pridaj "* (1 + getDPH(product))" za withMarkup.
+const DOMACNOST_MARKUP = 0; // +0% (bolo +20%)
 
 const getPriceWithDPH = (product) => {
-  // Domácnosť: základná cena + 20% príplatok + DPH
+  // TEMP: žiadny príplatok, žiadne DPH navyše - rovnaká cena ako pre firmu
   const withMarkup = product.price * (1 + DOMACNOST_MARKUP);
-  return withMarkup * (1 + getDPH(product));
+  return withMarkup;
 };
 
 const CATEGORIES = ["Všetko", "Ovocie", "Zelenina", "Šaláty", "Bylinky a koreniny", "Huby", "Zemiaky", "Vakuové produkty", "Vajcia", "Ostatné"];
